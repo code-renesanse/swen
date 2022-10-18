@@ -1,6 +1,19 @@
-import { errorLog } from 'swen-logger';
+import { buildComponentDictionary } from 'swen-dictionary';
+import { createElement } from 'swen-dom';
+import { developmentLog, errorLog } from 'swen-logger';
+import { API, Dictionary, SketchfabModelElement } from 'swen-types';
 
 export class Application {
+  appName: string = '';
+  MAIN: HTMLDivElement = createElement('div', '');
+  API_FRAME: HTMLIFrameElement = createElement('iframe', '');
+  isMobile: boolean = false;
+  GRAPH: object = {};
+  TRANSLATOR: any = [];
+  CARDS: object = {};
+  API: API = { imageDictionary: {}, componentDictionary: {}, modelsList: [] };
+  BUILD_DICTIONARY_FUNCTION: (graph: object, api) => Promise<Dictionary<SketchfabModelElement>>;
+
   constructor (appName: string) {
     // validateEnvironmentalVariables();
     if (process.env.APP_NAME === null || process.env.APP_NAME === undefined || process.env.APP_NAME === '') {
@@ -15,8 +28,8 @@ export class Application {
     // TODO: look more into this
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    this.GRAPH;
-    this.TRANSLATOR;
+    // this.GRAPH;
+    // this.TRANSLATOR;
 
     this.CARDS = {};
     this.API = {
@@ -32,7 +45,7 @@ export class Application {
          * @param {Sketchfab GRAPH object} graph
          * @param {Sketchfab API object} api - JSON object holding all application data
          */
-    this.DICTIONARY_BUILD_FUNCTION = (graph, api) => buildDictionary(graph, api);
+    this.DICTIONARY_BUILD_FUNCTION = async (graph, api) => await buildComponentDictionary(graph, api);
   }
 
   setCurrentModelId (modelId) {
@@ -138,8 +151,8 @@ export class Application {
      * This functions inserts the iframe element to the api-frane-holder div
      * @returns HTML iframe element
      */
-  createAPIFrame () {
-    const PARENT = document.querySelector('#api-frame-holder');
+  createAPIFrame (): HTMLIFrameElement {
+    const PARENT: HTMLDivElement = document.querySelector('#api-frame-holder') as HTMLDivElement;
     PARENT.innerHTML = `
         <iframe 
             id='api-frame'
@@ -156,7 +169,8 @@ export class Application {
         >
         </iframe>
         `;
-    return PARENT.children[0];
+    const result = PARENT.children[0] as HTMLIFrameElement;
+    return result;
   }
 
   /**
@@ -233,8 +247,8 @@ export class Application {
             // TODO: a better way of setting default value of defaultConfig.extraEqupment and validation
             api.defaultConfig = { extraEquipment: {} };
             this.CARDS[api.currentModelId].setModelConfiguration(api);
-            api.getSceneGraph(async (err, graph) => {
-              if (err) {
+            api.getSceneGraph(async (err: object, graph: object) => {
+              if (err !== null) {
                 errorLog('An error has occured in the "getSceneGraph" stage');
                 console.error(err);
                 return;
