@@ -78,3 +78,19 @@ export const createDockTitleButton = (api: API, id: string, dockElement: HTMLEle
 
   return b;
 };
+
+/**
+*
+* @returns dock-wripper with no elements inside
+*/
+export const clearDockWrapper = (): HTMLDivElement | null => {
+  const wrapper = document.querySelector('#dock-wrapper') as HTMLDivElement;
+
+  if (wrapper !== null) {
+    for (let i = wrapper.childElementCount - 1; i >= 0; i--) {
+      wrapper.children[i].remove();
+    }
+    return wrapper;
+  }
+  return null;
+};

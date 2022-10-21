@@ -11,10 +11,10 @@ import { API } from '../../types';
 
 // TODO: rename function to something like _getImage
 export function getImage (imageKey: string, api: API): string {
-  const result: string = api.imageDictionary[imageKey];
+  const result: string = api.image_dictionary[imageKey];
   if (result === null || result === undefined || result === '') {
     errorLog(`Image with key '${imageKey} does not exist in the image dictionary'`);
-    return '';
+    return 'https://via.placeholder.com/256x256.png';
   }
   return result;
 }

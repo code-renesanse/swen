@@ -7,9 +7,9 @@ import { elementExists, getElementID } from '../getters';
  * @param {Sketchfab API object} api - JSON object holding all application data
  */
 export function hide (condition: (key: string) => boolean, api: API): boolean {
-  for (const key in api.componentDictionary) {
+  for (const key in api.model_dictionary) {
     if (condition(key)) {
-      api.hide(api.componentDictionary[key].instanceID);
+      api.hide(api.model_dictionary[key].instanceID);
     }
   }
 

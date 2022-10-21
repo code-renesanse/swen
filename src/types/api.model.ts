@@ -9,15 +9,19 @@ export interface ConfigurationComponentMap {
 
 export interface API {
   currentModelId: string
-  imageDictionary: Dictionary<string>
-  componentDictionary: Dictionary<SketchfabModelElement>
-  modelsList: string[]
+  image_dictionary: Dictionary<string>
+  model_dictionary: Dictionary<SketchfabModelElement>
+  model_map: { [key: string]: string }
+  configuration: object
   animationSpeed: number
   languages: Language
   TRANSLATOR: Translation
   COMPONENTS: ComponentClass[]
   configurationComponentsMap: ConfigurationComponentMap
-  getters: object
+  // getters: object
   show: (id: string) => void
   hide: (id: string) => void
+  start: (fun: () => void) => void
+  getSceneGraph: (fun: (err: object, graph: object) => void | Promise<void>) => void | Promise<void>
+  addEventListener: (type: string, fun: () => void | Promise<void>) => void
 }

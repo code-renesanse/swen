@@ -4,7 +4,6 @@ import { Dictionary, SketchfabModelElement } from '../../types';
 /**
  * Builds a dictioanry of all blend components so that then can be referenced later
  * @param {3D element array} graph
- * @param {Sketchfab API object} api - JSON object holding all application data
  * @returns promise resolve
  */
 export async function buildComponentDictionary (graph: any): Promise<Dictionary<SketchfabModelElement>> {
@@ -24,7 +23,6 @@ export async function buildComponentDictionary (graph: any): Promise<Dictionary<
       dictioanry[n] = e;
     });
 
-    developmentLog('Storing model element dictionary into the API object');
     return resolve(componentDictionary);
   });
 };

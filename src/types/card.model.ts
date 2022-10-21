@@ -1,3 +1,5 @@
+import Card from '../card';
+
 export interface Models {
-  [key: string]: object
+  [key: string]: Card
 }

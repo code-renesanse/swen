@@ -16,7 +16,7 @@
         "project": ["./tsconfig.json"]
     },
     "rules": {
-        "camelcase": 1,
+        "camelcase": 0,
         "quotes": [2, "single", { "avoidEscape": true }],
         "no-unused-vars": 0,
         "no-undef": 0,
