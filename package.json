@@ -45,6 +45,8 @@
     ],
     "devDependencies": {
         "@size-limit/preset-small-lib": "^8.1.0",
+        "@types/webpack": "^5.28.0",
+        "@types/webpack-env": "^1.18.0",
         "@typescript-eslint/eslint-plugin": "^5.38.1",
         "@typescript-eslint/parser": "^5.38.1",
         "eslint": "^8.24.0",
@@ -53,16 +55,11 @@
         "eslint-plugin-import": "^2.26.0",
         "husky": "^8.0.1",
         "size-limit": "^8.1.0",
-        "swen-types": "^2.0.2",
         "tsdx": "^0.14.1",
         "tslib": "^2.4.0",
         "typescript": "^4.8.4"
     },
     "dependencies": {
-        "@sketchfab/viewer-api": "^1.12.1",
-        "swen-dictionary": "^0.1.4",
-        "swen-dom": "^0.2.3",
-        "swen-languages": "^0.1.1",
-        "swen-logger": "^0.1.0"
+        "@sketchfab/viewer-api": "^1.12.1"
     }
 }

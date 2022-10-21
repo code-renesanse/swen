@@ -1,7 +1,8 @@
-import { buildComponentDictionary } from 'swen-dictionary';
 import { createElement } from 'swen-dom';
-import { developmentLog, errorLog } from 'swen-logger';
-import { API, Dictionary, SketchfabModelElement } from 'swen-types';
+import { buildComponentDictionary } from './dictionary';
+import { developmentLog, errorLog, mustImplementFunction } from './logger';
+import { API, Dictionary, SketchfabModelElement } from './types';
+import { Models } from './types/card.model';
 
 export class Application {
   appName: string = '';
@@ -10,9 +11,27 @@ export class Application {
   isMobile: boolean = false;
   GRAPH: object = {};
   TRANSLATOR: any = [];
-  CARDS: object = {};
-  API: API = { imageDictionary: {}, componentDictionary: {}, modelsList: [] };
-  BUILD_DICTIONARY_FUNCTION: (graph: object, api) => Promise<Dictionary<SketchfabModelElement>>;
+  CARDS: Models = {};
+  API: API = {
+    imageDictionary: {},
+    componentDictionary: {},
+    modelsList: [],
+    currentModelId: '',
+    animationSpeed: 0,
+    languages: {},
+    TRANSLATOR: {},
+    COMPONENTS: [],
+    configurationComponentsMap: {},
+    getters: {},
+    show: function (_id: string): void {
+      throw new Error('Function show is not implemented.');
+    },
+    hide: function (_id: string): void {
+      throw new Error('Function is not implemented.');
+    }
+  };
+
+  DICTIONARY_BUILD_FUNCTION!: (graph: object, api: API) => Promise<Dictionary<SketchfabModelElement>>;
 
   constructor (appName: string) {
     // validateEnvironmentalVariables();
@@ -34,10 +53,17 @@ export class Application {
     this.CARDS = {};
     this.API = {
       currentModelId: '',
+      imageDictionary: {},
+      animationSpeed: 0,
+      languages: {},
+      TRANSLATOR: {},
       COMPONENTS: [],
       modelsList: [],
+      configurationComponentsMap: {},
       componentDictionary: {},
-      ...this.apiGetters()
+      getters: this.apiGetters(),
+      show: () => {},
+      hide: () => {}
     };
 
     /**
@@ -48,11 +74,12 @@ export class Application {
     this.DICTIONARY_BUILD_FUNCTION = async (graph, api) => await buildComponentDictionary(graph, api);
   }
 
-  setCurrentModelId (modelId) {
-    validateString(modelId);
+  setCurrentModelId (modelId: string): void {
+    // validateString(modelId);
     this.API.currentModelId = modelId;
   }
 
+  // TODO: implement model CARDS
   addCard (cardRef) {
     // TODO: cardRef validation
     validateString(cardRef.modelId);
@@ -64,7 +91,7 @@ export class Application {
      * This is called when the page loads
      * @param {Sketchfab API object} api - JSON object holding all application data
      */
-  async onPageLoad (api) {
+  async onPageLoad (_api: API): Promise<void> {
     mustImplementFunction('onPageLoad');
   }
 

@@ -2,13 +2,13 @@
 /**
  * Other libraries stuffs
  */
-export * from 'swen-dictionary';
+export * from './dictionary';
 
-export * from 'swen-dom';
+export * from './dom';
 
-export * from 'swen-languages';
+export * from './languages';
 
-export * from 'swen-logger';
+export * from './logger';
 
 /**
  * Component class

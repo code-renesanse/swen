@@ -1,7 +1,7 @@
-import { createSubelementsHolder } from 'swen-dom';
-import { getTranslation } from 'swen-languages';
-import { developmentLog, errorLog } from 'swen-logger';
-import { API, ComponentClass } from 'swen-types';
+import { createSubelementsHolder } from './dom';
+import { getTranslation } from './languages';
+import { developmentLog, errorLog } from './logger';
+import { API, ComponentClass } from './types';
 import { createDockElement, createDockItemContent, createDockTitleButton } from './dock/functions';
 
 export class Component implements ComponentClass {
