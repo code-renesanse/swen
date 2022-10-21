@@ -25,13 +25,13 @@ export const errorLog = (message: Message): void => {
     return;
   }
 
-  const isNode = (): boolean => { try { return this === global; } catch (e) { return false; } };
+  // const isNode = (): boolean => { try { return this === global; } catch (e) { return false; } };
 
-  console.error(`[ ${process.env.APP_NAME ?? 'no APP_NAME env variable'} ]: ${message}`);
+  // console.error(`[ ${process.env.APP_NAME ?? 'no APP_NAME env variable'} ]: ${message}`);
 
-  if (!isNode()) {
-    alert(`[ ${process.env.APP_NAME ?? 'no APP_NAME env variable'} ]: ${message}`);
-  }
+  // if (!isNode()) {
+  //   alert(`[ ${process.env.APP_NAME ?? 'no APP_NAME env variable'} ]: ${message}`);
+  // }
 
   throw new Error(`[ ${process.env.APP_NAME ?? 'no APP_NAME env variable'} ]: ${message}`);
 };

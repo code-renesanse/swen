@@ -1,6 +1,6 @@
-import { addClass, createElement, removeClass, replaceClass } from 'swen-dom';
-import { getTranslation } from 'swen-languages';
-import { API } from 'swen-types';
+import { addClass, createElement, removeClass, replaceClass } from '../dom';
+import { getTranslation } from '../languages';
+import { API } from '../types';
 import { getIdFromDockItem } from './getters';
 
 /**
@@ -8,7 +8,7 @@ import { getIdFromDockItem } from './getters';
  * @returns HTML div element
  */
 export const createDockElement = (): HTMLDivElement => {
-  const e = createElement('div', `dock-item-${document.getElementsByClassName('delm').length}`) as HTMLDivElement;
+  const e = createElement('div', `dock-item-${document.getElementsByClassName('delm').length}`);
   addClass(e, [
     'delm',
     'p-1'
@@ -22,7 +22,7 @@ export const createDockElement = (): HTMLDivElement => {
  * @returns HTML div element
  */
 export const createDockItemContent = (btnHolder: HTMLElement): HTMLDivElement => {
-  const dic = createElement('div', 'dock-item-content') as HTMLDivElement;
+  const dic = createElement('div', 'dock-item-content');
   dic.className = 'dock-item-content';
   addClass(dic, 'd-none');
   dic.appendChild(btnHolder);
@@ -37,7 +37,7 @@ export const createDockItemContent = (btnHolder: HTMLElement): HTMLDivElement =>
 * @returns HTML buutton element
 */
 export const createDockTitleButton = (api: API, id: string, dockElement: HTMLElement): HTMLButtonElement => {
-  const b = createElement('button', id) as HTMLButtonElement;
+  const b = createElement('button', id);
 
   addClass(b, [
     'd-block',
