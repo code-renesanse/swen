@@ -9,9 +9,9 @@ import { Translator } from '../translator';
  */
 
 export const wordsSpin = async (api: API): Promise<void> => {
-  if (api.TRANSLATOR === null || api.TRANSLATOR === undefined) {
+  if (api.translator === null || api.translator === undefined) {
     const lang = getLangFromURL();
-    api.TRANSLATOR = await Translator(api, lang);
+    api.translator = await Translator(api, lang);
   }
 
   let i = 1;

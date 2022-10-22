@@ -12,12 +12,13 @@ export interface API {
   image_dictionary: Dictionary<string>
   model_dictionary: Dictionary<SketchfabModelElement>
   model_map: { [key: string]: string }
-  configuration: object
-  animationSpeed: number
+  configuration: { [key: string]: object }
+  animation_speed: number
   languages: Language
-  TRANSLATOR: Translation
-  COMPONENTS: ComponentClass[]
-  configurationComponentsMap: ConfigurationComponentMap
+  translator: Translation
+  configuration_components: ComponentClass[]
+  is_mobile: boolean
+  configuration_components_map: ConfigurationComponentMap
   // getters: object
   show: (id: string) => void
   hide: (id: string) => void

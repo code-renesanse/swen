@@ -1,8 +1,8 @@
-import { createSubelementsHolder } from './dom';
-import { getTranslation } from './languages';
-import { developmentLog, errorLog } from './logger';
-import { API, ComponentClass } from './types';
-import { createDockElement, createDockItemContent, createDockTitleButton } from './dock/functions';
+import { createSubelementsHolder } from '../../dom';
+import { getTranslation } from '../../languages';
+import { developmentLog, errorLog } from '../../logger';
+import { API, ComponentClass } from '../../types';
+import { createDockElement, createDockItemContent, createDockTitleButton } from '../../dock/functions';
 
 export class Component implements ComponentClass {
   subelements: HTMLDivElement;
@@ -45,7 +45,7 @@ export class Component implements ComponentClass {
     dockWrapper.appendChild(this.dockElement);
 
     // This is the initailization of a component that is defined in each model (card)
-    api.configurationComponentsMap[id](this, api);
+    api.configuration_components_map[id](this, api);
   }
 
   /**
@@ -105,7 +105,7 @@ export class Component implements ComponentClass {
   updateLang (): void {
     this.title.textContent = getTranslation(this.api, this.id);
     const subElements = Array.from(this.subelements.children);
-    const currentLanguage: string = this.api.TRANSLATOR.lang;
+    const currentLanguage: string = this.api.translator.lang;
 
     for (const node of subElements) {
       if (node.nodeName === 'UL') {

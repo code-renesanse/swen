@@ -1,10 +1,10 @@
 import { Application } from './application';
-import { createCardLoadHolder, createImageHolder, createLoadingGif } from './dom';
-import { wordsSpin } from './languages';
-import { errorLog, mustImplementFunction } from './logger';
-import { API, ComponentClass } from './types';
+import { createCardLoadHolder, createImageHolder, createLoadingbarGif } from '../dom';
+import { wordsSpin } from '../languages';
+import { errorLog, mustImplementFunction } from '../logger';
+import { API, ComponentClass } from '../types';
 
-export default class Card {
+export class Card {
   modelid: string;
 
   constructor (modelid: string, configuratorRef: Application) {
@@ -21,7 +21,7 @@ export default class Card {
     // CARD_HOLDER.addEventListener('click', async () => await loadModel(configuratorRef, modelId, HOLDER));
     CARD_HOLDER.addEventListener('click', () => {
       void (async () => {
-        await createLoadingGif(configuratorRef.API);
+        await createLoadingbarGif(configuratorRef.API);
         await wordsSpin(configuratorRef.API);
         if (HOLDER !== null) {
           HOLDER.remove();
@@ -49,10 +49,10 @@ export default class Card {
   }
 
   addConfigurationComponent (id: string, component: (parent: ComponentClass, api: API) => void, api: API): void {
-    // if (!(api.configurationComponentsMap)) {
-    //   api.configurationComponentsMap = {};
+    // if (!(api.configuration_components_map)) {
+    //   api.configuration_components_map = {};
     // }
-    api.configurationComponentsMap[id] = (parent, api) => component(parent, api);
+    api.configuration_components_map[id] = (parent, api) => component(parent, api);
   }
 
   setModelConfiguration (_api: API): void {

@@ -1,8 +1,18 @@
 /**
+ * Merger class
+ */
+
+/**
  * Animation stuffs
  */
 export * from './animations/functions';
 export * from './animations/setters';
+
+/**
+ * Loading bar stuffs
+ */
+
+export * from './loadingbar';
 
 /**
  * Class stuffs
@@ -40,3 +50,27 @@ export * from './image';
  */
 
 export * from './subelements';
+
+/**
+ * Selection stuffs
+ */
+
+export * from './selection';
+
+/**
+ * Configuration menu stuffs
+ */
+
+export * from './configurationMenu';
+
+/**
+ * Button stuffs
+ */
+
+export * from './buttons';
+
+/**
+ * List stuffs
+ */
+
+export * from './list';

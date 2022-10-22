@@ -13,14 +13,14 @@ export * from './logger';
 /**
  * Component class
  */
-export * from './component';
 
 /**
  * Dock stuffs
  */
-export * from './dock/getters';
-export * from './dock/functions';
+export * from './dock';
 
-// TODO: add export for application file
+export * from './core';
 
-// TODO: add export for sketchfab file
+export * from './countries';
+
+export * from './config';

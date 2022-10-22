@@ -11,14 +11,14 @@ import { Translator } from './translator';
  * @param {String} lang - the lang that the app will switch to
  */
 export const setLang = async (api: API, lang: string): Promise<string> => {
-  api.TRANSLATOR = await Translator(api, lang);
+  api.translator = await Translator(api, lang);
 
-  if (api.TRANSLATOR === null || api.TRANSLATOR === undefined) {
+  if (api.translator === null || api.translator === undefined) {
     errorLog(`${lang} is not a valid language`);
     return '';
   }
 
-  const apiUpdate = api.COMPONENTS[0].api;
+  const apiUpdate = api.configuration_components[0].api;
   if (apiUpdate === null) {
     console.error('API not loaded');
     return '';
@@ -29,7 +29,7 @@ export const setLang = async (api: API, lang: string): Promise<string> => {
   const rtsBtn = getDomFromReference('rts-btn');
   rtsBtn.textContent = getTranslation(api, 'rts-btn');
 
-  api.COMPONENTS.forEach(cmp => {
+  api.configuration_components.forEach(cmp => {
     cmp.updateLang(api);
   });
 

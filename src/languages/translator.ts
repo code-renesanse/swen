@@ -11,18 +11,19 @@ export const loadNewTransllationFiles = async (api: API): Promise<boolean> => {
     return false;
   }
 
-  const path: string = process.env.LANG_PATH;
-  const allFiles: __WebpackModuleApi.RequireContext = require.context(path, true, /\.json/);
+  // TODO: fix webpack stuffs do not work (require.context)
+  // const path: string = process.env.LANG_PATH;
+  // const allFiles: any = require.context(path, true, /\.json/);
 
-  await allFiles.keys().forEach((file: string) => {
-    (async () => {
-      const data = await import(`${path}/${file.split('/')[1]}`);
-      developmentLog(`Loaded '${file}' translation file`);
-      api.languages[data.lang] = data;
-    })().catch(err => {
-      errorLog(err);
-    });
-  });
+  // await allFiles.keys().forEach((file: string) => {
+  //   (async () => {
+  //     const data = await import(`${path}/${file.split('/')[1]}`);
+  //     developmentLog(`Loaded '${file}' translation file`);
+  //     api.languages[data.lang] = data;
+  //   })().catch(err => {
+  //     errorLog(err);
+  //   });
+  // });
 
   return true;
 };

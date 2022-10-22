@@ -1,4 +1,4 @@
-import Card from '../card';
+import Card from '../core/card';
 
 export interface Models {
   [key: string]: Card

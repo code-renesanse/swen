@@ -1,12 +1,12 @@
-import { addClass, createElement, hideLoadingGif, replaceClass } from './dom';
-import { buildComponentDictionary, buildImageDictionary } from './dictionary';
-import { developmentLog, errorLog, log, mustImplementFunction } from './logger';
-import { API, ComponentClass, Dictionary, SketchfabModelElement } from './types';
-import { Models } from './types/card.model';
-import { getLangFromURL, loadNewTransllationFiles, Translator } from './languages';
+import { addClass, createElement, hideLoading, replaceClass } from '../dom';
+import { buildComponentDictionary } from '../dictionary';
+import { developmentLog, errorLog, log, mustImplementFunction } from '../logger';
+import { API, ComponentClass, Dictionary, SketchfabModelElement } from '../types';
+import { Models } from '../types/card.model';
+import { getLangFromURL, loadNewTransllationFiles, Translator } from '../languages';
 import { Sketchfab } from '@sketchfab/viewer-api';
-import { clearDockWrapper } from './dock/functions';
-import Card from './card';
+import { clearDockWrapper } from '../dock/functions';
+import { Card } from './card';
 
 export class Application {
   appName: string = '';
@@ -14,7 +14,7 @@ export class Application {
   API_FRAME: HTMLIFrameElement = createElement('iframe', '');
   isMobile: boolean = false;
   GRAPH: object = {};
-  TRANSLATOR: any = [];
+  translator: any = [];
   CARDS: Models = {};
   API: API = {
     configuration: {},
@@ -22,11 +22,12 @@ export class Application {
     model_dictionary: {},
     model_map: {},
     currentModelId: '',
-    animationSpeed: 0,
+    animation_speed: 0,
     languages: {},
-    TRANSLATOR: {},
-    COMPONENTS: [],
-    configurationComponentsMap: {},
+    translator: {},
+    configuration_components: [],
+    configuration_components_map: {},
+    is_mobile: false,
     // getters: {},
     show: function (_id: string): void {
       throw new Error('Function show is not implemented.');
@@ -63,7 +64,7 @@ export class Application {
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     // this.GRAPH;
-    // this.TRANSLATOR;
+    // this.translator;
 
     this.CARDS = {};
     this.API = {
@@ -71,12 +72,13 @@ export class Application {
       currentModelId: '',
       image_dictionary: {},
       model_dictionary: {},
-      animationSpeed: 0,
+      animation_speed: 0,
       languages: {},
-      TRANSLATOR: {},
-      COMPONENTS: [],
+      translator: {},
+      configuration_components: [],
       model_map: {},
-      configurationComponentsMap: {},
+      configuration_components_map: {},
+      is_mobile: false,
       // getters: this.apiGetters(),
       show: () => {},
       hide: () => {},
@@ -129,15 +131,15 @@ export class Application {
     this.CARDS[api.currentModelId].loadDefaultConfiguration(api);
     this.loadComponents(api);
 
-    if (api.COMPONENTS.length > 0) {
-      api.COMPONENTS.forEach((cmp) => {
+    if (api.configuration_components.length > 0) {
+      api.configuration_components.forEach((cmp) => {
         cmp.enable();
         cmp.updateLang(api);
         developmentLog(`Component ${cmp.getComponentName()} loaded`);
       });
     }
 
-    hideLoadingGif(this.API_FRAME);
+    hideLoading(this.API_FRAME);
   }
 
   /**
@@ -162,7 +164,7 @@ export class Application {
      */
   addConfiguratorComponent (componentRef: ComponentClass): void {
     // validateConfiguratorComponent(componentRef);
-    this.API.COMPONENTS.push(componentRef);
+    this.API.configuration_components.push(componentRef);
   }
 
   /**
@@ -175,15 +177,16 @@ export class Application {
     if (path === '') {
       throw new Error('No ASSET_PATH env variable');
     }
-    const imageDictionary = buildImageDictionary(require.context(path, true, /\.png|\.gif/));
-    this.API = {
-      ...this.API,
-      image_dictionary: imageDictionary
-    };
+    // TODO: fix webpack stuffs do not work (require.context)
+    // const imageDictionary = buildImageDictionary(require.context(path, true, /\.png|\.gif/));
+    // this.API = {
+    //   ...this.API,
+    //   image_dictionary: imageDictionary
+    // };
 
     await loadNewTransllationFiles(this.API);
     const lang = getLangFromURL();
-    this.API.TRANSLATOR = Translator(this.API, lang);
+    this.API.translator = Translator(this.API, lang);
   }
 
   // DEPRICATED
@@ -270,7 +273,7 @@ export class Application {
 
         developmentLog('Setting backend url');
         developmentLog('Setting animation speed');
-        api.animationSpeed = parseInt(process.env.ANIMATION_SPEED ?? '100');
+        api.animation_speed = parseInt(process.env.ANIMATION_SPEED ?? '100');
 
         developmentLog('Building api object');
         api = {
@@ -348,5 +351,9 @@ export class Application {
      */
   getApplicationName (): string {
     return this.appName;
+  }
+
+  setModelReference (modelId: string, sketchfabId: string, api: API): void {
+    api.model_map[modelId] = sketchfabId;
   }
 }

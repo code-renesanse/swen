@@ -1,4 +1,6 @@
 {
+    "name": "swen",
+    "author": "code.renesanse",
     "version": "1.2.2",
     "license": "MIT",
     "main": "dist/index.js",
@@ -30,8 +32,6 @@
         "singleQuote": true,
         "trailingComma": "es5"
     },
-    "name": "swen-core",
-    "author": "Tilen Okretic",
     "module": "dist/swen-core.esm.js",
     "size-limit": [
         {

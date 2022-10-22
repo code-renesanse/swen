@@ -13,7 +13,7 @@ export const getLangFromURL = (): string => window.location.href.split('/')[wind
   * @returns the translated lowercase string
   */
 export const getTranslation = (api: API, key: string): string => {
-  let result = api.TRANSLATOR[key];
+  let result = api.translator[key];
   if (result === null || result === undefined || result === '') {
     console.error(`ERROR 404: translation for key: ${key} does not exist or is empty`);
     return '';
