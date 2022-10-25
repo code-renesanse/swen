@@ -35,8 +35,9 @@ export const createLoadingbarSpan = (): HTMLSpanElement => {
  *
  * @returns HTML div element
  */
+// TODO: create a unique loding bar function
 export const createLoadingbarSvgHolder = (): HTMLDivElement => {
-  const svgDom = createElement('div', 'loading-bar-svg-holder');
+  const svgDom = createElement('div', 'loading-bar');
   addClass(svgDom, [
     'position-absolute',
     'w-4r',
