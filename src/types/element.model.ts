@@ -1,4 +1,4 @@
-export interface SketchfabModelElement {
+export interface ISketchfabModelElement {
   instanceID: string
   name: string
 }

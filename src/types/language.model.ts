@@ -1,7 +1,8 @@
-export interface Translation {
+
+export interface ITranslation {
   [key: string]: string
 }
 
-export interface Language {
-  [key: string]: Translation
+export interface ILanguage {
+  [key: string]: ITranslation
 }

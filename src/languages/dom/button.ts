@@ -1,6 +1,6 @@
 import { addClass, createElement, getDomFromReference } from '../../dom';
 import { errorLog } from '../../logger';
-import { API } from '../../types';
+import { IApi } from '../../types';
 import { setLang } from '../setters';
 
 /**
@@ -10,7 +10,7 @@ import { setLang } from '../setters';
  * @param {String} lang - language abbreviation
  */
 // TODO: change the image picture loading so that it is not pulled from alfastreet !!
-export const createLanguageButton = (api: API, lang: string): void => {
+export const createLanguageButton = (api: IApi, lang: string): void => {
   // if(!validateAPI(api)) return;
 
   const parent = getDomFromReference('lang-btn-holder');

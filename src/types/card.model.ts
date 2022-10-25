@@ -1,5 +1,5 @@
-import Card from '../core/card';
+import { Card } from '../core';
 
-export interface Models {
+export interface IModels {
   [key: string]: Card
 }

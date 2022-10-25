@@ -1,5 +1,5 @@
 import { getTranslation } from '../../../languages';
-import { API } from '../../../types';
+import { IApi } from '../../../types';
 
 // TODO: make generic meaning that name splitting is not hardcoded
 /**
@@ -7,4 +7,4 @@ import { API } from '../../../types';
  * @param {DOMObject} parameter - reference to thee DOM object
  * @returns String - content of the paragraph
  */
-export const getListItemParagraphContent = (api: API, { name }: { name: string }): string => getTranslation(api, name.split('CX-')[1]);
+export const getListItemParagraphContent = (api: IApi, { name }: { name: string }): string => getTranslation(api, name.split('CX-')[1]);

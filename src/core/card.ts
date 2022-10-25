@@ -2,7 +2,7 @@ import { Application } from './application';
 import { createCardLoadHolder, createImageHolder, createLoadingbarGif } from '../dom';
 import { wordsSpin } from '../languages';
 import { errorLog, mustImplementFunction } from '../logger';
-import { API, ComponentClass } from '../types';
+import { IApi, IComponent } from '../types';
 
 export class Card {
   modelid: string;
@@ -48,19 +48,19 @@ export class Card {
     }
   }
 
-  addConfigurationComponent (id: string, component: (parent: ComponentClass, api: API) => void, api: API): void {
+  addConfigurationComponent (id: string, component: (parent: IComponent, api: IApi) => void, api: IApi): void {
     // if (!(api.configuration_components_map)) {
     //   api.configuration_components_map = {};
     // }
     api.configuration_components_map[id] = (parent, api) => component(parent, api);
   }
 
-  setModelConfiguration (_api: API): void {
+  setModelConfiguration (_api: IApi): void {
     mustImplementFunction('setModelConfiguration');
   }
 
   // TODO: rename to SETUP
-  loadDefaultConfiguration (_api: API): void {
+  loadDefaultConfiguration (_api: IApi): void {
     mustImplementFunction('loadDefaultConfiguration');
   }
 }

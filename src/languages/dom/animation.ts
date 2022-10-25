@@ -1,5 +1,5 @@
-import { addClass } from '../../dom';
-import { API } from '../../types';
+import { addClass, getDomFromReference } from '../../dom';
+import { IApi } from '../../types';
 import { getLangFromURL, getTranslation } from '../getters';
 import { Translator } from '../translator';
 
@@ -8,15 +8,15 @@ import { Translator } from '../translator';
  * @param {Sketchfab API object} api - JSON object holding all application data
  */
 
-export const wordsSpin = async (api: API): Promise<void> => {
+export const wordsSpin = async (api: IApi): Promise<void> => {
   if (api.translator === null || api.translator === undefined) {
     const lang = getLangFromURL();
-    api.translator = await Translator(api, lang);
+    api.translator = Translator(api, lang);
   }
 
   let i = 1;
   const words = getTranslation(api, 'loadingtext');
-  const loadingSpan = document.querySelector('#loading-span') as HTMLSpanElement;
+  const loadingSpan = getDomFromReference('loading-bar-span') as HTMLSpanElement;
   addClass(loadingSpan, 'text-capitalize');
   loadingSpan.textContent = words[0].toLowerCase();
   addClass(loadingSpan, 'popInOutElement');

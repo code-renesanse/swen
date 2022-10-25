@@ -1,4 +1,4 @@
-import { API } from '../../types';
+import { IApi } from '../../types';
 import { setAnimation } from '../animations/setters';
 import { addClass, removeClass } from '../class';
 import { getDomFromReference } from '../getters';
@@ -7,7 +7,7 @@ import { getDomFromReference } from '../getters';
  *
  * @param {Sketchfab API object} api - JSON object holding all application data
  */
-export const openConfiguratorMenu = (api: API): void => {
+export const openConfiguratorMenu = (api: IApi): void => {
   const container = getDomFromReference('container');
   const wrapper = getDomFromReference('dock-wrapper');
   const configFinish = getDomFromReference('configuration-finish');
@@ -30,7 +30,7 @@ export const openConfiguratorMenu = (api: API): void => {
 *
 * @param {Sketchfab API object} api - JSON object holding all application data
 */
-export const closeConfiguratorMenu = (api: API): void => {
+export const closeConfiguratorMenu = (api: IApi): void => {
   const container = getDomFromReference('container');
   const wrapper = getDomFromReference('dock-wrapper');
 

@@ -1,5 +1,5 @@
 import { getImage } from '../dictionary';
-import { API } from '../types';
+import { IApi } from '../types';
 import { addClass } from './class';
 import { createElement } from './create';
 
@@ -9,7 +9,7 @@ import { createElement } from './create';
  * @param {String} alt - image alt
  * @returns img HTML element
  */
-export const createImageHolder = (modelId: string, alt: string, api: API): HTMLImageElement => {
+export const createImageHolder = (modelId: string, alt: string, api: IApi): HTMLImageElement => {
   const id = `card-img-${document.getElementsByTagName('img').length}`;
   const cardImg = createElement('img', id);
   let imgRef = getImage(modelId, api);

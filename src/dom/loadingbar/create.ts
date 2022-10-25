@@ -1,6 +1,6 @@
 import { getImage } from '../../dictionary';
 import { errorLog } from '../../logger';
-import { API } from '../../types';
+import { IApi } from '../../types';
 import { setAnimation, setAnimationIterationCount } from '../animations/setters';
 import { addClass } from '../class';
 import { createElement } from '../create';
@@ -54,7 +54,7 @@ export const createLoadingbarSvgHolder = (): HTMLDivElement => {
   * @param {String} gif
   * @returns img dom element
   */
-export const createLoadingbarGifImg = (gif: string, api: API): HTMLImageElement => {
+export const createLoadingbarGifImg = (gif: string, api: IApi): HTMLImageElement => {
   const loadingGifImage = createElement('img', 'loading-bar-gif-img');
   const imageRef = getImage(gif, api);
   loadingGifImage.src = imageRef;
@@ -66,7 +66,7 @@ export const createLoadingbarGifImg = (gif: string, api: API): HTMLImageElement 
  * Creates a loading gif DOM element and puts it on the page
  * @returns resolved promise
  */
-export const createLoadingbarGif = async (api: API): Promise<boolean> => await new Promise((resolve) => {
+export const createLoadingbarGif = async (api: IApi): Promise<boolean> => await new Promise((resolve) => {
   const APP = document.querySelector('#app') ?? createElement('div', 'error404');
   const PATH = process.env.LOADING_GIF_PATH ?? '';
 

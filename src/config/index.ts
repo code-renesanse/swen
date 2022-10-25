@@ -1,7 +1,7 @@
 
 // TODO: defaultConfig refactor !!
 
-import { API } from '../types';
+import { IApi } from '../types';
 
 /**
  *
@@ -10,7 +10,7 @@ import { API } from '../types';
  * @param {*} api
  * @returns
  */
-export const setConfigKeyValuePair = (key: string, value: object, api: API): void => {
+export const setConfigKeyValuePair = (key: string, value: object, api: IApi): void => {
   api.configuration[key] = value;
 };
 
@@ -20,6 +20,6 @@ export const setConfigKeyValuePair = (key: string, value: object, api: API): voi
  * @param {*} api
  * @returns
  */
-export const getConfigFromKey = (key: string, api: API): object => {
+export const getConfigFromKey = (key: string, api: IApi): object => {
   return api.configuration[key];
 };

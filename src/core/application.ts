@@ -1,12 +1,13 @@
 import { addClass, createElement, hideLoading, replaceClass } from '../dom';
 import { buildComponentDictionary } from '../dictionary';
 import { developmentLog, errorLog, log, mustImplementFunction } from '../logger';
-import { API, ComponentClass, Dictionary, SketchfabModelElement } from '../types';
-import { Models } from '../types/card.model';
+import { IApi, IComponent, Dictionary, ISketchfabModelElement } from '../types';
+import { IModels } from '../types/card.model';
 import { getLangFromURL, loadNewTransllationFiles, Translator } from '../languages';
-import { Sketchfab } from '@sketchfab/viewer-api';
 import { clearDockWrapper } from '../dock/functions';
 import { Card } from './card';
+
+declare const window: any;
 
 export class Application {
   appName: string = '';
@@ -15,8 +16,8 @@ export class Application {
   isMobile: boolean = false;
   GRAPH: object = {};
   translator: any = [];
-  CARDS: Models = {};
-  API: API = {
+  CARDS: IModels = {};
+  API: IApi = {
     configuration: {},
     image_dictionary: {},
     model_dictionary: {},
@@ -46,7 +47,7 @@ export class Application {
     }
   };
 
-  DICTIONARY_BUILD_FUNCTION!: (graph: object) => Promise<Dictionary<SketchfabModelElement>>;
+  DICTIONARY_BUILD_FUNCTION!: (graph: object) => Promise<Dictionary<ISketchfabModelElement>>;
   CLIENT: any;
 
   constructor (appName: string) {
@@ -80,11 +81,11 @@ export class Application {
       configuration_components_map: {},
       is_mobile: false,
       // getters: this.apiGetters(),
-      show: () => {},
-      hide: () => {},
-      start: () => {},
-      getSceneGraph: () => {},
-      addEventListener: () => {}
+      show () {},
+      hide () {},
+      start () {},
+      addEventListener () {},
+      getSceneGraph () {}
     };
 
     /**
@@ -110,7 +111,7 @@ export class Application {
      * This is called when the page loads
      * @param {Sketchfab API object} api - JSON object holding all application data
      */
-  async onPageLoad (_api: API): Promise<void> {
+  async onPageLoad (_api: IApi): Promise<void> {
     mustImplementFunction('onPageLoad');
   }
 
@@ -118,7 +119,7 @@ export class Application {
      * All the code that is executed before the scene graph is set
      * @param {Sketchfab API object} api - JSON object holding all application data
      */
-  async preload (_api: API): Promise<void> {
+  async preload (_api: IApi): Promise<void> {
     mustImplementFunction('preload');
   }
 
@@ -126,7 +127,7 @@ export class Application {
      * All the code that is executed after the scene graph is set
      * @param {Sketchfab API object} api - JSON object holding all application data
      */
-  async load (api: API): Promise<void> {
+  async load (api: IApi): Promise<void> {
     // validateString(api.currentModelId);
     this.CARDS[api.currentModelId].loadDefaultConfiguration(api);
     this.loadComponents(api);
@@ -154,7 +155,7 @@ export class Application {
      * Inside this function you append components to the COMPONENTS list
      * @param {Sketchfab API object} api - JSON object holding all application data
      */
-  loadComponents (_api: API): void {
+  loadComponents (_api: IApi): void {
     mustImplementFunction('loadComponents function needs to be implemented');
   }
 
@@ -162,7 +163,7 @@ export class Application {
      * This function pushes a new component class to the component array of the application class
      * @param {Component} componentRef
      */
-  addConfiguratorComponent (componentRef: ComponentClass): void {
+  addConfiguratorComponent (componentRef: IComponent): void {
     // validateConfiguratorComponent(componentRef);
     this.API.configuration_components.push(componentRef);
   }
@@ -172,19 +173,10 @@ export class Application {
      * Pictures, gifs, etc.
      */
   // TODO: make asset loading based only on model type ex.: always load colors, tapestry, but extra elements are loaded only for the selected model
-  async loadAssets (): Promise<void> {
-    const path = process.env.ASSETS_PATH ?? '';
-    if (path === '') {
-      throw new Error('No ASSET_PATH env variable');
-    }
-    // TODO: fix webpack stuffs do not work (require.context)
-    // const imageDictionary = buildImageDictionary(require.context(path, true, /\.png|\.gif/));
-    // this.API = {
-    //   ...this.API,
-    //   image_dictionary: imageDictionary
-    // };
+  async loadAssets (context: any): Promise<void> {
+    const assets = this.importAssets(context);
 
-    await loadNewTransllationFiles(this.API);
+    await loadNewTransllationFiles(assets.lang, this.API);
     const lang = getLangFromURL();
     this.API.translator = Translator(this.API, lang);
   }
@@ -229,7 +221,7 @@ export class Application {
      * It also preloads all necessary static data such as assets and getter functions
      * @param {String} modelId - reference to the sketchafb model refrence inside api.modelMap
      */
-  async loadModel (modelId: string, api: API): Promise<void> {
+  async loadModel (modelId: string, api: IApi): Promise<void> {
     const loadingBar = document.getElementById('loading-bar');
 
     const modelReference = api.model_map[modelId];
@@ -268,7 +260,7 @@ export class Application {
       ui_vr: 0,
       ui_ar: 0,
       merge_materials: 1,
-      success: (api: API) => {
+      success: (api: IApi) => {
         developmentLog('Client initialization successful');
 
         developmentLog('Setting backend url');
@@ -277,8 +269,8 @@ export class Application {
 
         developmentLog('Building api object');
         api = {
-          ...api,
-          ...this.API
+          ...this.API,
+          ...api
         };
 
         developmentLog('Clearing dock wrapper');
@@ -329,6 +321,7 @@ export class Application {
               developmentLog('Starting component laoding');
               await this.load(api);
             });
+            this.API_FRAME.style.opacity = '1';
           });
         });
       },
@@ -343,7 +336,7 @@ export class Application {
      * For initializing a new client
      * @returns new sketchfab client instance
      */
-  initClient (): any { return new Sketchfab(this.API_FRAME); }
+  initClient (): any { return new window.Sketchfab(this.API_FRAME); }
 
   /**
      * Application name getter
@@ -353,7 +346,25 @@ export class Application {
     return this.appName;
   }
 
-  setModelReference (modelId: string, sketchfabId: string, api: API): void {
+  setModelReference (modelId: string, sketchfabId: string, api: IApi): void {
     api.model_map[modelId] = sketchfabId;
+  }
+
+  /**
+   * Stores assets in the application cache
+   * @param context
+   */
+  importAssets (context: any): any {
+    const cache: any = {};
+    context.keys().forEach((key: string) => {
+      const split: string[] = key.split('/');
+      const group: string = split[1];
+      const name: string = split[2];
+      if (cache[group] === undefined) {
+        cache[group] = {};
+      }
+      (cache[group][name] = context(key));
+    });
+    return cache;
   }
 }

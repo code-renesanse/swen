@@ -1,5 +1,5 @@
 import { getImage } from '../../../dictionary';
-import { API } from '../../../types';
+import { IApi } from '../../../types';
 import { addClass } from '../../class';
 import { createElement } from '../../create';
 import { appendElementList } from '../../subelements';
@@ -89,7 +89,7 @@ export const createListElement = (id: string): HTMLButtonElement => {
  * @param {Function} itemFunction
  * @returns fully composed list item
  */
-export const createListItem = (id: string, type: string = '', img: string = '', itemFunction: () => void, api: API): HTMLLIElement => {
+export const createListItem = (id: string, type: string = '', img: string = '', itemFunction: () => void, api: IApi): HTMLLIElement => {
   const listHead = createListItemHead(id, type);
 
   listHead.onmousedown = (event) => event.preventDefault();

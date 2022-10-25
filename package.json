@@ -60,7 +60,6 @@
         "typescript": "^4.8.4"
     },
     "dependencies": {
-        "@sketchfab/viewer-api": "^1.12.1",
         "i": "^0.3.7",
         "npm": "^8.19.2"
     }

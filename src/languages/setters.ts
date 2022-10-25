@@ -1,6 +1,6 @@
 import { getDomFromReference } from '../dom';
 import { errorLog } from '../logger';
-import { API } from '../types';
+import { IApi } from '../types';
 import { getTranslation } from './getters';
 import { Translator } from './translator';
 
@@ -10,7 +10,7 @@ import { Translator } from './translator';
  * @param {Sketchfab API object} api - JSON object holding all application data
  * @param {String} lang - the lang that the app will switch to
  */
-export const setLang = async (api: API, lang: string): Promise<string> => {
+export const setLang = async (api: IApi, lang: string): Promise<string> => {
   api.translator = await Translator(api, lang);
 
   if (api.translator === null || api.translator === undefined) {

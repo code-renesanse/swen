@@ -1,6 +1,6 @@
 import { getImage } from '../../dictionary';
 import { getTranslation } from '../../languages';
-import { API } from '../../types';
+import { IApi } from '../../types';
 import { addClass, removeClass } from '../class';
 import { openConfiguratorMenu } from '../configurationMenu';
 import { createElement } from '../create';
@@ -13,7 +13,7 @@ import { selectUnselectButtonFunction } from './functions';
  * @param {Sketchfab API object} api - JSON object holding all application data
  * @returns HTML button element
  */
-export const createValidResponseButton = (textContent: string, popupHolder: HTMLDivElement, api: API): HTMLButtonElement => {
+export const createValidResponseButton = (textContent: string, popupHolder: HTMLDivElement, api: IApi): HTMLButtonElement => {
   const btn = createElement('button', 'vr-btn');
   addClass(btn, [
     'bg-transparent',
@@ -40,7 +40,7 @@ export const createValidResponseButton = (textContent: string, popupHolder: HTML
  * @param {Sketchfab API object} api - JSON object holding all application data
  * @returns html button element
  */
-export const createHTMLButton = (id: string, img: string, api: API): HTMLButtonElement => {
+export const createHTMLButton = (id: string, img: string, api: IApi): HTMLButtonElement => {
   id = id.toString();
 
   const out = createElement('button', id);

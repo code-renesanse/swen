@@ -1,7 +1,7 @@
-import { API } from './api.model';
+import { IApi } from './api.model';
 
-export interface ComponentClass {
-  api: API
+export interface IComponent {
+  api: IApi
   id: string
   name: string
   // this.translation;
@@ -14,6 +14,6 @@ export interface ComponentClass {
   addSubElement: (element: HTMLElement | Element) => void
   addSubElements: (...elementList: HTMLElement[] | Element[]) => void
   getComponentName: () => string
-  customLangUpdate: (api: API) => void
-  updateLang: (api: API) => void
+  customLangUpdate: (api: IApi) => void
+  updateLang: (api: IApi) => void
 }

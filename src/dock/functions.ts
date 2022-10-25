@@ -1,6 +1,6 @@
 import { addClass, createElement, removeClass, replaceClass } from '../dom';
 import { getTranslation } from '../languages';
-import { API } from '../types';
+import { IApi } from '../types';
 import { getIdFromDockItem } from './getters';
 
 /**
@@ -36,7 +36,7 @@ export const createDockItemContent = (btnHolder: HTMLElement): HTMLDivElement =>
 * @param {Sketchfab API object} api - JSON object holding all application data
 * @returns HTML buutton element
 */
-export const createDockTitleButton = (api: API, id: string, dockElement: HTMLElement): HTMLButtonElement => {
+export const createDockTitleButton = (api: IApi, id: string, dockElement: HTMLElement): HTMLButtonElement => {
   const b = createElement('button', id);
 
   addClass(b, [

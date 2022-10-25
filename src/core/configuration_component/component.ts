@@ -1,10 +1,10 @@
 import { createSubelementsHolder } from '../../dom';
 import { getTranslation } from '../../languages';
 import { developmentLog, errorLog } from '../../logger';
-import { API, ComponentClass } from '../../types';
+import { IApi, IComponent } from '../../types';
 import { createDockElement, createDockItemContent, createDockTitleButton } from '../../dock/functions';
 
-export class Component implements ComponentClass {
+export class Component implements IComponent {
   subelements: HTMLDivElement;
   dockElement: HTMLDivElement;
   title: HTMLButtonElement;
@@ -12,14 +12,14 @@ export class Component implements ComponentClass {
   name: string;
   id: string;
   // translation;
-  api: API;
+  api: IApi;
 
   /**
      *
      * @param {string} id - id of the component
      * @param {Sketchfab API object} api - JSON object holding all application data
      */
-  constructor (id: string, api: API) {
+  constructor (id: string, api: IApi) {
     this.name = getTranslation(api, id);
     this.id = id;
 
@@ -94,7 +94,7 @@ export class Component implements ComponentClass {
      * This function handles custom language updates
      * @param {Sketchfab API object} api - JSON object holding all application data
      */
-  customLangUpdate (_api: API): void {
+  customLangUpdate (_api: IApi): void {
 
   }
 

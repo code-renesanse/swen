@@ -1,34 +1,23 @@
-import { developmentLog, errorLog } from '../logger';
-import { API, Translation } from '../types';
+import { developmentLog } from '../logger';
+import { IApi, ICacheInstance, ITranslation } from '../types';
 
-export const loadNewTransllationFiles = async (api: API): Promise<boolean> => {
+export const loadNewTransllationFiles = async (langAssets: ICacheInstance, api: IApi): Promise<boolean> => {
   if (api.languages === null || api.languages === undefined) {
     api.languages = {};
   }
 
-  if (process.env.LANG_PATH === null || process.env.LANG_PATH === undefined || process.env.LANG_PATH === '') {
-    errorLog('No valid LANG_PATH env variable');
-    return false;
+  const keys: string[] = Object.keys(langAssets);
+  for (const key of keys) {
+    const translation: ITranslation = langAssets[key] as ITranslation;
+    const lang: string = translation.lang;
+    api.languages[lang] = translation;
+    developmentLog(`Loaded '${key}' translation file`);
   }
-
-  // TODO: fix webpack stuffs do not work (require.context)
-  // const path: string = process.env.LANG_PATH;
-  // const allFiles: any = require.context(path, true, /\.json/);
-
-  // await allFiles.keys().forEach((file: string) => {
-  //   (async () => {
-  //     const data = await import(`${path}/${file.split('/')[1]}`);
-  //     developmentLog(`Loaded '${file}' translation file`);
-  //     api.languages[data.lang] = data;
-  //   })().catch(err => {
-  //     errorLog(err);
-  //   });
-  // });
 
   return true;
 };
 
-export const Translator = (api: API, lang: string): Translation => {
+export const Translator = (api: IApi, lang: string): ITranslation => {
   developmentLog(`Translator set to '${lang}' language`);
   document.getElementsByTagName('html')[0].lang = lang;
 

@@ -1,5 +1,5 @@
 
-import { API, SketchfabModelElement } from '../../../types';
+import { IApi, ISketchfabModelElement } from '../../../types';
 import { elementExists, getElementID } from '../getters';
 
 /**
@@ -8,7 +8,7 @@ import { elementExists, getElementID } from '../getters';
  * @param {Sketchfab API object} api - JSON object holding all application data
  * @returns true
  */
-export function showElement (elementReference: SketchfabModelElement | string, api: API): boolean {
+export function showElement (elementReference: ISketchfabModelElement | string, api: IApi): boolean {
   if (elementExists(elementReference, api)) {
     api.show(getElementID(elementReference, api));
     return true;
@@ -21,8 +21,8 @@ export function showElement (elementReference: SketchfabModelElement | string, a
  * @param {array} elementList - element list array
  * @param {Sketchfab API object} api - JSON object holding all application data
  */
-// TODO: implement the elementList as an array of SketchfabModelElement
-export function showElementList (elementList: string[], api: API): void {
+// TODO: implement the elementList as an array of ISketchfabModelElement
+export function showElementList (elementList: string[], api: IApi): void {
   elementList = elementList.filter((e: any) => e !== '');
 
   elementList.forEach((key: any) => {

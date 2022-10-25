@@ -7,10 +7,10 @@
  */
 
 import { developmentLog } from '../../logger';
-import { API } from '../../types';
+import { IApi } from '../../types';
 
 // TODO: rename function to something like _getImage
-export function getImage (imageKey: string, api: API): string {
+export function getImage (imageKey: string, api: IApi): string {
   const result: string = api.image_dictionary[imageKey];
   if (result === null || result === undefined || result === '') {
     developmentLog(`Image with key '${imageKey} does not exist in the image dictionary'`);
