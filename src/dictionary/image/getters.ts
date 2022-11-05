@@ -17,7 +17,7 @@ export function getImage (imageKey: string, api: IApi): string {
 
   const result: string = api.image_dictionary[imageKey];
   if (result === null || result === undefined || result === '') {
-    developmentLog(`Image with key '${imageKey} does not exist in the image dictionary'`);
+    developmentLog(`Image with key '${imageKey}' does not exist in the image dictionary`);
     return 'https://via.placeholder.com/256x256.png';
   }
   return result;

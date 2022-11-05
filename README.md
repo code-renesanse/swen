@@ -4,13 +4,14 @@
 
 # TODO
 
+* [ ] Handle empty ('') and undefined strings in *getImage* function 
+
 ### Typescipt code formating
 
-* [ ] Namespaces
 * [ ] Clean up types
 
 ### Classes / Functionality to implement
-* [ ] Application **Launcher**
+* [x] Application **Launcher**
 
 ### Other
 * [ ] Setup tests
