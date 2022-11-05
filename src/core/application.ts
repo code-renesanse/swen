@@ -180,6 +180,8 @@ export class Application {
     await loadNewTransllationFiles(assets.lang, this.API);
     const lang = getLangFromURL();
     this.API.translator = Translator(this.API, lang);
+
+    this.API.image_dictionary = assets.images;
   }
 
   // DEPRICATED

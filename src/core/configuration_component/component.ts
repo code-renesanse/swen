@@ -138,7 +138,7 @@ export class Component implements IComponent {
       } else {
         if (node.children.length > 0) {
           const translation = getTranslation(this.api, node.id);
-          if (node.children[1] !== null || node.children[1] !== undefined) {
+          if (node.children[1] !== null && node.children[1] !== undefined) {
             node.children[1].textContent = translation;
           } else {
             node.children[0].textContent = translation;
