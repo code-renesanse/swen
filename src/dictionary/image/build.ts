@@ -1,5 +1,6 @@
 import { Dictionary } from '../../types';
 
+// DEPRICATED: image loading is done in the application class
 /**
  * Returns an object holding imported imaga data
  * Format: directory/image

@@ -173,14 +173,13 @@ export class Application {
      * Pictures, gifs, etc.
      */
   // TODO: make asset loading based only on model type ex.: always load colors, tapestry, but extra elements are loaded only for the selected model
-  // TODO: implemnt image dictioany build
   async loadAssets (context: any): Promise<void> {
     const assets = this.importAssets(context);
+    const lang = getLangFromURL();
 
     await loadNewTransllationFiles(assets.lang, this.API);
-    const lang = getLangFromURL();
-    this.API.translator = Translator(this.API, lang);
 
+    this.API.translator = Translator(this.API, lang);
     this.API.image_dictionary = assets.images;
   }
 
