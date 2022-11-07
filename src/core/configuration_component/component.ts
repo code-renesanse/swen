@@ -102,51 +102,54 @@ export class Component implements IComponent {
      * Updates the language of the component and all of it's sub elements
      * @param {Sketchfab API object} api - JSON object holding all application data
      */
+  // TODO: make it a promise or something similar
   updateLang (): void {
-    this.title.textContent = getTranslation(this.api, this.id);
-    const subElements = Array.from(this.subelements.children);
-    const currentLanguage: string = this.api.translator.lang;
+    setTimeout(() => {
+      this.title.textContent = getTranslation(this.api, this.id);
+      const subElements = Array.from(this.subelements.children);
+      const currentLanguage: string = this.api.translator.lang;
 
-    for (const node of subElements) {
-      if (node.nodeName === 'UL') {
-        const listNodes = Array.from(node.children);
-        for (const listNode of listNodes) {
-          if (listNode.tagName.toLocaleLowerCase() === 'button') {
-            const id: string = listNode.id;
+      for (const node of subElements) {
+        if (node.nodeName === 'UL') {
+          const listNodes = Array.from(node.children);
+          for (const listNode of listNodes) {
+            if (listNode.tagName.toLocaleLowerCase() === 'button') {
+              const id: string = listNode.id;
 
-            if (id === '' || id === null) {
-              errorLog('The id of the node is null or not defined');
-              return;
-            }
+              if (id === '' || id === null) {
+                errorLog('The id of the node is null or not defined');
+                return;
+              }
 
-            listNode.children[1].textContent = getTranslation(this.api, id) !== '' ? getTranslation(this.api, id) : '';
+              listNode.children[1].textContent = getTranslation(this.api, id) !== '' ? getTranslation(this.api, id) : '';
 
-            if (getTranslation(this.api, id) !== '') {
-              listNode.remove();
-              errorLog(`EROOR: VLAUE NOT IN LANG FILE FOR LANG ${currentLanguage}`);
-            }
-          } else {
-            const id = listNode.id.split('-')[listNode.id.split('-').length - 1];
-            listNode.children[0].children[1].textContent = getTranslation(this.api, id) !== '' ? getTranslation(this.api, id) : '';
+              if (getTranslation(this.api, id) !== '') {
+                listNode.remove();
+                errorLog(`EROOR: VLAUE NOT IN LANG FILE FOR LANG ${currentLanguage}`);
+              }
+            } else {
+              const id = listNode.id.split('-')[listNode.id.split('-').length - 1];
+              listNode.children[0].children[1].textContent = getTranslation(this.api, id) !== '' ? getTranslation(this.api, id) : '';
 
-            if (getTranslation(this.api, id) === '') {
-              listNode.remove();
-              errorLog(`EROOR: VLAUE NOT IN LANG FILE FOR LANG ${currentLanguage}`);
+              if (getTranslation(this.api, id) === '') {
+                listNode.remove();
+                errorLog(`EROOR: VLAUE NOT IN LANG FILE FOR LANG ${currentLanguage}`);
+              }
             }
           }
-        }
-      } else {
-        if (node.children.length > 0) {
-          const translation = getTranslation(this.api, node.id);
-          if (node.children[1] !== null && node.children[1] !== undefined) {
-            node.children[1].textContent = translation;
-          } else {
-            node.children[0].textContent = translation;
+        } else {
+          if (node.children.length > 0) {
+            const translation = getTranslation(this.api, node.id);
+            if (node.children[1] !== null && node.children[1] !== undefined) {
+              node.children[1].textContent = translation;
+            } else {
+              node.children[0].textContent = translation;
+            }
           }
         }
       }
-    }
 
-    this.customLangUpdate(this.api);
+      this.customLangUpdate(this.api);
+    });
   }
 }
