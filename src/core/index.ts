@@ -8,4 +8,4 @@ export * from './application';
 
 export * from './card';
 
-export * from './configuration_component';
+export * from './component';

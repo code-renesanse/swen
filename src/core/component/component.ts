@@ -1,17 +1,17 @@
-import { createSubelementsHolder } from '../../dom';
+import { createSubelementsHolder, getDomFromReference } from '../../dom';
 import { getTranslation } from '../../languages';
 import { developmentLog, errorLog } from '../../logger';
-import { IApi, IComponent } from '../../types';
+import { IApi } from '../../types';
 import { createDockElement, createDockItemContent, createDockTitleButton } from '../../dock/functions';
+import { IComponent } from './component.model';
 
-export class Component implements IComponent {
+export class _Component_ implements IComponent {
   subelements: HTMLDivElement;
   dockElement: HTMLDivElement;
   title: HTMLButtonElement;
   dockItem: HTMLDivElement;
   name: string;
   id: string;
-  // translation;
   api: IApi;
 
   /**
@@ -19,11 +19,11 @@ export class Component implements IComponent {
      * @param {string} id - id of the component
      * @param {Sketchfab API object} api - JSON object holding all application data
      */
+  // TODO: make the dock wrapper an argument or maybe append dock wrapper reference to the api object
   constructor (id: string, api: IApi) {
     this.name = getTranslation(api, id);
     this.id = id;
 
-    // this.translation;
     this.api = api;
     this.subelements = createSubelementsHolder(id);
 
@@ -36,7 +36,7 @@ export class Component implements IComponent {
     this.dockElement.appendChild(this.title);
     this.dockElement.appendChild(this.dockItem);
 
-    const dockWrapper = document.querySelector('#dock-wrapper');
+    const dockWrapper = getDomFromReference('dock-wrapper');
     if (dockWrapper === null) {
       errorLog('dock-wrapper does not exist');
       return;

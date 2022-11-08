@@ -3,6 +3,10 @@
     "author": "code.renesanse",
     "version": "1.2.10",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/code-renesanse/swen"
+    },
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
     "files": [
@@ -15,7 +19,7 @@
     "scripts": {
         "start": "tsdx watch",
         "build": "tsdx build",
-        "test": "tsdx test",
+        "test": "export APP_NAME=testing && tsdx test",
         "lint": "tsdx lint",
         "prepare": "tsdx build",
         "size": "size-limit",

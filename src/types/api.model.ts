@@ -1,4 +1,4 @@
-import { IComponent } from './component.model';
+import { IComponent } from '../core/component/component.model';
 import { Dictionary } from './dictionary.model';
 import { ISketchfabModelElement } from './element.model';
 import { ILanguage, ITranslation } from './language.model';
@@ -7,6 +7,7 @@ export interface IConfigurationComponentMap {
   [key: string]: (parent: IComponent, api: IApi) => void
 }
 
+// TODO: remove configuration_components array <=> no uses for configuration_components array
 export interface IApi {
   currentModelId: string
   image_dictionary: Dictionary<string>

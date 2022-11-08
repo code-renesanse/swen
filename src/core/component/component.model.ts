@@ -1,4 +1,4 @@
-import { IApi } from './api.model';
+import { IApi } from '../../types/api.model';
 
 export interface IComponent {
   api: IApi
