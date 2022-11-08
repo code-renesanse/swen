@@ -45,7 +45,7 @@ export class _Component_ implements IComponent {
     dockWrapper.appendChild(this.dockElement);
 
     // This is the initailization of a component that is defined in each model (card)
-    api.configuration_components_map[id](this, api);
+    api.component_load_map[id](this, api);
   }
 
   /**

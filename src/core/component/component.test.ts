@@ -19,7 +19,7 @@ describe('Components', () => {
       },
       configuration_components: [],
       is_mobile: false,
-      configuration_components_map: {
+      component_load_map: {
         test: () => {
           console.log('Test component initialization works');
         }

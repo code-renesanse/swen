@@ -1,4 +1,5 @@
-import { IApi, IComponent } from '../../types';
+import { IApi } from '../../types';
+import { IComponent } from './component.model';
 
 // TODO: replace configuration_components list to configuration_components_map
 /**

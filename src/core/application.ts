@@ -1,11 +1,12 @@
 import { addClass, createElement, hideLoading, replaceClass } from '../dom';
 import { buildComponentDictionary } from '../dictionary';
 import { developmentLog, errorLog, log, mustImplementFunction } from '../logger';
-import { IApi, IComponent, Dictionary, ISketchfabModelElement } from '../types';
+import { IApi, Dictionary, ISketchfabModelElement } from '../types';
 import { IModels } from '../types/card.model';
 import { getLangFromURL, loadNewTransllationFiles, Translator } from '../languages';
 import { clearDockWrapper } from '../dock/functions';
 import { Card } from './card';
+import { IComponent } from './component';
 
 declare const window: any;
 
@@ -27,7 +28,7 @@ export class Application {
     languages: {},
     translator: {},
     configuration_components: [],
-    configuration_components_map: {},
+    component_load_map: {},
     is_mobile: false,
     // getters: {},
     show: function (_id: string): void {
@@ -78,7 +79,7 @@ export class Application {
       translator: {},
       configuration_components: [],
       model_map: {},
-      configuration_components_map: {},
+      component_load_map: {},
       is_mobile: false,
       // getters: this.apiGetters(),
       show () {},

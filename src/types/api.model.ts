@@ -3,7 +3,7 @@ import { Dictionary } from './dictionary.model';
 import { ISketchfabModelElement } from './element.model';
 import { ILanguage, ITranslation } from './language.model';
 
-export interface IConfigurationComponentMap {
+export interface IComponentLoadMap {
   [key: string]: (parent: IComponent, api: IApi) => void
 }
 
@@ -19,7 +19,7 @@ export interface IApi {
   translator: ITranslation
   configuration_components: IComponent[]
   is_mobile: boolean
-  configuration_components_map: IConfigurationComponentMap
+  component_load_map: IComponentLoadMap
   // getters: object
   show: (id: string) => void
   hide: (id: string) => void

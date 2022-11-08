@@ -2,7 +2,8 @@ import { Application } from './application';
 import { createCardLoadHolder, createImageHolder, createLoadingbarGif } from '../dom';
 import { wordsSpin } from '../languages';
 import { errorLog, mustImplementFunction } from '../logger';
-import { IApi, IComponent } from '../types';
+import { IApi } from '../types';
+import { IComponent } from './component';
 
 export class Card {
   modelid: string;
@@ -52,7 +53,7 @@ export class Card {
     // if (!(api.configuration_components_map)) {
     //   api.configuration_components_map = {};
     // }
-    api.configuration_components_map[id] = (parent, api) => component(parent, api);
+    api.component_load_map[id] = (parent, api) => component(parent, api);
   }
 
   setModelConfiguration (_api: IApi): void {
