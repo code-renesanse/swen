@@ -361,10 +361,12 @@ export class Application {
     context.keys().forEach((key: string) => {
       const split: string[] = key.split('/');
       const group: string = split[1];
-      const name: string = split[2];
+      const name: string = split[2].split('.')[0];
+
       if (cache[group] === undefined) {
         cache[group] = {};
       }
+
       (cache[group][name] = context(key));
     });
     return cache;
