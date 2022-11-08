@@ -11,6 +11,11 @@ import { IApi } from '../../types';
 
 // TODO: rename function to something like _getImage
 export function getImage (imageKey: string, api: IApi): string {
+  if (imageKey === null || imageKey === undefined || imageKey === '') {
+    developmentLog('Image with key is not available');
+    return 'https://via.placeholder.com/256x256.png';
+  }
+
   if (imageKey.startsWith('https://')) {
     return imageKey;
   }
