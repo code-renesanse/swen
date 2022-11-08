@@ -1,6 +1,6 @@
 import { hideLoading, showLoading } from '../dom';
 import { developmentLog } from '../logger';
-import { Application } from './application';
+import { Application } from './application/application';
 
 export class Launcher {
   application: Application | null = null;

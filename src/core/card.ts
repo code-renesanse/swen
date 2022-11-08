@@ -1,4 +1,4 @@
-import { Application } from './application';
+import { Application } from './application/application';
 import { createCardLoadHolder, createImageHolder, createLoadingbarGif } from '../dom';
 import { wordsSpin } from '../languages';
 import { errorLog, mustImplementFunction } from '../logger';

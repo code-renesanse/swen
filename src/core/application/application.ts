@@ -1,12 +1,12 @@
-import { addClass, createElement, hideLoading, replaceClass } from '../dom';
-import { buildComponentDictionary } from '../dictionary';
-import { developmentLog, errorLog, log, mustImplementFunction } from '../logger';
-import { IApi, Dictionary, ISketchfabModelElement } from '../types';
-import { IModels } from '../types/card.model';
-import { getLangFromURL, loadNewTransllationFiles, Translator } from '../languages';
-import { clearDockWrapper } from '../dock/functions';
-import { Card } from './card';
-import { IComponent } from './component';
+import { addClass, createElement, hideLoading, replaceClass } from '../../dom';
+import { buildComponentDictionary } from '../../dictionary';
+import { developmentLog, errorLog, log, mustImplementFunction } from '../../logger';
+import { IApi, Dictionary, ISketchfabModelElement } from '../../types';
+import { IModels } from '../../types/card.model';
+import { getLangFromURL, loadNewTransllationFiles, Translator } from '../../languages';
+import { clearDockWrapper } from '../../dock/functions';
+import { Card } from '../card';
+import { IComponent } from '../component';
 
 declare const window: any;
 
