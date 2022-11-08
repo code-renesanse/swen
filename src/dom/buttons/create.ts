@@ -47,6 +47,7 @@ export const createHTMLButton = (id: string, img: string, api: IApi): HTMLButton
 
   addClass(out, [
     'p-1',
+    'w-7r',
     'bg-transparent',
     'border-dark',
     'm-1',
@@ -59,6 +60,7 @@ export const createHTMLButton = (id: string, img: string, api: IApi): HTMLButton
   addClass(text, [
     'd-flex',
     'm-0',
+    'justify-content-center',
     'text-capitalize',
     'align-items-center'
   ]);

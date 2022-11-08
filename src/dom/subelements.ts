@@ -30,6 +30,8 @@ export const appendElementList = (domRef: Document | HTMLElement | string, ...li
 export const createSubelementsHolder = (id: string): HTMLDivElement => {
   const buttonHolder = createElement('div', id);
   addClass(buttonHolder, [
+    'd-flex',
+    'flex-column',
     'indent',
     'mx-2'
   ]);

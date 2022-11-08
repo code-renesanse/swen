@@ -4,6 +4,7 @@
 
 # TODO
 
+* [ ] Element propreties should be generic and not bound to custom css scripts and bootstrap
 * [ ] Handle empty ('') and undefined strings in *getImage* function 
 
 ### Typescipt code formating

@@ -55,8 +55,7 @@ export const createListItemHead = (id: string, type: string): HTMLLIElement => {
   addClass(lh, [
     'd-flex',
     'flex-column',
-    'w-7r',
-    'pt-25r'
+    'w-7r'
   ]);
 
   return lh;
