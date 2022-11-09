@@ -24,3 +24,5 @@ export * from './core';
 export * from './countries';
 
 export * from './config';
+
+export * from './types';

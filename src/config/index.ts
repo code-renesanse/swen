@@ -1,6 +1,7 @@
 
 // TODO: defaultConfig refactor !!
-
+// TODO: a proper return type for setConfigKeyValuePair
+// TODO: a proper return type for getConfigKeyValuePair
 import { IApi } from '../types';
 
 /**
@@ -10,8 +11,9 @@ import { IApi } from '../types';
  * @param {*} api
  * @returns
  */
-export const setConfigKeyValuePair = (key: string, value: object, api: IApi): void => {
+export const setConfigKeyValuePair = <O extends object>(key: string, value: O, api: IApi): O => {
   api.configuration[key] = value;
+  return value;
 };
 
 /**

@@ -18,7 +18,7 @@
     },
     "scripts": {
         "start": "tsdx watch",
-        "build": "tsdx build",
+        "build": "npm run test && tsdx build",
         "test": "export APP_NAME=testing && tsdx test",
         "lint": "tsdx lint",
         "prepare": "tsdx build",
