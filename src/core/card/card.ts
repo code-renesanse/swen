@@ -1,9 +1,9 @@
-import { Application } from './application/application';
-import { createCardLoadHolder, createImageHolder, createLoadingbarGif } from '../dom';
-import { wordsSpin } from '../languages';
-import { errorLog, mustImplementFunction } from '../logger';
-import { IApi } from '../types';
-import { IComponent } from './component';
+import { Application } from '../application/application';
+import { createCardLoadHolder, createImageHolder, createLoadingbarGif } from '../../dom';
+import { wordsSpin } from '../../languages';
+import { errorLog, mustImplementFunction } from '../../logger';
+import { IApi } from '../../types';
+import { IComponent } from '../component';
 
 export class Card {
   modelid: string;
