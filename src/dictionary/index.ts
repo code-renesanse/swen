@@ -2,7 +2,6 @@
 /**
  * Image dictioanry stuffs
  */
-export * from './image/build';
 export * from './image/getters';
 
 /**

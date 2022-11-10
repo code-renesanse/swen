@@ -2,15 +2,15 @@ import { addClass, createElement, hideLoading, replaceClass } from '../../dom';
 import { buildComponentDictionary } from '../../dictionary';
 import { developmentLog, errorLog, log, mustImplementFunction } from '../../logger';
 import { IApi, Dictionary, ISketchfabModelElement } from '../../types';
-import { IModels } from '../../types/card.model';
+import { IModels } from '../card/card.model';
 import { getLangFromURL, loadNewTransllationFiles, Translator } from '../../languages';
 import { clearDockWrapper } from '../../dock/functions';
-import { Card } from '../card';
+import { _Card_ } from '../card';
 import { IComponent } from '../component';
 
 declare const window: any;
 
-export class Application {
+export class _Application_ {
   appName: string = '';
   MAIN: HTMLDivElement = createElement('div', '');
   API_FRAME: HTMLIFrameElement = createElement('iframe', '');
@@ -102,7 +102,7 @@ export class Application {
   }
 
   // TODO: implement model CARDS
-  addCard (cardRef: Card): void {
+  addCard (cardRef: _Card_): void {
     // TODO: cardRef validation
     // validateString(cardRef.modelId);
     this.CARDS[cardRef.modelid] = cardRef;

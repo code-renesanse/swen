@@ -21,7 +21,7 @@ export * from './dock';
 
 export * from './core';
 
-export * from './countries';
+export * from './countries/countries';
 
 export * from './config';
 

@@ -1,10 +1,10 @@
 import { hideLoading, showLoading } from '../dom';
 import { developmentLog } from '../logger';
-import { Application } from './application/application';
+import { _Application_ } from './application/application';
 
 export class Launcher {
-  application: Application | null = null;
-  constructor (context: any, application: Application) {
+  application: _Application_ | null = null;
+  constructor (context: any, application: _Application_) {
     void (async () => {
       this.application = application;
       showLoading();

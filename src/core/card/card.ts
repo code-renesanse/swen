@@ -1,14 +1,14 @@
-import { Application } from '../application/application';
+import { _Application_ } from '../application/application';
 import { createCardLoadHolder, createImageHolder, createLoadingbarGif } from '../../dom';
 import { wordsSpin } from '../../languages';
 import { errorLog, mustImplementFunction } from '../../logger';
 import { IApi } from '../../types';
 import { IComponent } from '../component';
 
-export class Card {
+export class _Card_ {
   modelid: string;
 
-  constructor (modelid: string, configuratorRef: Application) {
+  constructor (modelid: string, configuratorRef: _Application_) {
     // validateConfigurator(configuratorRef);
     this.modelid = modelid;
 

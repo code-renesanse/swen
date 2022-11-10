@@ -1,7 +1,7 @@
-import { Application } from './application';
+import { _Application_ } from './application';
 
 describe('Application', () => {
-  let instance: Application;
+  let instance: _Application_;
   beforeAll(() => {
     /**
      * Create a simulated api-frame-holder div
@@ -11,11 +11,11 @@ describe('Application', () => {
     _apiFrame.id = 'api-frame-holder';
     document.body.appendChild(_apiFrame);
 
-    instance = new Application('test');
+    instance = new _Application_('test');
   });
 
-  it('Validates the example application', () => {
-    expect(instance).toBeInstanceOf(Application);
+  it('Validates the example _application_', () => {
+    expect(instance).toBeInstanceOf(_Application_);
     expect(instance.API).toBeDefined();
     expect(instance.API_FRAME).toBeDefined();
     expect(instance.appName).toBeDefined();
