@@ -2,8 +2,8 @@ import { getImage } from '../../dictionary';
 import { errorLog } from '../../logger';
 import { IApi } from '../../types';
 import { setAnimation, setAnimationIterationCount } from '../animations/setters';
-import { addClass } from '../class';
 import { createElement } from '../create';
+import { _HTMLElement_ } from '../dom.model';
 
 /**
   * DIV holder for the loading gif
@@ -11,13 +11,13 @@ import { createElement } from '../create';
   */
 export const createLoadingbar = (): HTMLDivElement => {
   const gifDiv = createElement('div', 'loading-bar');
-  addClass(gifDiv, [
+  gifDiv.addClass(
     'd-flex',
     'flex-column',
     'justify-content-center',
     'align-items-center',
     'position-absolute'
-  ]);
+  );
   return gifDiv;
 };
 
@@ -27,7 +27,7 @@ export const createLoadingbar = (): HTMLDivElement => {
 */
 export const createLoadingbarSpan = (): HTMLSpanElement => {
   const lodingGifSpan = createElement('span', 'loading-bar-span');
-  addClass(lodingGifSpan, 'loading-span');
+  lodingGifSpan.addClass('loading-span');
   return lodingGifSpan;
 };
 
@@ -38,7 +38,7 @@ export const createLoadingbarSpan = (): HTMLSpanElement => {
 // TODO: create a unique loding bar function
 export const createLoadingbarSvgHolder = (): HTMLDivElement => {
   const svgDom = createElement('div', 'loading-bar');
-  addClass(svgDom, [
+  svgDom.addClass(
     'position-absolute',
     'w-4r',
     'h-auto',
@@ -46,7 +46,7 @@ export const createLoadingbarSvgHolder = (): HTMLDivElement => {
     'start-50',
     'translate-middle-x',
     'bg-transparent-white'
-  ]);
+  );
   return svgDom;
 };
 
@@ -79,7 +79,7 @@ export const createLoadingbarGif = async (api: IApi): Promise<boolean> => await 
   }
 
   const loadingBar = createLoadingbar();
-  const loadGif = createLoadingbarGifImg(PATH, api);
+  const loadGif = createLoadingbarGifImg(PATH, api) as unknown as _HTMLElement_;
   const loadSpan = createLoadingbarSpan();
 
   loadingBar.appendChild(loadGif);

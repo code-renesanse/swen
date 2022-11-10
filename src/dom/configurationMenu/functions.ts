@@ -1,6 +1,5 @@
 import { IApi } from '../../types';
 import { setAnimation } from '../animations/setters';
-import { addClass, removeClass } from '../class';
 import { getDomFromReference } from '../getters';
 
 /**
@@ -12,17 +11,17 @@ export const openConfiguratorMenu = (api: IApi): void => {
   const wrapper = getDomFromReference('dock-wrapper');
   const configFinish = getDomFromReference('configuration-finish');
 
-  removeClass(container, [
+  container.removeClass(
     'p-0',
     'w-0'
-  ]);
+  );
 
-  removeClass(configFinish, 'button-selected');
+  configFinish.removeClass('button-selected');
 
   setAnimation(container, 'extendWidth', api.animation_speed.toString(), 'linear');
 
   setTimeout(() => {
-    removeClass(wrapper, [ 'opaque', 'overflow-hidden' ]);
+    wrapper.removeClass('opaque', 'overflow-hidden');
   }, api.animation_speed);
 };
 
@@ -38,18 +37,18 @@ export const closeConfiguratorMenu = (api: IApi): void => {
 
   if (!api.is_mobile) {
     if (!container.classList.contains('w-0')) {
-      addClass(wrapper, [
+      wrapper.addClass(
         'opaque',
         'overflow-hidden'
-      ]);
+      );
 
       setAnimation(container, 'extendWidthBack', `${animationSpeed}ms`, 'linear');
 
       setTimeout(() => {
-        addClass(container, [
+        container.addClass(
           'p-0',
           'w-0'
-        ]);
+        );
       }, animationSpeed);
     }
   }

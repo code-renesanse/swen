@@ -17,7 +17,7 @@ export * from './loadingbar';
 /**
  * Class stuffs
  */
-export * from './class';
+// export * from './class';
 
 /**
  * Create stuffs
@@ -74,3 +74,8 @@ export * from './buttons';
  */
 
 export * from './list';
+
+/**
+ * Types
+ */
+export * from './dom.model';

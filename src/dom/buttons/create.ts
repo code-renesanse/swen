@@ -1,9 +1,9 @@
 import { getImage } from '../../dictionary';
 import { getTranslation } from '../../languages';
 import { IApi } from '../../types';
-import { addClass, removeClass } from '../class';
 import { openConfiguratorMenu } from '../configurationMenu';
 import { createElement } from '../create';
+import { _HTMLElement_ } from '../dom.model';
 import { selectUnselectButtonFunction } from './functions';
 
 /**
@@ -15,7 +15,7 @@ import { selectUnselectButtonFunction } from './functions';
  */
 export const createValidResponseButton = (textContent: string, popupHolder: HTMLDivElement, api: IApi): HTMLButtonElement => {
   const btn = createElement('button', 'vr-btn');
-  addClass(btn, [
+  btn.addClass(
     'bg-transparent',
     'border',
     'border-none',
@@ -23,7 +23,7 @@ export const createValidResponseButton = (textContent: string, popupHolder: HTML
     'text-uppercase',
     'button-hover',
     'my-1'
-  ]);
+  );
   btn.textContent = textContent;
 
   btn.addEventListener('click', () => {
@@ -43,29 +43,29 @@ export const createValidResponseButton = (textContent: string, popupHolder: HTML
 export const createHTMLButton = (id: string, img: string, api: IApi): HTMLButtonElement => {
   id = id.toString();
 
-  const out = createElement('button', id);
+  const out = createElement('button', id) as _HTMLElement_;
 
-  addClass(out, [
+  out.addClass(
     'p-1',
     'w-7r',
     'bg-transparent',
     'border-dark',
     'm-1',
     'on-hover'
-  ]);
+  );
 
   const text = createElement('p', `${id}-paragraph`);
   text.textContent = getTranslation(api, id);
 
-  addClass(text, [
+  text.addClass(
     'd-flex',
     'm-0',
     'justify-content-center',
     'text-capitalize',
     'align-items-center'
-  ]);
+  );
 
-  removeClass(out, 'on-hover');
+  out.removeClass('on-hover');
 
   const ico = createElement('img', `${id}-img`);
 
@@ -79,7 +79,7 @@ export const createHTMLButton = (id: string, img: string, api: IApi): HTMLButton
   ico.style.backgroundSize = '100%';
 
   // width and height styling
-  addClass(ico, [
+  ico.addClass(
     'w-4r',
     'min-width-4r',
     'h-4r',
@@ -87,7 +87,7 @@ export const createHTMLButton = (id: string, img: string, api: IApi): HTMLButton
     'border-2',
     'border-dark',
     'mx-1'
-  ]);
+  );
 
   out.appendChild(ico);
 

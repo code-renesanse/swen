@@ -1,4 +1,4 @@
-import { addClass, getDomFromReference } from '../../dom';
+import { getDomFromReference } from '../../dom';
 import { IApi } from '../../types';
 import { getLangFromURL, getTranslation } from '../getters';
 import { Translator } from '../translator';
@@ -16,10 +16,10 @@ export const wordsSpin = async (api: IApi): Promise<void> => {
 
   let i = 1;
   const words = getTranslation(api, 'loadingtext');
-  const loadingSpan = getDomFromReference('loading-bar-span') as HTMLSpanElement;
-  addClass(loadingSpan, 'text-capitalize');
+  const loadingSpan = getDomFromReference('loading-bar-span');
+  loadingSpan.addClass('text-capitalize');
   loadingSpan.textContent = words[0].toLowerCase();
-  addClass(loadingSpan, 'popInOutElement');
+  loadingSpan.addClass('popInOutElement');
 
   loadingSpan.addEventListener('animationend', () => {
     if (i > words.length - 1) {

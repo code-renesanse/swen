@@ -1,6 +1,5 @@
 import { getImage } from '../dictionary';
 import { IApi } from '../types';
-import { addClass } from './class';
 import { createElement } from './create';
 
 /**
@@ -21,10 +20,10 @@ export const createImageHolder = (modelId: string, alt: string, api: IApi): HTML
 
   cardImg.src = imgRef;
   cardImg.alt = alt;
-  addClass(cardImg, [
+  cardImg.addClass(
     'w-100',
     'h-100'
-  ]);
+  );
 
   return cardImg;
 };

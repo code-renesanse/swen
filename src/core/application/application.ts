@@ -1,4 +1,4 @@
-import { addClass, createElement, hideLoading, replaceClass } from '../../dom';
+import { createElement, hideLoading, _HTMLElement_ } from '../../dom';
 import { buildComponentDictionary } from '../../dictionary';
 import { developmentLog, errorLog, log, mustImplementFunction } from '../../logger';
 import { IApi, Dictionary, ISketchfabModelElement } from '../../types';
@@ -225,7 +225,7 @@ export class _Application_ {
      * @param {String} modelId - reference to the sketchafb model refrence inside api.modelMap
      */
   async loadModel (modelId: string, api: IApi): Promise<void> {
-    const loadingBar = document.getElementById('loading-bar');
+    const loadingBar = document.getElementById('loading-bar') as _HTMLElement_;
 
     const modelReference = api.model_map[modelId];
 
@@ -235,7 +235,7 @@ export class _Application_ {
     }
 
     developmentLog(`Loading model with ID: ${modelId}`);
-    replaceClass(loadingBar, 'd-none', 'd-flex');
+    loadingBar.replaceClass('d-none', 'd-flex');
 
     this.API_FRAME.style.opacity = '0';
 
@@ -283,7 +283,7 @@ export class _Application_ {
           log('Modile mode');
         } else {
           if (wrapper !== null) {
-            addClass(wrapper, 'opaque');
+            wrapper.addClass('opaque');
           }
         }
 

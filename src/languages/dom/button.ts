@@ -1,4 +1,4 @@
-import { addClass, createElement, getDomFromReference } from '../../dom';
+import { createElement, getDomFromReference } from '../../dom';
 import { errorLog } from '../../logger';
 import { IApi } from '../../types';
 import { setLang } from '../setters';
@@ -37,19 +37,19 @@ export const createLanguageButton = (api: IApi, lang: string): void => {
   const title = titleMap[lang];
 
   const btn = createElement('button', id);
-  addClass(btn, [
+  btn.addClass(
     className,
     'bg-transparent',
     'border-none',
     'button-hover'
-  ]);
+  );
 
   btn.title = title;
 
   const bImg = createElement('img', `${id}-img`);
   bImg.alt = title;
   bImg.src = `${imagePrefix}/${lang}.png`;
-  addClass(bImg, 'wpml-ls-flag');
+  bImg.addClass('wpml-ls-flag');
 
   const elan = id.split('-')[1];
   btn.addEventListener('click', () => {

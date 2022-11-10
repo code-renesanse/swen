@@ -1,6 +1,6 @@
 import { errorLog } from '../logger';
-import { addClass } from './class';
 import { createElement } from './create';
+import { _HTMLElement_ } from './dom.model';
 import { getDomFromReference } from './getters';
 
 /**
@@ -8,7 +8,7 @@ import { getDomFromReference } from './getters';
  * @param {DOMElement | String} domRef - reference to the dom element
  * @param  {...DOMElements} list list of DOM elements to append to the parent
  */
-export const appendElementList = (domRef: Document | HTMLElement | string, ...list: HTMLElement[]): boolean => {
+export const appendElementList = (domRef: Document | _HTMLElement_ | string, ...list: _HTMLElement_[]): boolean => {
   const parent = getDomFromReference(domRef);
 
   if (parent === null || parent === undefined) {
@@ -16,7 +16,7 @@ export const appendElementList = (domRef: Document | HTMLElement | string, ...li
     return false;
   }
 
-  list.forEach((child: HTMLElement) => {
+  list.forEach((child: _HTMLElement_) => {
     parent.appendChild(child);
   });
 
@@ -29,11 +29,10 @@ export const appendElementList = (domRef: Document | HTMLElement | string, ...li
    */
 export const createSubelementsHolder = (id: string): HTMLDivElement => {
   const buttonHolder = createElement('div', id);
-  addClass(buttonHolder, [
+  buttonHolder.addClass(
     'd-flex',
     'flex-column',
-    'indent',
     'mx-2'
-  ]);
+  );
   return buttonHolder;
 };
