@@ -26,19 +26,10 @@ export const developmentLog = (message: Message): Message => {
 
 export const errorLog = (message: Message): void => {
   if ((process.env.APP_NAME ?? '').length === 0) {
-    console.log('No valid APP_NAME enviromantal variable');
-    return;
+    throw new Error('No valid APP_NAME enviromantal variable');
   }
 
-  // const isNode = (): boolean => { try { return this === global; } catch (e) { return false; } };
-
-  // console.error(`[ ${process.env.APP_NAME ?? 'no APP_NAME env variable'} ]: ${message}`);
-
-  // if (!isNode()) {
-  //   alert(`[ ${process.env.APP_NAME ?? 'no APP_NAME env variable'} ]: ${message}`);
-  // }
-
-  throw new Error(`[ ${process.env.APP_NAME ?? 'no APP_NAME env variable'} ]: ${message}`);
+  throw new Error(`[ ${process.env.APP_NAME ?? 'error404'} ]: ${message}`);
 };
 
 export const mustImplementFunction = (functionName: Message): void => {

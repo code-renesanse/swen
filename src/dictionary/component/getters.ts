@@ -14,7 +14,6 @@ export function elementExists (elementReference: ISketchfabModelElement | string
 
   if (key === '' || component === null || component === undefined) {
     errorLog(`Element with index '${key}' does not exist`);
-    return false;
   }
 
   return component !== null;
