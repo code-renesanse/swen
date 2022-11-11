@@ -235,7 +235,8 @@ export class _Application_ {
     }
 
     developmentLog(`Loading model with ID: ${modelId}`);
-    loadingBar.replaceClass('d-none', 'd-flex');
+    loadingBar.style.display = 'none';
+    // loadingBar.replaceClass('d-none', 'd-flex');
 
     this.API_FRAME.style.opacity = '0';
 

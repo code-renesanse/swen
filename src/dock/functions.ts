@@ -1,4 +1,4 @@
-import { createElement, _HTMLElement_, _HTMLObjectElement_ } from '../dom';
+import { createElement, getDomFromReference, _HTMLElement_, _HTMLObjectElement_ } from '../dom';
 import { getTranslation } from '../languages';
 import { IApi } from '../types';
 import { getIdFromDockItem } from './getters';
@@ -20,8 +20,6 @@ export const createDockItem = (): _HTMLElement_ => {
  */
 export const createDockItemContent = (btnHolder: _HTMLElement_): _HTMLElement_ => {
   const dic = createElement('div', 'dock-item-content');
-  dic.addClass('dock-item-content');
-  dic.addClass('d-none');
   dic.appendChild(btnHolder);
   return dic;
 };
@@ -53,11 +51,13 @@ export const createDockTitleButton = (api: IApi, id: string, dockElement: _HTMLE
   _dockTitleButton.addEventListener('click', () => {
     _dockTitleButton.addClass('button-selected');
     const dockContent = dockElement.children[1] as _HTMLObjectElement_<'div'>;
-    if (dockContent.style.display === 'none') {
+    const _computedStyle = window.getComputedStyle(dockContent).display;
+    if (_computedStyle === 'none') {
       // dockContent.replaceClass('d-none', 'd-flex');
       dockContent.style.display = 'flex';
+
       _dockTitleButton.removeClass('button-selected');
-    } else {
+    } else if (_computedStyle === 'flex') {
       // dockContent.replaceClass('d-flex', 'd-none');
       dockContent.style.display = 'none';
     }
@@ -67,8 +67,10 @@ export const createDockTitleButton = (api: IApi, id: string, dockElement: _HTMLE
       const index: number = getIdFromDockItem(all[i] as HTMLElement);
       const dockElementIndex: number = getIdFromDockItem(dockElement);
       if (index !== dockElementIndex) {
-        all[index].children[1].classList.replace('d-flex', 'd-none');
+        // all[index].children[1].classList.replace('d-flex', 'd-none');
+        const _tmp = all[index].children[1] as _HTMLElement_;
         const _elm = all[index].children[0] as _HTMLObjectElement_<'button'>;
+        _tmp.style.display = 'none';
         _elm.removeClass('button-selected');
       }
     }
@@ -82,7 +84,7 @@ export const createDockTitleButton = (api: IApi, id: string, dockElement: _HTMLE
 * @returns dock-wripper with no elements inside
 */
 export const clearDockWrapper = (): _HTMLElement_ | null => {
-  const wrapper = document.querySelector('#dock-wrapper') as _HTMLElement_;
+  const wrapper = getDomFromReference('dock-wrapper');
 
   if (wrapper !== null) {
     for (let i = wrapper.childElementCount - 1; i >= 0; i--) {

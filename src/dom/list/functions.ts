@@ -12,16 +12,18 @@ export const closeHTMLList = (listRef: string | _HTMLElement_): void => {
 
   //   const list = typeof listRef === 'string' ? document.querySelector(`#${listRef}`) : listRef;
   const list = getDomFromReference(listRef);
-  list.removeClass('d-flex');
-  list.addClass('d-none');
+  // list.removeClass('d-flex');
+  // list.addClass('d-none');
+  list.style.display = 'none';
 };
 
 export const openHTMLList = (listRef: string | _HTMLElement_): void => {
   if (listRef === null) errorLog('No valid list reference');
 
   const list = getDomFromReference(listRef);
-  list.removeClass('d-none');
-  list.addClass('d-flex');
+  // list.removeClass('d-none');
+  // list.addClass('d-flex');
+  list.style.display = 'flex';
 };
 
 /**

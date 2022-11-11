@@ -1,5 +1,5 @@
 import { _Application_ } from '../application/application';
-import { createCardLoadHolder, createImageHolder, createLoadingbarGif } from '../../dom';
+import { createCardLoadHolder, createImageHolder, createLoadingbarGif, getDomFromReference } from '../../dom';
 import { wordsSpin } from '../../languages';
 import { errorLog, mustImplementFunction } from '../../logger';
 import { IApi } from '../../types';
@@ -30,9 +30,10 @@ export class _Card_ {
           errorLog('model-selection-holder is null');
         }
 
-        const apiFrameHolder = document.querySelector('#api-frame-holder');
+        const apiFrameHolder = getDomFromReference('api-frame-holder');
         if (apiFrameHolder !== null) {
-          apiFrameHolder.classList.replace('d-none', 'd-flex');
+        //   apiFrameHolder.classList.replace('d-none', 'd-flex');
+          apiFrameHolder.style.display = 'flex';
         } else {
           errorLog('apiFrameHolder is null');
         }
