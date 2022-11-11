@@ -12,7 +12,7 @@ export const createCardLoadHolder = (id: string, title: string): HTMLDivElement 
     'w-20r',
     'mx-2',
     'my-2',
-    'on-hove',
+    'on-hover',
     'shadow-lg',
     'border',
     'border-dark',
