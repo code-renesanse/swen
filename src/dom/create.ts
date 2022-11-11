@@ -1,4 +1,4 @@
-import { HTMLObjectElement } from './dom.model';
+import { _HTMLObjectElement_ } from './dom.model';
 
 /**
  *
@@ -6,8 +6,8 @@ import { HTMLObjectElement } from './dom.model';
  * @param {String} id DOM id
  * @returns newly created DOM element
  */
-export const createElement = <K extends keyof HTMLElementTagNameMap>(type: K, id: string): HTMLObjectElement<K> => {
-  const _element = document.createElement(type) as HTMLObjectElement<K>;
+export const createElement = <K extends keyof HTMLElementTagNameMap>(type: K, id: string): _HTMLObjectElement_<K> => {
+  const _element = document.createElement(type) as _HTMLObjectElement_<K>;
   _element.id = id;
   _element.addClass = (...list: string[]) => {
     if (list !== undefined) {

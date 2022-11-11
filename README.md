@@ -9,6 +9,9 @@
 # TODO
 * [x] Handle empty ('') and undefined strings in *getImage* function 
 * [ ] Animation create loadGif type _HTMLElement_
+* _HTMLElement 
+  * [ ] **removeEventListener**
+  * [ ] **setId**
 * index.html - template
   * Create html elements with JS
     * [ ] *model-selection-holder* div

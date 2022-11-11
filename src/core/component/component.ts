@@ -1,4 +1,4 @@
-import { createSubelementsHolder, getDomFromReference } from '../../dom';
+import { createSubelementsHolder, getDomFromReference, _HTMLElement_ } from '../../dom';
 import { getTranslation } from '../../languages';
 import { developmentLog, errorLog } from '../../logger';
 import { IApi } from '../../types';
@@ -6,8 +6,8 @@ import { createDockItem, createDockItemContent, createDockTitleButton } from '..
 import { IComponent } from './component.model';
 
 export class _Component_ implements IComponent {
-  subelements: HTMLDivElement;
-  dockElement: HTMLDivElement;
+  subelements: _HTMLElement_;
+  dockElement: _HTMLElement_;
   title: HTMLButtonElement;
   dockItem: HTMLDivElement;
   name: string;
@@ -27,7 +27,7 @@ export class _Component_ implements IComponent {
     this.api = api;
     this.subelements = createSubelementsHolder(id);
 
-    this.dockElement = createDockItem('dock-element', 'p-1');
+    this.dockElement = createDockItem();
 
     this.title = createDockTitleButton(api, id, this.dockElement);
 

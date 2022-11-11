@@ -27,7 +27,7 @@ export const appendElementList = (domRef: Document | _HTMLElement_ | string, ...
    *
    * @returns HTML div element
    */
-export const createSubelementsHolder = (id: string): HTMLDivElement => {
+export const createSubelementsHolder = (id: string): _HTMLElement_ => {
   const buttonHolder = createElement('div', id);
   buttonHolder.addClass(
     'd-flex',
