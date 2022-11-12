@@ -27,6 +27,10 @@ jobs:
 
       - name: Test
         run: yarn test --ci --coverage --maxWorkers=2
+        with:
+          APP_NAME: swen-test
 
       - name: Build
         run: yarn build
+        with: 
+          APP_NAME: swen-build

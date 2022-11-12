@@ -19,7 +19,7 @@
     "scripts": {
         "start": "tsdx watch",
         "build": "npm run test && tsdx build",
-        "test": "cross-env APP_NAME='swen' tsdx test",
+        "test": "tsdx test",
         "lint": "tsdx lint",
         "prepare": "tsdx build",
         "size": "size-limit",
