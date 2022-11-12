@@ -18,8 +18,8 @@
     },
     "scripts": {
         "start": "tsdx watch",
-        "build": "export NODE_ENV='production' && npm run test && tsdx build",
-        "test": "export APP_NAME=testing && tsdx test",
+        "build": "npm run test && tsdx build",
+        "test": "tsdx test",
         "lint": "tsdx lint",
         "prepare": "tsdx build",
         "size": "size-limit",
