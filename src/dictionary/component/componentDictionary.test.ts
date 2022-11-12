@@ -79,7 +79,7 @@ describe('Component dictionary', () => {
     const _result = (): void => {
       elementExists('CMP003', _api);
     };
-    expect(_result).toThrow('[ testing ]: Element with index \'CMP003\' does not exist');
+    expect(_result).toThrow(`[ ${process.env.APP_NAME ?? 'swen'} ]: Element with index 'CMP003' does not exist`);
   });
 
   it('Find one', () => {

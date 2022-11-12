@@ -19,7 +19,7 @@
     "scripts": {
         "start": "tsdx watch",
         "build": "npm run test && tsdx build",
-        "test": "export APP_NAME='testing' && tsdx test",
+        "test": "APP_NAME=$(grep APP_NAME .env | cut -d '=' -f2 | cut -d '\"' -f2) tsdx test",
         "lint": "tsdx lint",
         "prepare": "tsdx build",
         "size": "size-limit",
