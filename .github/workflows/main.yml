@@ -5,6 +5,9 @@ jobs:
     name: Build, lint, and test on Node ${{ matrix.node }} and ${{ matrix.os }}
 
     runs-on: ${{ matrix.os }}
+    env:
+      APP_NAME: swen-testing
+      
     strategy:
       matrix:
         node: [ '12.x', '14.x' ]
@@ -27,10 +30,6 @@ jobs:
 
       - name: Test
         run: yarn test --ci --coverage --maxWorkers=2
-        with:
-          APP_NAME: swen-test
 
       - name: Build
         run: yarn build
-        with: 
-          APP_NAME: swen-build
