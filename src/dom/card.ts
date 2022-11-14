@@ -9,6 +9,7 @@ import { createElement } from './create';
  */
 export const createCardLoadHolder = (id: string, title: string): HTMLDivElement => {
   const cardHolder = createElement('div', id);
+  cardHolder.addClass('card-holder');
   // cardHolder.addClass(
   //   'w-20r',
   //   'mx-2',
