@@ -1,3 +1,5 @@
+// TODO: remove replace calls
+
 import { createElement, getDomFromReference, _HTMLElement_, _HTMLObjectElement_ } from '../dom';
 import { getTranslation } from '../languages';
 import { IApi } from '../types';
@@ -55,11 +57,10 @@ export const createDockTitleButton = (api: IApi, id: string, dockElement: _HTMLE
     if (_computedStyle === 'none') {
       // dockContent.replaceClass('d-none', 'd-flex');
       dockContent.style.display = 'flex';
-
-      _dockTitleButton.removeClass('button-selected');
     } else if (_computedStyle === 'flex') {
       // dockContent.replaceClass('d-flex', 'd-none');
       dockContent.style.display = 'none';
+      _dockTitleButton.removeClass('button-selected');
     }
 
     const all = document.getElementsByClassName('delm');
