@@ -67,18 +67,19 @@ export const createListItemHead = (id: string, type: string): _HTMLElement_ => {
  * @returns HTML button
  */
 export const createListElement = (id: string): HTMLButtonElement => {
-  const o = createElement('button', `${id}-button`);
-  o.addClass(
-    'list-element',
-    'd-flex',
-    'flex-column',
-    'justify-content-center',
-    'align-items-center',
-    'bg-transparent',
-    'border-none',
-    'on-hover'
-  );
-  return o;
+  const _listElement = createElement('button', `${id}-button`);
+  _listElement.addClass('list-element');
+  // o.addClass(
+  //   'list-element',
+  //   'd-flex',
+  //   'flex-column',
+  //   'justify-content-center',
+  //   'align-items-center',
+  //   'bg-transparent',
+  //   'border-none',
+  //   'on-hover'
+  // );
+  return _listElement;
 };
 
 /**
