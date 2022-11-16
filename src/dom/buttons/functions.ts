@@ -22,6 +22,7 @@ export const disableHTMLButton = (btnRef: string | HTMLButtonElement): void => {
   btn.disabled = true;
 };
 
+// TODO: fix showSelection
 export const selectUnselectButtonFunction = (out: string | _HTMLElement_, event: HTMLElementEventMap['click']): void => {
   const btn = getDomFromReference(out);
   if (btn.classList.contains('bold') || btn.id === 'rts-btn') {
