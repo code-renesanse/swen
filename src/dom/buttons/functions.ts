@@ -25,11 +25,13 @@ export const disableHTMLButton = (btnRef: string | HTMLButtonElement): void => {
 // TODO: fix showSelection
 export const selectUnselectButtonFunction = (out: string | _HTMLElement_, event: HTMLElementEventMap['click']): void => {
   const btn = getDomFromReference(out);
+  const type = 'select-unselect';
   if (btn.classList.contains('bold') || btn.id === 'rts-btn') {
     if ((event.target as HTMLElement).id !== btn.id && (event.target as HTMLElement)?.parentElement?.id !== btn.id) {
-      clearSelection('select-unselect');
+      clearSelection(type);
     }
   } else {
-    showSelection(out, 'select-unselect', true);
+    showSelection(out, type, true);
   }
+  btn.addProperty(type);
 };
