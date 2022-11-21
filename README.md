@@ -11,7 +11,7 @@
 * [ ] Animation create loadGif type _HTMLElement_
 * _HTMLElement 
   * [ ] **removeEventListener**
-  * [ ] **setId**
+  * [x] **setId**
 * index.html - template
   * Create html elements with JS
     * [x] *model-selection-holder* div
@@ -22,11 +22,11 @@
         * [x] *lang-btn-holder* div
 * createElement
   * add return to functions:
-    * [x] addClass
-    * [x] removeClass
-    * [x] replaceClass
-    * [x] addProperty
-    * [x] getProptery
+    * [ ] addClass
+    * [ ] removeClass
+    * [ ] replaceClass
+    * [ ] addProperty
+    * [ ] getProptery
 * CSS styles
   * [ ] Remove CSS classes from *addClass* calls
   * Change slection system:

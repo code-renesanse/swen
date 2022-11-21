@@ -1,5 +1,7 @@
 
 export type _HTMLElement_ = {
+  setId: Function
+  getId: Function
   addClass: Function
   removeClass: Function
   replaceClass: Function

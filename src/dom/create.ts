@@ -10,6 +10,15 @@ export const createElement = <K extends keyof HTMLElementTagNameMap>(type: K, id
   const _element = document.createElement(type) as _HTMLObjectElement_<K>;
   _element.id = id;
 
+  _element.setId = (id: string) => {
+    _element.id = id;
+    return id;
+  };
+
+  _element.getId = () => {
+    return _element.id;
+  };
+
   _element.addClass = (...list: string[]) => {
     if (list !== undefined) {
       list.forEach(_item => _element.classList.add(_item));
