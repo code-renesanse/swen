@@ -12,6 +12,7 @@
 * _HTMLElement 
   * [ ] **removeEventListener**
   * [x] **setId**
+  * [ ] Consider removing this custom HTML Element type / implementation as it is redundant
 * index.html - template
   * Create html elements with JS
     * [x] *model-selection-holder* div

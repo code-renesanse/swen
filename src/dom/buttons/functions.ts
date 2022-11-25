@@ -27,7 +27,7 @@ export const selectUnselectButtonFunction = (out: string | _HTMLElement_, event:
   const btn = getDomFromReference(out);
   const type = 'select-unselect';
   if (btn.classList.contains('bold') || btn.id === 'rts-btn') {
-    if ((event.target as HTMLElement).id !== btn.id && (event.target as HTMLElement)?.parentElement?.id !== btn.id) {
+    if ((event.target as _HTMLElement_).id !== btn.id && (event.target as _HTMLElement_)?.parentElement?.id !== btn.id) {
       clearSelection(type);
     }
   } else {

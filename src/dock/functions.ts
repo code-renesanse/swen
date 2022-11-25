@@ -51,6 +51,12 @@ export const createDockTitleButton = (api: IApi, id: string, dockElement: _HTMLE
   _dockTitleButton.disabled = true;
   _dockTitleButton.textContent = getTranslation(api, id);
   _dockTitleButton.addEventListener('click', () => {
+    const _selectedButtons = document.getElementsByClassName('button-selected');
+    for (let i = 0; i < _selectedButtons.length; i++) {
+      const _button = _selectedButtons[i];
+      _button.classList.remove('button-selected');
+    }
+
     _dockTitleButton.addClass('button-selected');
     const dockContent = dockElement.children[1] as _HTMLObjectElement_<'div'>;
     const _computedStyle = window.getComputedStyle(dockContent).display;
