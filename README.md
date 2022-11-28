@@ -8,12 +8,15 @@
 
 # TODO
 * [x] Handle empty ('') and undefined strings in *getImage* function 
+
 * [ ] Animation create loadGif type _HTMLElement_
+
 * _HTMLElement 
   * [ ] **removeEventListener**
   * [x] **setId**
   * [ ] Consider removing this custom HTML Element type / implementation as it is redundant
-  * [ ] Remove selectUnselectButtonFunction because it is depricated and buggy
+  * [x] Remove selectUnselectButtonFunction because it is depricated and buggy
+
 * index.html - template
   * Create html elements with JS
     * [x] *model-selection-holder* div
@@ -22,6 +25,7 @@
       * [x] *wrapper-container* div
         * [x] *dock-wrapper* div
         * [x] *lang-btn-holder* div
+
 * createElement
   * add return to functions:
     * [ ] addClass
@@ -29,12 +33,14 @@
     * [ ] replaceClass
     * [ ] addProperty
     * [ ] getProptery
+
 * CSS styles
   * [ ] Remove CSS classes from *addClass* calls
-  * Change slection system:
+
+* Change slection system:
     * [x] update ```showSelection```
     * [x] update ```clearSelection```
-    * [ ] Tests for show/clearSelection
+    * [x] Tests for show/clearSelection
     * [ ] Clean up show/clearSelecrtion functions
 
 * Example objects:
