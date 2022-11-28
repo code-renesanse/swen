@@ -4,7 +4,6 @@ import { IApi } from '../../types';
 import { openConfiguratorMenu } from '../configurationMenu';
 import { createElement } from '../create';
 import { _HTMLElement_ } from '../dom.model';
-import { selectUnselectButtonFunction } from './functions';
 
 /**
  *
@@ -94,7 +93,7 @@ export const createHTMLButton = (id: string, img: string, api: IApi): HTMLButton
   out.onmousedown = (event) => event.preventDefault();
   out.appendChild(text);
 
-  out.addEventListener('click', (event) => selectUnselectButtonFunction(out, event));
+  // out.addEventListener('click', (event) => selectUnselectButtonFunction(out, event));
 
   return out;
 };
