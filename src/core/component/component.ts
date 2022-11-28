@@ -123,7 +123,7 @@ export class _Component_ implements IComponent {
 
               listNode.children[1].textContent = getTranslation(this.api, id) !== '' ? getTranslation(this.api, id) : '';
 
-              if (getTranslation(this.api, id) !== '') {
+              if (getTranslation(this.api, id) === '') {
                 listNode.remove();
                 errorLog(`EROOR: VLAUE NOT IN LANG FILE FOR LANG ${currentLanguage}`);
               }

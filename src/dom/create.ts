@@ -39,7 +39,7 @@ export const createElement = <K extends keyof HTMLElementTagNameMap>(type: K, id
     return _element.classList.contains(className);
   };
 
-  _element.addProperty = (property: string, _value: string) => {
+  _element.addProperty = (property: string, _value: string = '') => {
     _element.setAttribute(property, _value);
     return property;
   };
