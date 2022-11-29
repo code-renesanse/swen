@@ -51,9 +51,9 @@
         "@size-limit/preset-small-lib": "^8.1.0",
         "@types/webpack": "^5.28.0",
         "@types/webpack-env": "^1.18.0",
-        "@typescript-eslint/eslint-plugin": "^5.43.0",
-        "@typescript-eslint/parser": "^5.43.0",
-        "eslint": "^8.27.0",
+        "@typescript-eslint/eslint-plugin": "^5.45.0",
+        "@typescript-eslint/parser": "^5.45.0",
+        "eslint": "^8.28.0",
         "eslint-config-airbnb-base": "^15.0.0",
         "eslint-config-standard-with-typescript": "^23.0.0",
         "eslint-plugin-import": "^2.26.0",
@@ -61,10 +61,10 @@
         "size-limit": "^8.1.0",
         "tsdx": "^0.14.1",
         "tslib": "^2.4.1",
-        "typescript": "^4.8.4"
+        "typescript": "^4.9.3"
     },
     "dependencies": {
         "i": "^0.3.7",
-        "npm": "^9.1.1"
+        "npm": "^9.1.2"
     }
 }

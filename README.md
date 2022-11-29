@@ -7,6 +7,10 @@
 ---
 
 # TODO
+
+* [ ] **createDockTitleButton** remove on-click functionality
+  *  on-click functionality should be implemented in the app itself not in the engine
+
 * [x] Handle empty ('') and undefined strings in *getImage* function 
 
 * [ ] Animation create loadGif type _HTMLElement_
