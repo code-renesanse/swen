@@ -3,26 +3,30 @@ import { errorLog } from '../../logger';
 import { IApi } from '../../types';
 import { setAnimation, setAnimationIterationCount } from '../animations/setters';
 import { createElement } from '../create';
-import { _HTMLElement_ } from '../dom.model';
 
 /**
-  * DIV holder for the loading gif
+  * Creates an div element that has all of the loading stuffs
   * @returns DOM elment
   */
-export const createLoadingbar = (): HTMLDivElement => {
-  const gifDiv = createElement('div', 'loading-bar');
-  gifDiv.addClass(
-    'd-flex',
-    'flex-column',
-    'justify-content-center',
-    'align-items-center',
-    'position-absolute'
-  );
-  return gifDiv;
+export const createLoadingbarContent = (imageKey: string, api: IApi): HTMLDivElement => {
+  const _wrapper = createElement('div', 'loading-bar');
+  const _loadingImg = createLoadingbarImage(imageKey, api);
+  const _progressBar = createLoadingbarProgress();
+
+  _wrapper.appendChild(_loadingImg);
+  _wrapper.appendChild(_progressBar);
+  return _wrapper;
+};
+
+export const createLoadingbarProgress = (): HTMLDivElement => {
+  const _holder = createElement('div', 'loading-bar-holder');
+  const _progess = createElement('div', 'loading-bar-progress');
+  _holder.appendChild(_progess);
+  return _holder;
 };
 
 /**
-*
+* !DEPRICATED!
 * @returns span dom element
 */
 export const createLoadingbarSpan = (): HTMLSpanElement => {
@@ -36,7 +40,7 @@ export const createLoadingbarSpan = (): HTMLSpanElement => {
  * @returns HTML div element
  */
 // TODO: create a unique loding bar function
-export const createLoadingbarSvgHolder = (): HTMLDivElement => {
+export const createLoadingSvgHolder = (): HTMLDivElement => {
   const svgDom = createElement('div', 'loading-bar');
   svgDom.addClass(
     'position-absolute',
@@ -52,22 +56,26 @@ export const createLoadingbarSvgHolder = (): HTMLDivElement => {
 
 /**
   *
-  * @param {String} gif
+  * @param {String} imageKey
   * @returns img dom element
   */
-export const createLoadingbarGifImg = (gif: string, api: IApi): HTMLImageElement => {
-  const loadingGifImage = createElement('img', 'loading-bar-gif-img');
-  const imageRef = getImage(gif, api);
-  loadingGifImage.src = imageRef;
-  loadingGifImage.alt = 'logo-revel-gif';
-  return loadingGifImage;
+export const createLoadingbarImage = (imageKey: string, api: IApi): HTMLImageElement => {
+  const loadingbarImage = createElement('img', 'loading-bar-image');
+  const imageRef = getImage(imageKey, api);
+  loadingbarImage.src = imageRef;
+  loadingbarImage.alt = 'logo-revel-gif';
+
+  setAnimation(loadingbarImage, 'popOut', '2s', 'ease-in-out');
+  setAnimationIterationCount(loadingbarImage, 'infinite');
+
+  return loadingbarImage;
 };
 
 /**
  * Creates a loading gif DOM element and puts it on the page
  * @returns resolved promise
  */
-export const createLoadingbarGif = async (api: IApi): Promise<boolean> => await new Promise((resolve) => {
+export const createLoadingbar = async (api: IApi): Promise<boolean> => await new Promise((resolve) => {
   const APP = document.querySelector('#app') ?? createElement('div', 'error404');
   const PATH = process.env.LOADING_GIF_PATH ?? '';
 
@@ -78,18 +86,12 @@ export const createLoadingbarGif = async (api: IApi): Promise<boolean> => await 
     errorLog('No valid LOADING_GIF_PATH');
   }
 
-  const loadingBar = createLoadingbar();
-  const loadGif = createLoadingbarGifImg(PATH, api) as unknown as _HTMLElement_;
-  const loadSpan = createLoadingbarSpan();
+  const loadingbar = createLoadingbarContent(PATH, api);
+  loadingbar.style.opacity = '0';
+  // const loadGif = createLoadingbarGifImg(PATH, api) as unknown as _HTMLElement_;
+  // const loadSpan = createLoadingbarSpan();
 
-  loadingBar.appendChild(loadGif);
-  loadingBar.appendChild(document.createElement('br'));
-  loadingBar.appendChild(loadSpan);
-
-  setAnimation(loadGif, 'popOut', '2000ms', 'ease-in-out');
-  setAnimationIterationCount(loadGif, 'infinite');
-
-  APP.appendChild(loadingBar);
+  APP.appendChild(loadingbar);
 
   resolve(true);
 });

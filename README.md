@@ -8,8 +8,37 @@
 
 # TODO
 
+* [ ] clean-up **src/dom/loadingbar/create**
+
+* Loading bar
+  * [x] **wordsSpin** is depricated remove it
+  * [x] Implement the new **loading=holder** and **loading-progress**
+  * [x] Clean up **createLoadingbar** function
+
+* [ ] [ _Card_ ] make all of the card DOM elements accessable to child classes 
+
+* [ ] [ _Card_ ] card load holder hover text, make it so that the text is defined in the constructor or some other way
+
 * [ ] **createDockTitleButton** remove on-click functionality
   *  on-click functionality should be implemented in the app itself not in the engine
+  * example code:
+    ```
+        this.title.addEventListener('click', () => {
+          document.querySelectorAll('#dock-item-content').forEach(_e => {
+              if (_e !== this.dockItem) {
+                     _e.replaceClass('d-flex', 'd-none');
+                 }
+             });
+
+             if (this.dockItem.hasClass('d-flex')) {
+                 this.dockItem.replaceClass('d-flex', 'd-none');
+             } else {
+                 this.dockItem.addClass('d-flex');
+             }
+        });
+      ```
+
+* [ ] Rename **dockItem** to content in the **_Component** class
 
 * [x] Handle empty ('') and undefined strings in *getImage* function 
 

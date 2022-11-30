@@ -4,10 +4,10 @@ import { getLangFromURL, getTranslation } from '../getters';
 import { Translator } from '../translator';
 
 /**
+ * !DEPRICATED!
  * Creates the loading ... animation
  * @param {Sketchfab API object} api - JSON object holding all application data
  */
-
 export const wordsSpin = async (api: IApi): Promise<void> => {
   if (api.translator === null || api.translator === undefined) {
     const lang = getLangFromURL();
@@ -29,8 +29,6 @@ export const wordsSpin = async (api: IApi): Promise<void> => {
     i++;
 
     loadingSpan.style.animation = 'none';
-    // loadingSpan.offsetHeight;
-    // TODO: check if this works
     loadingSpan.style.animation = '';
   });
 };

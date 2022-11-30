@@ -1,6 +1,5 @@
 import { _Application_ } from '../application/application';
-import { createCardLoadHolder, createImageHolder, createLoadingbarGif, getDomFromReference } from '../../dom';
-import { wordsSpin } from '../../languages';
+import { createCardLoadHolder, createImageHolder, createLoadingbar, getDomFromReference } from '../../dom';
 import { errorLog, mustImplementFunction } from '../../logger';
 import { IApi } from '../../types';
 import { IComponent } from '../component';
@@ -22,8 +21,8 @@ export class _Card_ {
     // CARD_HOLDER.addEventListener('click', async () => await loadModel(configuratorRef, modelId, HOLDER));
     CARD_HOLDER.addEventListener('click', () => {
       void (async () => {
-        await createLoadingbarGif(configuratorRef.API);
-        await wordsSpin(configuratorRef.API);
+        await createLoadingbar(configuratorRef.API);
+
         if (HOLDER !== null) {
           HOLDER.remove();
         } else {

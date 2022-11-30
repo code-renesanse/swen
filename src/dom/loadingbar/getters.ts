@@ -4,7 +4,7 @@
  *
  * @returns HTML code for a loading bar SVG
  */
-export const getLoadingbarSVG = (): string => `<?xml version="1.0" encoding="utf-8"?>
+export const getLoadingSVG = (): string => `<?xml version="1.0" encoding="utf-8"?>
  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none; display: block; shape-rendering: auto;" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
    <rect x="17.5" y="30" width="15" height="40" fill="#666666">
      <animate attributeName="y" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="18;30;30" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.2s"></animate>

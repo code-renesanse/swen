@@ -1,14 +1,14 @@
 import { developmentLog, errorLog } from '../../logger';
-import { createLoadingbarSvgHolder } from './create';
-import { getLoadingbarSVG } from './getters';
+import { createLoadingSvgHolder } from './create';
+import { getLoadingSVG } from './getters';
 
 /**
  * Creates and show the loading animation
  */
 export const showLoading = (): void => {
   const APP = document.querySelector('#app');
-  const loadHolder = createLoadingbarSvgHolder();
-  const loadSvg = getLoadingbarSVG();
+  const loadHolder = createLoadingSvgHolder();
+  const loadSvg = getLoadingSVG();
 
   loadHolder.innerHTML += (loadSvg);
 
