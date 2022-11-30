@@ -129,7 +129,6 @@ export class _Application_ {
      * @param {Sketchfab API object} api - JSON object holding all application data
      */
   async load (api: IApi): Promise<void> {
-    // validateString(api.currentModelId);
     this.CARDS[api.currentModelId].loadDefaultConfiguration(api);
     this.loadComponents(api);
 
@@ -298,8 +297,14 @@ export class _Application_ {
 
         api.start(() => {
           developmentLog('API started');
+
+          const _loadingprogress = loadingBar.querySelector('#loading-bar-progress');
+          _loadingprogress?.setAttribute('animation', 'start');
+
           api.addEventListener('viewerready', async () => {
             developmentLog('Viewer ready');
+
+            _loadingprogress?.setAttribute('animation', 'end');
 
             developmentLog('Preload');
             await this.preload(api);
@@ -325,7 +330,7 @@ export class _Application_ {
               developmentLog('Starting component laoding');
               await this.load(api);
             });
-            this.API_FRAME.style.opacity = '1';
+            // this.API_FRAME.style.opacity = '1';
           });
         });
       },

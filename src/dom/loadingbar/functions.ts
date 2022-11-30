@@ -26,18 +26,31 @@ export const showLoading = (): void => {
 export const hideLoading = (API_FRAME: HTMLIFrameElement): void => {
   const wrapper = document.querySelector('#dock-wrapper') as HTMLDivElement;
   const loadingBar = document.querySelector('#loading-bar');
+  const _loadingprogress = loadingBar?.querySelector('#loading-bar-progress');
 
-  if (loadingBar !== null) {
-    loadingBar.remove();
+  if (_loadingprogress !== null) {
+    _loadingprogress?.setAttribute('animation', 'end');
+
+    _loadingprogress?.addEventListener('animationend', () => {
+      loadingBar?.remove();
+      if (wrapper !== null) {
+        wrapper.style.display = '';
+      } else {
+        developmentLog('Dock wrapper is null');
+      }
+      API_FRAME.style.opacity = '1';
+    });
   } else {
-    developmentLog('Loading bar is null');
-  }
+    if (loadingBar !== null) {
+      loadingBar.remove();
+    } else {
+      developmentLog('Loading bar is null');
+    }
 
-  if (wrapper !== null) {
-    wrapper.style.display = '';
-  } else {
-    developmentLog('Dock wrapper is null');
+    if (wrapper !== null) {
+      wrapper.style.display = '';
+    } else {
+      developmentLog('Dock wrapper is null');
+    }
   }
-
-  API_FRAME.style.opacity = '1';
 };
