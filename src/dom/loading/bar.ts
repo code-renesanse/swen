@@ -62,7 +62,6 @@ export const createLoadingbar = async (api: IApi): Promise<boolean> => await new
   }
 
   const loadingbar = createLoadingbarContent(PATH, api);
-  loadingbar.style.opacity = '0';
 
   APP.appendChild(loadingbar);
 

@@ -8,7 +8,6 @@ export class _Card_ {
   modelid: string;
 
   constructor (modelid: string, configuratorRef: _Application_) {
-    // validateConfigurator(configuratorRef);
     this.modelid = modelid;
 
     const HOLDER = document.querySelector('#model-selection-holder');
