@@ -1,4 +1,4 @@
-import { createElement, hideLoading, _HTMLElement_ } from '../../dom';
+import { createElement, hideLoadingBar, _HTMLElement_ } from '../../dom';
 import { buildComponentDictionary } from '../../dictionary';
 import { developmentLog, errorLog, log, mustImplementFunction } from '../../logger';
 import { IApi, Dictionary, ISketchfabModelElement } from '../../types';
@@ -140,7 +140,7 @@ export class _Application_ {
       });
     }
 
-    hideLoading(this.API_FRAME);
+    hideLoadingBar();
   }
 
   /**

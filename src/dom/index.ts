@@ -12,7 +12,7 @@ export * from './animations/setters';
  * Loading bar stuffs
  */
 
-export * from './loadingbar';
+export * from './loading';
 
 /**
  * Class stuffs

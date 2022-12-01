@@ -5,53 +5,14 @@ import { setAnimation, setAnimationIterationCount } from '../animations/setters'
 import { createElement } from '../create';
 
 /**
-  * Creates an div element that has all of the loading stuffs
-  * @returns DOM elment
-  */
-export const createLoadingbarContent = (imageKey: string, api: IApi): HTMLDivElement => {
-  const _wrapper = createElement('div', 'loading-bar');
-  const _loadingImg = createLoadingbarImage(imageKey, api);
-  const _progressBar = createLoadingbarProgress();
-
-  _wrapper.appendChild(_loadingImg);
-  _wrapper.appendChild(_progressBar);
-  return _wrapper;
-};
-
+ * Creates the loading bar holder and progress bar
+ * @returns DIV Element - loading-bar-holder
+ */
 export const createLoadingbarProgress = (): HTMLDivElement => {
   const _holder = createElement('div', 'loading-bar-holder');
   const _progess = createElement('div', 'loading-bar-progress');
   _holder.appendChild(_progess);
   return _holder;
-};
-
-/**
-* !DEPRICATED!
-* @returns span dom element
-*/
-export const createLoadingbarSpan = (): HTMLSpanElement => {
-  const lodingGifSpan = createElement('span', 'loading-bar-span');
-  lodingGifSpan.addClass('loading-span');
-  return lodingGifSpan;
-};
-
-/**
- *
- * @returns HTML div element
- */
-// TODO: create a unique loding bar function
-export const createLoadingSvgHolder = (): HTMLDivElement => {
-  const svgDom = createElement('div', 'loading-bar');
-  svgDom.addClass(
-    'position-absolute',
-    'w-4r',
-    'h-auto',
-    'top-0',
-    'start-50',
-    'translate-middle-x',
-    'bg-transparent-white'
-  );
-  return svgDom;
 };
 
 /**
@@ -72,6 +33,20 @@ export const createLoadingbarImage = (imageKey: string, api: IApi): HTMLImageEle
 };
 
 /**
+  * Creates an div element that has all of the loading stuffs
+  * @returns DOM elment
+  */
+export const createLoadingbarContent = (imageKey: string, api: IApi): HTMLDivElement => {
+  const _wrapper = createElement('div', 'loading-bar');
+  const _loadingImg = createLoadingbarImage(imageKey, api);
+  const _progressBar = createLoadingbarProgress();
+
+  _wrapper.appendChild(_loadingImg);
+  _wrapper.appendChild(_progressBar);
+  return _wrapper;
+};
+
+/**
  * Creates a loading gif DOM element and puts it on the page
  * @returns resolved promise
  */
@@ -88,10 +63,33 @@ export const createLoadingbar = async (api: IApi): Promise<boolean> => await new
 
   const loadingbar = createLoadingbarContent(PATH, api);
   loadingbar.style.opacity = '0';
-  // const loadGif = createLoadingbarGifImg(PATH, api) as unknown as _HTMLElement_;
-  // const loadSpan = createLoadingbarSpan();
 
   APP.appendChild(loadingbar);
 
   resolve(true);
 });
+
+export const hideLoadingBar = (): void => {
+  const loadingbar = document.querySelector<HTMLElement>('#loading-bar');
+
+  if (loadingbar === null) {
+    errorLog('loading-bar does not exist!');
+    return;
+  };
+
+  const wrapper = document.querySelector<HTMLElement>('#wrapper');
+  const loadingbarprogress = loadingbar.querySelector<HTMLElement>('#loading-bar-progress');
+
+  if (wrapper === null) {
+    errorLog('wrapper does not exist!');
+    return;
+  } else if (loadingbarprogress === null) {
+    errorLog('loading-bar-progress does not exist');
+    return;
+  }
+
+  loadingbarprogress.addEventListener('animationend', () => {
+    loadingbar.remove();
+    wrapper.style.opacity = '1';
+  });
+};

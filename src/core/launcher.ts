@@ -1,15 +1,15 @@
-import { createElement, getDomFromReference, hideLoading, showLoading } from '../dom';
+import { createElement, getDomFromReference, hideLoadingSvg, showLoadingSvg } from '../dom';
 import { developmentLog } from '../logger';
 import { _Application_ } from './application/application';
 
 export class Launcher {
   async setupApplication (context: any, application: _Application_): Promise<void> {
-    showLoading();
+    showLoadingSvg();
     developmentLog(`Running in ${this.getEnviromentLevel()} mode`);
     await application.loadAssets(context);
     developmentLog('Assets have loaded');
     await application.onPageLoad(application.API);
-    hideLoading(application.API_FRAME);
+    hideLoadingSvg();
     developmentLog('Page has loaded');
   }
 
