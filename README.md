@@ -9,8 +9,8 @@
 # Working on
 
 * clean-up **src/dom/loadingbar/create**:
-  * [ ] Remove ```loadingbar.style.opacity = '0';```
   * [ ] Loading bar get created when a user clicks on a **_Card_** to load the model
+  * [ ] Remove ```loadingbar.style.opacity = '0';```
   * [x] Move svg loading to a separate file
 
 # TODO
