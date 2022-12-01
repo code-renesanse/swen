@@ -70,6 +70,13 @@ export const createLoadingbar = async (api: IApi): Promise<boolean> => await new
 });
 
 export const hideLoadingBar = (): void => {
+  const API_FRAME = document.querySelector<HTMLElement>('#api-frame');
+
+  if (API_FRAME === null) {
+    errorLog('api-frame does not exist!');
+    return;
+  }
+
   const loadingbar = document.querySelector<HTMLElement>('#loading-bar');
 
   if (loadingbar === null) {
@@ -91,5 +98,6 @@ export const hideLoadingBar = (): void => {
   loadingbarprogress.addEventListener('animationend', () => {
     loadingbar.remove();
     wrapper.style.opacity = '1';
+    API_FRAME.style.opacity = '1';
   });
 };
