@@ -18,19 +18,12 @@ export class Launcher {
 
     const _modelSelectionHolder = createElement('div', 'model-selection-holder');
     const _apiFrameHolder = createElement('div', 'api-frame-holder');
-    const _wrapper = createElement('div', 'wrapper');
-    const _wrapperContainer = createElement('div', 'wrapper-container');
-    const _dockWrapper = createElement('div', 'dock-wrapper');
-    const _langButtonHolder = createElement('div', 'lang-btn-holder');
 
     APP.appendChild(_modelSelectionHolder);
     APP.appendChild(_apiFrameHolder);
 
-    _wrapperContainer.appendChild(_dockWrapper);
-    _wrapperContainer.appendChild(_langButtonHolder);
-
-    _wrapper.appendChild(_wrapperContainer);
-    APP.appendChild(_wrapper);
+    // TODO: moved wrapper creation to the createEmptyWrapper
+    // APP.appendChild(_wrapper);
   }
 
   getEnviromentLevel (): string {

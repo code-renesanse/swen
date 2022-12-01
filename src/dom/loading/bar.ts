@@ -68,35 +68,29 @@ export const createLoadingbar = async (api: IApi): Promise<boolean> => await new
   resolve(true);
 });
 
-export const hideLoadingBar = (): void => {
-  const API_FRAME = document.querySelector<HTMLElement>('#api-frame');
+export const hideLoadingBar = async (): Promise<void> => {
+  return await new Promise((resolve, reject) => {
+    const API_FRAME = document.querySelector<HTMLElement>('#api-frame');
+    const loadingbar = document.querySelector<HTMLElement>('#loading-bar');
 
-  if (API_FRAME === null) {
-    errorLog('api-frame does not exist!');
-    return;
-  }
+    if (API_FRAME === null) {
+      return reject(errorLog('api-frame does not exist!'));
+    }
 
-  const loadingbar = document.querySelector<HTMLElement>('#loading-bar');
+    if (loadingbar === null) {
+      return reject(errorLog('loading-bar does not exist!'));
+    };
 
-  if (loadingbar === null) {
-    errorLog('loading-bar does not exist!');
-    return;
-  };
+    const loadingbarprogress = loadingbar.querySelector<HTMLElement>('#loading-bar-progress');
 
-  const wrapper = document.querySelector<HTMLElement>('#wrapper');
-  const loadingbarprogress = loadingbar.querySelector<HTMLElement>('#loading-bar-progress');
+    if (loadingbarprogress === null) {
+      return reject(errorLog('loading-bar-progress does not exist'));
+    }
 
-  if (wrapper === null) {
-    errorLog('wrapper does not exist!');
-    return;
-  } else if (loadingbarprogress === null) {
-    errorLog('loading-bar-progress does not exist');
-    return;
-  }
-
-  loadingbarprogress.addEventListener('animationend', () => {
-    loadingbar.remove();
-    wrapper.style.opacity = '1';
-    API_FRAME.style.opacity = '1';
+    loadingbarprogress.addEventListener('animationend', () => {
+      loadingbar.remove();
+      API_FRAME.style.opacity = '1';
+      return resolve();
+    });
   });
 };

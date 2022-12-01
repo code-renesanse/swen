@@ -7,6 +7,7 @@ import { getLangFromURL, loadNewTransllationFiles, Translator } from '../../lang
 import { clearDockWrapper } from '../../dock/functions';
 import { _Card_ } from '../card';
 import { IComponent } from '../component';
+import { createEmptyWrapper } from '../../dom/wrapper';
 
 declare const window: any;
 
@@ -127,8 +128,15 @@ export class _Application_ {
   /**
      * All the code that is executed after the scene graph is set
      * @param {Sketchfab API object} api - JSON object holding all application data
-     */
+   */
   async load (api: IApi): Promise<void> {
+    await hideLoadingBar();
+
+    // Creates the wrapper
+    const APP = document.querySelector('#app');
+    const _wrapper = createEmptyWrapper();
+    APP?.appendChild(_wrapper);
+
     this.CARDS[api.currentModelId].loadDefaultConfiguration(api);
     this.loadComponents(api);
 
@@ -139,8 +147,6 @@ export class _Application_ {
         developmentLog(`Component ${cmp.getComponentName()} loaded`);
       });
     }
-
-    hideLoadingBar();
   }
 
   /**

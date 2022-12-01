@@ -8,16 +8,14 @@
 
 # Working on
 
-* clean-up **src/dom/loadingbar/create**:
-  * [x] Loading bar get created when a user clicks on a **_Card_** to load the model
-  * [x] Remove ```loadingbar.style.opacity = '0';```
-  * [x] Move svg loading to a separate file
+* [ _wrapper_ ] 
+  * [x] Remove ```wrapper.style.opacity = '1';```
+  * [x] Move wrapper creation after model has loaded
+  * [x] Only show wrapper when the wrapper is created
+
+---
 
 # TODO
-
-* [ _wrapper_ ] 
-  * [ ] Remove ```wrapper.style.opacity = '1';```
-  * [ ] Only show wrapper when the wrapper is created
 
 * [ ] [ _Card_ ] make all of the card DOM elements accessable to child classes 
 
@@ -60,3 +58,12 @@
 * Example objects:
   * [ ] API
   * [ ] Graph 
+
+--- 
+
+# Done
+
+* clean-up **src/dom/loadingbar/create**:
+  * [x] Loading bar get created when a user clicks on a **_Card_** to load the model
+  * [x] Remove ```loadingbar.style.opacity = '0';```
+  * [x] Move svg loading to a separate file
