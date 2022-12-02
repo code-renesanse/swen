@@ -6,52 +6,66 @@ import { IComponent } from '../component';
 
 export class _Card_ {
   modelid: string;
+  CARD_HOLDER: HTMLDivElement | null = null;
+  configuratorRef: _Application_;
 
-  constructor (modelid: string, configuratorRef: _Application_) {
+  constructor (cardTitle: string, modelid: string, configuratorRef: _Application_) {
     this.modelid = modelid;
+    this.configuratorRef = configuratorRef;
 
-    const HOLDER = document.querySelector('#model-selection-holder');
-    const CARD_HOLDER = createCardLoadHolder(`card-load-${modelid}`, `Load boat model ${modelid}`);
+    const HOLDER = document.querySelector<HTMLDivElement>('#model-selection-holder');
+    if (HOLDER === null) {
+      errorLog('model-selection-holder');
+      return;
+    }
+
+    this.CARD_HOLDER = createCardLoadHolder(`card-load-${modelid}`, cardTitle);
 
     const cardImg = createImageHolder(modelid, `model${modelid}`, configuratorRef.API);
 
-    CARD_HOLDER.appendChild(cardImg);
+    this.CARD_HOLDER.appendChild(cardImg);
 
-    // CARD_HOLDER.addEventListener('click', async () => await loadModel(configuratorRef, modelId, HOLDER));
-    CARD_HOLDER.addEventListener('click', () => {
+    // this.CARD_HOLDER.addEventListener('click', async () => await loadModel(configuratorRef, modelId, HOLDER));
+    this.CARD_HOLDER.addEventListener('click', () => {
       void (async () => {
-        await createLoadingbar(configuratorRef.API);
-
-        if (HOLDER !== null) {
-          HOLDER.remove();
-        } else {
-          errorLog('model-selection-holder is null');
-        }
-
-        const apiFrameHolder = getDomFromReference('api-frame-holder');
-        if (apiFrameHolder !== null) {
-        //   apiFrameHolder.classList.replace('d-none', 'd-flex');
-          apiFrameHolder.style.display = 'flex';
-        } else {
-          errorLog('apiFrameHolder is null');
-        }
-
-        configuratorRef.setCurrentModelId(modelid);
-        await configuratorRef.loadModel(modelid, configuratorRef.API);
+        await this.load(modelid, HOLDER, configuratorRef.API);
       })();
     });
 
     if (HOLDER !== null) {
-      HOLDER.appendChild(CARD_HOLDER);
+      HOLDER.appendChild(this.CARD_HOLDER);
     } else {
       errorLog('model-selection-holder is null');
     }
   }
 
+  /**
+   * This is the load function of the card
+   */
+  async load (modelid: string, HOLDER: HTMLDivElement, api: IApi): Promise<void> {
+    await (async () => {
+      await createLoadingbar(api);
+
+      if (HOLDER !== null) {
+        HOLDER.remove();
+      } else {
+        errorLog('model-selection-holder is null');
+      }
+
+      const apiFrameHolder = getDomFromReference('api-frame-holder');
+      if (apiFrameHolder !== null) {
+        //   apiFrameHolder.classList.replace('d-none', 'd-flex');
+        apiFrameHolder.style.display = 'flex';
+      } else {
+        errorLog('apiFrameHolder is null');
+      }
+
+      this.configuratorRef.setCurrentModelId(modelid);
+      await this.configuratorRef.loadModel(modelid, api);
+    })();
+  }
+
   addConfigurationComponent (id: string, component: (parent: IComponent, api: IApi) => void, api: IApi): void {
-    // if (!(api.configuration_components_map)) {
-    //   api.configuration_components_map = {};
-    // }
     api.component_load_map[id] = (parent, api) => component(parent, api);
   }
 

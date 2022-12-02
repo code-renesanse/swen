@@ -8,19 +8,19 @@
 
 # Working on
 
-* [ _wrapper_ ] 
-  * [x] Remove ```wrapper.style.opacity = '1';```
-  * [x] Move wrapper creation after model has loaded
-  * [x] Only show wrapper when the wrapper is created
+* [ ] [ _Card_ ] make all of the card DOM elements accessable to child classes 
+
+* [x] [ _Card_ ] card load holder hover text, make it so that the text is defined in the constructor or some other way
 
 ---
 
 # TODO
 
-* [ ] [ _Card_ ] make all of the card DOM elements accessable to child classes 
+* [ ] Look into css **visually-hidden** insted of display: none
 
-* [ ] [ _Card_ ] card load holder hover text, make it so that the text is defined in the constructor or some other way
-
+* [ ] Look into linking button elements with meta data
+  * ``` https://www.youtube.com/watch?v=YAqRQoN8ykI ```
+  
 * [ ] [ _Component_ ]Rename **dockItem** to content in the **_Component** class
 
 * [ ] **createDockTitleButton** remove on-click functionality
@@ -67,3 +67,9 @@
   * [x] Loading bar get created when a user clicks on a **_Card_** to load the model
   * [x] Remove ```loadingbar.style.opacity = '0';```
   * [x] Move svg loading to a separate file
+
+
+* [ _wrapper_ ] 
+  * [x] Remove ```wrapper.style.opacity = '1';```
+  * [x] Move wrapper creation after model has loaded
+  * [x] Only show wrapper when the wrapper is created
