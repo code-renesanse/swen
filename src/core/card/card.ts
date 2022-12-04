@@ -14,6 +14,7 @@ export class _Card_ {
     this.configurator = configurator;
 
     const HOLDER = document.querySelector<HTMLDivElement>('#model-selection-holder');
+
     if (HOLDER === null) {
       errorLog('model-selection-holder');
       return;

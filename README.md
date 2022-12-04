@@ -8,10 +8,6 @@
 
 # Working on
 
-* [ ] [ _Card_ ] make all of the card DOM elements accessable to child classes 
-
-* [x] [ _Card_ ] card load holder hover text, make it so that the text is defined in the constructor or some other way
-
 ---
 
 # TODO
@@ -68,8 +64,11 @@
   * [x] Remove ```loadingbar.style.opacity = '0';```
   * [x] Move svg loading to a separate file
 
-
 * [ _wrapper_ ] 
   * [x] Remove ```wrapper.style.opacity = '1';```
   * [x] Move wrapper creation after model has loaded
   * [x] Only show wrapper when the wrapper is created
+
+* [x] [ _Card_ ] make all of the card DOM elements accessable to child classes 
+
+* [x] [ _Card_ ] card load holder hover text, make it so that the text is defined in the constructor or some other way
