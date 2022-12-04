@@ -8,19 +8,10 @@
 
 # Working on
 
-* [ ] [ _Component_ ] Rename **dockItem** to **content** in the **_Component** class
+* [x] [ _Component_ ] Rename **dockItem** to **content** in the **_Component** class
 
----
-
-# TODO
-
-* [ ] Look into css **visually-hidden** insted of display: none
-
-* [ ] Look into linking button elements with meta data
-  * ``` https://www.youtube.com/watch?v=YAqRQoN8ykI ```
-  
-* [ ] **createDockTitleButton** remove on-click functionality
-  *  on-click functionality should be implemented in the app itself not in the engine
+* [x] **createDockTitleButton** remove on-click functionality
+  * on-click functionality should be implemented in the app itself not in the engine
   * example code:
     ```
         this.title.addEventListener('click', () => {
@@ -37,6 +28,15 @@
              }
         });
       ```
+---
+
+# TODO
+
+* [ ] Look into css **visually-hidden** insted of display: none
+
+* [ ] Look into linking button elements with meta data
+  * ``` https://www.youtube.com/watch?v=YAqRQoN8ykI ```
+  
 
 
 * _HTMLElement 
