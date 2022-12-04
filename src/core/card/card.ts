@@ -7,11 +7,11 @@ import { IComponent } from '../component';
 export class _Card_ {
   modelid: string;
   CARD_HOLDER: HTMLDivElement | null = null;
-  configuratorRef: _Application_;
+  configurator: _Application_;
 
-  constructor (cardTitle: string, modelid: string, configuratorRef: _Application_) {
+  constructor (cardTitle: string, modelid: string, configurator: _Application_) {
     this.modelid = modelid;
-    this.configuratorRef = configuratorRef;
+    this.configurator = configurator;
 
     const HOLDER = document.querySelector<HTMLDivElement>('#model-selection-holder');
     if (HOLDER === null) {
@@ -21,14 +21,13 @@ export class _Card_ {
 
     this.CARD_HOLDER = createCardLoadHolder(`card-load-${modelid}`, cardTitle);
 
-    const cardImg = createImageHolder(modelid, `model${modelid}`, configuratorRef.API);
+    const cardImg = createImageHolder(modelid, `model${modelid}`, configurator.API);
 
     this.CARD_HOLDER.appendChild(cardImg);
 
-    // this.CARD_HOLDER.addEventListener('click', async () => await loadModel(configuratorRef, modelId, HOLDER));
     this.CARD_HOLDER.addEventListener('click', () => {
       void (async () => {
-        await this.load(modelid, HOLDER, configuratorRef.API);
+        await this.load(modelid, HOLDER, configurator.API);
       })();
     });
 
@@ -60,8 +59,8 @@ export class _Card_ {
         errorLog('apiFrameHolder is null');
       }
 
-      this.configuratorRef.setCurrentModelId(modelid);
-      await this.configuratorRef.loadModel(modelid, api);
+      this.configurator.setCurrentModelId(modelid);
+      await this.configurator.loadModel(modelid, api);
     })();
   }
 

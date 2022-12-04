@@ -20,7 +20,7 @@ describe('Card', () => {
     const _holder = document.createElement('div');
     _holder.id = 'model-selection-holder';
     document.body.appendChild(_holder);
-    instance = new _Card_('test-card', _app);
+    instance = new _Card_('test-card', 'Load test-card', _app);
   });
 
   it('Validates card', () => {
