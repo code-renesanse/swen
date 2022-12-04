@@ -9,7 +9,7 @@ export class _Component_ implements IComponent {
   subelements: _HTMLElement_;
   dockElement: _HTMLElement_;
   title: HTMLButtonElement;
-  dockItem: HTMLDivElement;
+  content: HTMLDivElement;
   name: string;
   id: string;
   api: IApi;
@@ -31,10 +31,10 @@ export class _Component_ implements IComponent {
 
     this.title = createDockTitleButton(api, id, this.dockElement);
 
-    this.dockItem = createDockItemContent(this.subelements);
+    this.content = createDockItemContent(this.subelements);
 
     this.dockElement.appendChild(this.title);
-    this.dockElement.appendChild(this.dockItem);
+    this.dockElement.appendChild(this.content);
 
     const dockWrapper = getDomFromReference('dock-wrapper');
     if (dockWrapper === null) {

@@ -8,7 +8,7 @@ export interface IComponent {
   subelements: HTMLElement
   dockElement: HTMLElement
   title: HTMLElement
-  dockItem: HTMLElement
+  content: HTMLElement
   enable: () => void
   disable: () => void
   addSubElement: (element: HTMLElement | Element) => void

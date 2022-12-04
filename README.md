@@ -8,6 +8,8 @@
 
 # Working on
 
+* [ ] [ _Component_ ] Rename **dockItem** to **content** in the **_Component** class
+
 ---
 
 # TODO
@@ -17,8 +19,6 @@
 * [ ] Look into linking button elements with meta data
   * ``` https://www.youtube.com/watch?v=YAqRQoN8ykI ```
   
-* [ ] [ _Component_ ]Rename **dockItem** to content in the **_Component** class
-
 * [ ] **createDockTitleButton** remove on-click functionality
   *  on-click functionality should be implemented in the app itself not in the engine
   * example code:

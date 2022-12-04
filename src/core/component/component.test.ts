@@ -53,7 +53,7 @@ describe('Components', () => {
     expect(instance.title).toBeDefined();
     expect(instance.name).toBeDefined();
     expect(instance.dockElement).toBeDefined();
-    expect(instance.dockItem).toBeDefined();
+    expect(instance.content).toBeDefined();
     expect(instance.subelements).toBeDefined();
   });
 });
