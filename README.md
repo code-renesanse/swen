@@ -37,7 +37,9 @@
 * [ ] Look into linking button elements with meta data
   * ``` https://www.youtube.com/watch?v=YAqRQoN8ykI ```
   
-
+* [x] Make **model-selection-holder** a list
+  * now it gets created as an div
+  * change it to ul list
 
 * _HTMLElement 
   * [ ] Consider removing this custom HTML Element type / implementation as it is redundant

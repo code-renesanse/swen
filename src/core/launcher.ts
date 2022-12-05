@@ -16,14 +16,11 @@ export class Launcher {
   async setupLauncher (): Promise<void> {
     const APP = getDomFromReference('app');
 
-    const _modelSelectionHolder = createElement('div', 'model-selection-holder');
+    const _modelSelectionHolder = createElement('ul', 'model-selection-holder');
     const _apiFrameHolder = createElement('div', 'api-frame-holder');
 
     APP.appendChild(_modelSelectionHolder);
     APP.appendChild(_apiFrameHolder);
-
-    // TODO: moved wrapper creation to the createEmptyWrapper
-    // APP.appendChild(_wrapper);
   }
 
   getEnviromentLevel (): string {
