@@ -7,27 +7,13 @@
 ---
 
 # Working on
+  
+* [x] Make **model-selection-holder** a list
+  * now it gets created as an div
+  * change it to ul list
+* [x] card generation as li element instead of div
+* [ ] card li element have a button that contains the img
 
-* [x] [ _Component_ ] Rename **dockItem** to **content** in the **_Component** class
-
-* [x] **createDockTitleButton** remove on-click functionality
-  * on-click functionality should be implemented in the app itself not in the engine
-  * example code:
-    ```
-        this.title.addEventListener('click', () => {
-          document.querySelectorAll('#dock-item-content').forEach(_e => {
-              if (_e !== this.dockItem) {
-                     _e.replaceClass('d-flex', 'd-none');
-                 }
-             });
-
-             if (this.dockItem.hasClass('d-flex')) {
-                 this.dockItem.replaceClass('d-flex', 'd-none');
-             } else {
-                 this.dockItem.addClass('d-flex');
-             }
-        });
-      ```
 ---
 
 # TODO
@@ -36,10 +22,6 @@
 
 * [ ] Look into linking button elements with meta data
   * ``` https://www.youtube.com/watch?v=YAqRQoN8ykI ```
-  
-* [x] Make **model-selection-holder** a list
-  * now it gets created as an div
-  * change it to ul list
 
 * _HTMLElement 
   * [ ] Consider removing this custom HTML Element type / implementation as it is redundant
@@ -74,3 +56,24 @@
 * [x] [ _Card_ ] make all of the card DOM elements accessable to child classes 
 
 * [x] [ _Card_ ] card load holder hover text, make it so that the text is defined in the constructor or some other way
+
+* [x] [ _Component_ ] Rename **dockItem** to **content** in the **_Component** class
+
+* [x] **createDockTitleButton** remove on-click functionality
+  * on-click functionality should be implemented in the app itself not in the engine
+  * example code:
+    ```
+        this.title.addEventListener('click', () => {
+          document.querySelectorAll('#dock-item-content').forEach(_e => {
+              if (_e !== this.dockItem) {
+                     _e.replaceClass('d-flex', 'd-none');
+                 }
+             });
+
+             if (this.dockItem.hasClass('d-flex')) {
+                 this.dockItem.replaceClass('d-flex', 'd-none');
+             } else {
+                 this.dockItem.addClass('d-flex');
+             }
+        });
+      ```

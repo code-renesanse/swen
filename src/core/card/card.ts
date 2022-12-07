@@ -1,19 +1,20 @@
 import { _Application_ } from '../application/application';
-import { createCardLoadHolder, createImageHolder, createLoadingbar, getDomFromReference } from '../../dom';
+import { createCardLoadHolder, createHTMLButton, createLoadingbar, getDomFromReference } from '../../dom';
 import { errorLog, mustImplementFunction } from '../../logger';
 import { IApi } from '../../types';
 import { IComponent } from '../component';
 
 export class _Card_ {
   modelid: string;
-  CARD_HOLDER: HTMLDivElement | null = null;
+  CARD_HOLDER: HTMLLIElement | null = null;
+  BUTTON: HTMLButtonElement | null = null;
   configurator: _Application_;
 
   constructor (cardTitle: string, modelid: string, configurator: _Application_) {
     this.modelid = modelid;
     this.configurator = configurator;
 
-    const HOLDER = document.querySelector<HTMLDivElement>('#model-selection-holder');
+    const HOLDER = document.querySelector<HTMLLIElement>('#model-selection-holder');
 
     if (HOLDER === null) {
       errorLog('model-selection-holder');
@@ -22,9 +23,9 @@ export class _Card_ {
 
     this.CARD_HOLDER = createCardLoadHolder(`card-load-${modelid}`, cardTitle);
 
-    const cardImg = createImageHolder(modelid, `model${modelid}`, configurator.API);
+    this.BUTTON = createHTMLButton(`card-button-${modelid}`, `model${modelid}`, configurator.API);
 
-    this.CARD_HOLDER.appendChild(cardImg);
+    this.CARD_HOLDER.appendChild(this.BUTTON);
 
     this.CARD_HOLDER.addEventListener('click', () => {
       void (async () => {
@@ -42,7 +43,7 @@ export class _Card_ {
   /**
    * This is the load function of the card
    */
-  async load (modelid: string, HOLDER: HTMLDivElement, api: IApi): Promise<void> {
+  async load (modelid: string, HOLDER: HTMLLIElement, api: IApi): Promise<void> {
     await (async () => {
       await createLoadingbar(api);
 

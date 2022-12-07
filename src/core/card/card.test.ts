@@ -12,6 +12,7 @@ describe('Card', () => {
     document.body.appendChild(_apiFrame);
 
     const _app: _Application_ = new _Application_('test');
+    _app.API.translator['card-button-test-card'] = 'test-card';
 
     /**
      * Create an model-selection-holder simulated instance
@@ -20,7 +21,7 @@ describe('Card', () => {
     const _holder = document.createElement('div');
     _holder.id = 'model-selection-holder';
     document.body.appendChild(_holder);
-    instance = new _Card_('test-card', 'Load test-card', _app);
+    instance = new _Card_('Load test-card', 'test-card', _app);
   });
 
   it('Validates card', () => {
