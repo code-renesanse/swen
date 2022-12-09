@@ -287,7 +287,8 @@ export class _Application_ {
           log('Modile mode');
         } else {
           if (wrapper !== null) {
-            wrapper.addClass('opaque');
+            console.log('wrapper opaque call maybe remove');
+            // wrapper.addClass('opaque');
           }
         }
 
