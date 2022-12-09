@@ -31,7 +31,7 @@ export const createDockItemContent = (btnHolder: _HTMLElement_): _HTMLElement_ =
 * @param {Sketchfab API object} api - JSON object holding all application data
 * @returns HTML buutton element
 */
-export const createDockTitleButton = (api: IApi, id: string): HTMLElement => {
+export const createDockTitleButton = (api: IApi, id: string): HTMLButtonElement => {
   const _dockTitleButton = createElement('button', id);
   _dockTitleButton.classList.add('dock-title-button');
   _dockTitleButton.disabled = true;
