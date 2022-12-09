@@ -8,7 +8,7 @@ import { IApi } from '../types';
  * @returns HTML div element
  */
 export const createDockItem = (): HTMLDivElement => {
-  const _dockItem = createElement('div', `dock-item-${document.getElementsByClassName('delm').length}`);
+  const _dockItem = createElement('div', `dock-item-${document.getElementsByClassName('dock-item').length}`);
   _dockItem.classList.add('dock-item');
   return _dockItem;
 };
@@ -18,8 +18,9 @@ export const createDockItem = (): HTMLDivElement => {
  * @param {DOMElement} btnHolder
  * @returns HTML div element
  */
-export const createDockItemContent = (btnHolder: _HTMLElement_): _HTMLElement_ => {
-  const dic = createElement('div', 'dock-item-content');
+export const createDockItemContent = (btnHolder: HTMLElement): HTMLElement => {
+  const dic = createElement('div', `dock-item-${document.getElementsByClassName('dock-item-content').length}-content`);
+  dic.classList.add('dock-item-content');
   dic.appendChild(btnHolder);
   return dic;
 };
