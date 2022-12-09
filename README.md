@@ -8,15 +8,14 @@
 
 # Working on
   
-* [x] Make **model-selection-holder** a list
-  * now it gets created as an div
-  * change it to ul list
-* [x] card generation as li element instead of div
-* [ ] card li element have a button that contains the img
 
 ---
 
 # TODO
+
+* [ ] card li element have a button that contains the img
+* [ ] [ _Card_ ] change addConfigurationComponent to load the component class
+  * instead fo just a function
 
 * [ ] Look into css **visually-hidden** insted of display: none
 
@@ -43,10 +42,20 @@
 
 # Done
 
-* clean-up **src/dom/loadingbar/create**:
-  * [x] Loading bar get created when a user clicks on a **_Card_** to load the model
-  * [x] Remove ```loadingbar.style.opacity = '0';```
-  * [x] Move svg loading to a separate file
+
+* [x] [ #model-selection=holder ] card generation as li element instead of div
+
+* [x] [ #model-selection=holder ] Make **model-selection-holder** a list
+  * now it gets created as an div
+  * change it to ul list
+
+* [x] clean-up **src/dom/loadingbar/create**:
+
+* [x] Loading bar get created when a user clicks on a **_Card_** to load the model
+
+* [x] Remove ```loadingbar.style.opacity = '0';```
+
+* [x] Move svg loading to a separate file
 
 * [ _wrapper_ ] 
   * [x] Remove ```wrapper.style.opacity = '1';```
@@ -77,3 +86,4 @@
              }
         });
       ```
+
