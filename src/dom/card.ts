@@ -9,7 +9,7 @@ import { createElement } from './create';
  */
 export const createCardLoadHolder = (id: string, title: string): HTMLLIElement => {
   const cardHolder = createElement('li', id);
-  cardHolder.addClass('card-holder');
+  cardHolder.classList.add('card-holder');
   cardHolder.title = title;
   return cardHolder;
 };
