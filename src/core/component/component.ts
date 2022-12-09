@@ -7,7 +7,7 @@ import { IComponent } from './component.model';
 
 export class _Component_ implements IComponent {
   subelements: _HTMLElement_;
-  dockElement: _HTMLElement_;
+  dockElement: HTMLElement;
   title: HTMLButtonElement;
   content: HTMLDivElement;
   name: string;
@@ -29,7 +29,7 @@ export class _Component_ implements IComponent {
 
     this.dockElement = createDockItem();
 
-    this.title = createDockTitleButton(api, id, this.dockElement);
+    this.title = createDockTitleButton(api, id);
 
     this.content = createDockItemContent(this.subelements);
 
