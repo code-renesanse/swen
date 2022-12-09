@@ -7,9 +7,9 @@ import { IApi } from '../types';
  * Creates an dock item div element
  * @returns HTML div element
  */
-export const createDockItem = (): _HTMLElement_ => {
+export const createDockItem = (): HTMLDivElement => {
   const _dockItem = createElement('div', `dock-item-${document.getElementsByClassName('delm').length}`);
-  _dockItem.addClass('dock-item');
+  _dockItem.classList.add('dock-item');
   return _dockItem;
 };
 
@@ -31,9 +31,9 @@ export const createDockItemContent = (btnHolder: _HTMLElement_): _HTMLElement_ =
 * @param {Sketchfab API object} api - JSON object holding all application data
 * @returns HTML buutton element
 */
-export const createDockTitleButton = (api: IApi, id: string): _HTMLElement_ => {
+export const createDockTitleButton = (api: IApi, id: string): HTMLElement => {
   const _dockTitleButton = createElement('button', id);
-
+  _dockTitleButton.classList.add('dock-title-button');
   _dockTitleButton.disabled = true;
   _dockTitleButton.textContent = getTranslation(api, id);
 
