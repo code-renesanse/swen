@@ -33,7 +33,7 @@ export const createDockItemContent = (btnHolder: _HTMLElement_): _HTMLElement_ =
 */
 export const createDockTitleButton = (api: IApi, id: string): HTMLButtonElement => {
   const _dockTitleButton = createElement('button', id);
-  _dockTitleButton.classList.add('dock-title-button');
+  _dockTitleButton.classList.add('dock-item-title');
   _dockTitleButton.disabled = true;
   _dockTitleButton.textContent = getTranslation(api, id);
 
