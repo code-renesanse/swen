@@ -23,7 +23,7 @@ export class _Card_ {
 
     this.CARD_HOLDER = createCardLoadHolder(`card-load-${modelid}`, cardTitle);
 
-    this.BUTTON = createHTMLButton(`card-button-${modelid}`, `model${modelid}`, configurator.API);
+    this.BUTTON = createHTMLButton(`card-button-${modelid}`, `model-${modelid}`, configurator.API);
 
     this.CARD_HOLDER.appendChild(this.BUTTON);
 
