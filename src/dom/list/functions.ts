@@ -10,20 +10,19 @@ import { getDomFromReference } from '../getters';
 export const closeHTMLList = (listRef: string | _HTMLElement_): void => {
   if (listRef === null) errorLog('No valid list reference');
 
-  //   const list = typeof listRef === 'string' ? document.querySelector(`#${listRef}`) : listRef;
   const list = getDomFromReference(listRef);
-  // list.removeClass('d-flex');
-  // list.addClass('d-none');
-  list.style.display = 'none';
+  if (!list.classList.contains('visually-hidden')) {
+    list.classList.add('visually-hidden');
+  }
 };
 
 export const openHTMLList = (listRef: string | _HTMLElement_): void => {
   if (listRef === null) errorLog('No valid list reference');
 
   const list = getDomFromReference(listRef);
-  // list.removeClass('d-none');
-  // list.addClass('d-flex');
-  list.style.display = 'flex';
+  if (list.classList.contains('visually-hidden')) {
+    list.classList.remove('visually-hidden');
+  }
 };
 
 /**
