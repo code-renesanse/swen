@@ -6,24 +6,18 @@ import { getDomFromReference } from './getters';
  * @param {DomElement | String} domRef
  * @returns
  */
-export const showSelection = (_element: _HTMLElement_ | string | _HTMLElement_[] | string[], _type: string, _canBeUnselected: boolean): void => {
-  if (_element instanceof Array) {
-    _element.forEach((e: string | _HTMLElement_) => {
-      showSelection(e, _type, _canBeUnselected);
-    });
-  } else {
-    const _dom = getDomFromReference(_element);
-    if (_canBeUnselected) {
-      if (_dom.classList.contains('selected-item')) {
-        _dom.classList.remove('selected-item');
-      } else {
-        clearSelection(_type);
-        _dom.addClass('selected-item');
-      }
+export const showSelection = (_element: _HTMLElement_ | string, _type: string, _canBeUnselected: boolean): void => {
+  const _dom = getDomFromReference(_element);
+  if (_canBeUnselected) {
+    if (_dom.classList.contains('selected-item')) {
+      _dom.classList.remove('selected-item');
     } else {
       clearSelection(_type);
       _dom.addClass('selected-item');
     }
+  } else {
+    clearSelection(_type);
+    _dom.addClass('selected-item');
   }
 };
 
