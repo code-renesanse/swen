@@ -13,7 +13,7 @@ import { _HTMLElement_ } from '../dom.model';
  * @returns HTML button element
  */
 export const createValidResponseButton = (textContent: string, popupHolder: HTMLDivElement, api: IApi): HTMLButtonElement => {
-  const btn = createElement('button', 'vr-btn');
+  const btn = createElement('button', 'valid-response-button');
   // btn.addClass(
   //   'bg-transparent',
   //   'border',

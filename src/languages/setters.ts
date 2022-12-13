@@ -26,8 +26,8 @@ export const setLang = async (api: IApi, lang: string): Promise<string> => {
 
   document.title = getTranslation(api, 'title');
 
-  const rtsBtn = getDomFromReference('rts-btn');
-  rtsBtn.textContent = getTranslation(api, 'rts-btn');
+  const rtsBtn = getDomFromReference('return-to-selection-button');
+  rtsBtn.textContent = getTranslation(api, 'return-to-selection-button');
 
   api.configuration_components.forEach(cmp => {
     cmp.updateLang(api);

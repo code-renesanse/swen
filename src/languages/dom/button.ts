@@ -4,7 +4,7 @@ import { IApi } from '../../types';
 import { setLang } from '../setters';
 
 /**
- * Creates an HTML button and appends it to the lang-btn-holder div element
+ * Creates an HTML button and appends it to the language-button-holder div element
  * Button has an image that is pulled from alfastreet page :O
  * @param {Sketchfab API object} api - JSON object holding all application data
  * @param {String} lang - language abbreviation
@@ -13,10 +13,10 @@ import { setLang } from '../setters';
 export const createLanguageButton = (api: IApi, lang: string): void => {
   // if(!validateAPI(api)) return;
 
-  const parent = getDomFromReference('lang-btn-holder');
+  const parent = getDomFromReference('language-button-holder');
 
   if (parent === null) {
-    errorLog('lang-btn-holder does not exist!');
+    errorLog('language-button-holder does not exist!');
     return;
   }
 
@@ -31,8 +31,8 @@ export const createLanguageButton = (api: IApi, lang: string): void => {
     es: 'Spanish'
   };
 
-  const className = 'lang-btn';
-  const id = `lang-${lang}`;
+  const className = 'language-button';
+  const id = `language-${lang}`;
 
   const title = titleMap[lang];
 

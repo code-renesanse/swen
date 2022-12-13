@@ -25,7 +25,7 @@ export const disableHTMLButton = (btnRef: string | HTMLButtonElement): void => {
 // export const selectUnselectButtonFunction = (out: string | _HTMLElement_, event: HTMLElementEventMap['click']): void => {
 //   const btn = getDomFromReference(out);
 //   const type = 'select-unselect';
-//   if (btn.classList.contains('bold') || btn.id === 'rts-btn') {
+//   if (btn.classList.contains('bold') || btn.id === 'return-to-selection-button') {
 //     if ((event.target as _HTMLElement_).id !== btn.id && (event.target as _HTMLElement_)?.parentElement?.id !== btn.id) {
 //       clearSelection(type);
 //     }
