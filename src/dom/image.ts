@@ -9,21 +9,12 @@ import { createElement } from './create';
  * @returns img HTML element
  */
 export const createImageHolder = (modelId: string, alt: string, api: IApi): HTMLImageElement => {
-  const id = `card-img-${document.getElementsByTagName('img').length}`;
+  const id = `card-image-${document.getElementsByTagName('img').length}`;
   const cardImg = createElement('img', id);
-  let imgRef = getImage(modelId, api);
-
-  // TODO: put this into the swen-dictionary getImage function
-  if (imgRef === '') {
-    imgRef = 'https://via.placeholder.com/512x256.png';
-  }
+  const imgRef = getImage(modelId, api);
 
   cardImg.src = imgRef;
   cardImg.alt = alt;
-  cardImg.addClass(
-    'w-100',
-    'h-100'
-  );
 
   return cardImg;
 };
