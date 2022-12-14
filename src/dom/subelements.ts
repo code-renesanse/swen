@@ -7,7 +7,7 @@ import { getDomFromReference } from './getters';
  * @param  {...DOMElements} list list of DOM elements to append to the parent
  * @returns the html element that the given elements were appended
  */
-export const appendElementList = (domRef: Document | HTMLElement | string, ...list: HTMLElement[]): HTMLElement => {
+export const appendElementList = (domRef: HTMLElement | string, ...list: HTMLElement[]): HTMLElement => {
   const parent = getDomFromReference(domRef);
 
   list.forEach((child: HTMLElement) => {
