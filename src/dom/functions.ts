@@ -1,29 +1,27 @@
 
 import { errorLog } from '../logger';
-import { createElement } from './create';
-import { _HTMLElement_ } from './dom.model';
 import { getDomFromReference } from './getters';
 
 /**
  *
- * @param {DOM reference} domRef - reference to the dom element
+ * @param {DOM reference} domReference - reference to the dom element
  */
-export const domExists = (domRef: Document | _HTMLElement_ | string): boolean => {
-  const tmp = getDomFromReference(domRef);
+export const domExists = (domReference: HTMLElement | string): boolean => {
+  const tmp = getDomFromReference(domReference);
   return tmp !== null && tmp !== undefined;
 };
 
 /**
  * Removes all event listeners from the DOM
- * @param {DOMElement | String} domRef - reference to the dom element
+ * @param {DOMElement | String} domReference - reference to the dom element
  * @returns DOM element
  */
-export const removeEventListener = (domRef: Document | _HTMLElement_ | string): _HTMLElement_ => {
-  const dom = getDomFromReference(domRef);
+export const removeEventListener = (domReference: HTMLElement | string): HTMLElement | string => {
+  const dom = getDomFromReference(domReference);
 
   if (dom.parentNode === null || dom.parentNode === undefined) {
     errorLog('Dom does not have a parent node!');
-    return createElement('div', 'err404') as _HTMLElement_;
+    return document.createElement('p');
   }
 
   const elClone = dom.cloneNode(true);
@@ -34,23 +32,22 @@ export const removeEventListener = (domRef: Document | _HTMLElement_ | string): 
 
 /**
  * Removes the DOM element from the page
- * @param {DOMElment | String } domRef - reference to the dom; If string then it is an dom ID
+ * @param {DOMElment | String } domReference - reference to the dom; If string then it is an dom ID
  */
-export const removeDom = (domRef: Document | _HTMLElement_ | string): boolean => {
-  const dom = getDomFromReference(domRef);
-
+export const removeDom = (domReference: HTMLElement | string): HTMLElement | string => {
+  const dom = getDomFromReference(domReference);
   dom.remove();
-  return true;
+  return domReference;
 };
 
 /**
  *
- * @param {DOMElement | String} dom
+ * @param {DOMElement | String} domReference
  * @param {String} domId to be set
  * @returns dom id
  */
-export const setIdOfDOM = (domRef: Document | _HTMLElement_ | string, domId: string): string => {
-  const dom = getDomFromReference(domRef);
+export const setIdOfDOM = (domReference: HTMLElement | string, domId: string): string => {
+  const dom = getDomFromReference(domReference);
   dom.id = domId;
   return domId;
 };
