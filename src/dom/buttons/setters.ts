@@ -1,6 +1,5 @@
 import { getImage } from '../../dictionary';
 import { IApi } from '../../types';
-import { _HTMLElement_ } from '../dom.model';
 import { getDomFromReference } from '../getters';
 
 /**
@@ -9,7 +8,8 @@ import { getDomFromReference } from '../getters';
  * @param {string} imgRef - reference to the image in the image dictionary
  * @param {Sketchfab API object} api - JSON object holding all application data
  */
-export const setImageOfHTMLButton = (buttonId: string | _HTMLElement_, imgRef: string, api: IApi): void => {
-  const btn = getDomFromReference(buttonId) as unknown as HTMLImageElement;
-  btn.src = getImage(imgRef, api);
+export const setImageOfHTMLImage = (buttonId: string | HTMLElement, imgRef: string, api: IApi): HTMLImageElement => {
+  const imageElement = getDomFromReference(buttonId) as HTMLImageElement;
+  imageElement.src = getImage(imgRef, api);
+  return imageElement;
 };

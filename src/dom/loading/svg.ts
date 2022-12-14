@@ -8,15 +8,6 @@ import { getLoadingSVG } from './getters';
  */
 export const createLoadingSvgHolder = (): HTMLDivElement => {
   const svgDom = createElement('div', 'loading-bar-svg');
-  // svgDom.addClass(
-  //   'position-absolute',
-  //   'w-4r',
-  //   'h-auto',
-  //   'top-0',
-  //   'start-50',
-  //   'translate-middle-x',
-  //   'bg-transparent-white'
-  // );
   return svgDom;
 };
 

@@ -74,8 +74,3 @@ export * from './buttons';
  */
 
 export * from './list';
-
-/**
- * Types
- */
-export * from './dom.model';

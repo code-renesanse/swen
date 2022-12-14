@@ -16,5 +16,4 @@ export * from './translator';
 /**
  * Dom stuffs
  */
-export * from './dom/animation';
 export * from './dom/button';
