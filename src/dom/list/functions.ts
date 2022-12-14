@@ -1,13 +1,12 @@
 import { errorLog } from '../../logger';
-import { disableHTMLButton, enableHTMLButton } from '../buttons';
-import { _HTMLElement_ } from '../dom.model';
+import { disableHTMLElement, enableHTMLElement } from '../buttons';
 import { getDomFromReference } from '../getters';
 
 /**
  * Hides the list DOM element
  * @param {Sting | DOMElement} listRef - reference to the list element
  */
-export const closeHTMLList = (listRef: string | _HTMLElement_): void => {
+export const closeHTMLList = (listRef: string | HTMLElement): void => {
   if (listRef === null) errorLog('No valid list reference');
 
   const list = getDomFromReference(listRef);
@@ -16,7 +15,7 @@ export const closeHTMLList = (listRef: string | _HTMLElement_): void => {
   }
 };
 
-export const openHTMLList = (listRef: string | _HTMLElement_): void => {
+export const openHTMLList = (listRef: string | HTMLElement): void => {
   if (listRef === null) errorLog('No valid list reference');
 
   const list = getDomFromReference(listRef);
@@ -30,9 +29,8 @@ export const openHTMLList = (listRef: string | _HTMLElement_): void => {
  * @param {String|DOM element} buttonRef - reference to the list display button dom
  * @param {*} listRef - reference to the list dom
  */
-export const enableHTMLList = (buttonRef: string | HTMLButtonElement, listRef: string | _HTMLElement_): void => {
-  enableHTMLButton(buttonRef);
-  // TODO: implement a getDomListFromReference
+export const enableHTMLList = (buttonRef: HTMLButtonElement, listRef: string | HTMLElement): void => {
+  enableHTMLElement(buttonRef);
   openHTMLList(listRef);
 };
 
@@ -41,8 +39,8 @@ export const enableHTMLList = (buttonRef: string | HTMLButtonElement, listRef: s
  * @param {String|DOM element} buttonRef - reference to the list display button dom
  * @param {*} listRef - reference to the list dom
  */
-export const disableHTMLList = (buttonRef: string | HTMLButtonElement, listRef: string | _HTMLElement_): void => {
-  disableHTMLButton(buttonRef);
+export const disableHTMLList = (buttonRef: HTMLElement | string, listRef: HTMLElement | string): void => {
+  disableHTMLElement(buttonRef);
   // TODO: implement a getDomListFromReference
   closeHTMLList(listRef);
 };

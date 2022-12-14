@@ -1,16 +1,15 @@
 import { createElement } from './create';
-import { _HTMLElement_ } from './dom.model';
 import { showSelection } from './selection';
 
 describe('show/clearSelection', () => {
   it('showSelection', () => {
-    const element: _HTMLElement_ = createElement('div', 'test-selection');
+    const element: HTMLElement = createElement('div', 'test-selection');
     const type: string = 'selection';
     const canBeUnselected: boolean = false;
 
     showSelection(element, type, canBeUnselected);
 
-    const _hasClass = element.hasClass('selected-item');
+    const _hasClass = element.classList.contains('selected-item');
     expect(_hasClass).toBe(true);
 
     let _hasType = element.hasAttribute(type);

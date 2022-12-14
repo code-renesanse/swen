@@ -1,36 +1,21 @@
-import { _HTMLElement_ } from '../dom.model';
 import { getDomFromReference } from '../getters';
 
 /**
  * Enables the refered button dom
- * @param {String|DOM element} btnRef - reference to the button dom element to be enabled
+ * @param {String|DOM element} elementReference - reference to the button dom element to be enabled
  */
-export const enableHTMLButton = (btnRef: string | HTMLButtonElement): void => {
-  const btn = getDomFromReference(btnRef as _HTMLElement_);
-  btn.removeClass('disabled');
-  btn.disabled = false;
+export const enableHTMLElement = (elementReference: HTMLElement): HTMLElement => {
+  const element = getDomFromReference(elementReference);
+  element.classList.remove('disabled');
+  return element;
 };
 
 /**
  * Disables the refered button dom
- * @param {String||DOM element} btnRef - a reference to the button that will be disabled
+ * @param {String||DOM element} elementReference - a reference to the button that will be disabled
  */
-export const disableHTMLButton = (btnRef: string | HTMLButtonElement): void => {
-  const btn = getDomFromReference(btnRef as _HTMLElement_);
-  btn.addClass('disabled');
-  btn.disabled = true;
+export const disableHTMLElement = (elementReference: string | HTMLElement): HTMLElement => {
+  const element = getDomFromReference(elementReference);
+  element.classList.add('disabled');
+  return element;
 };
-
-// TODO: fix showSelection
-// export const selectUnselectButtonFunction = (out: string | _HTMLElement_, event: HTMLElementEventMap['click']): void => {
-//   const btn = getDomFromReference(out);
-//   const type = 'select-unselect';
-//   if (btn.classList.contains('bold') || btn.id === 'return-to-selection-button') {
-//     if ((event.target as _HTMLElement_).id !== btn.id && (event.target as _HTMLElement_)?.parentElement?.id !== btn.id) {
-//       clearSelection(type);
-//     }
-//   } else {
-//     showSelection(out, type, true);
-//   }
-//   btn.addProperty(type);
-// };

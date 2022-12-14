@@ -1,38 +1,27 @@
-import { errorLog } from '../logger';
 import { createElement } from './create';
-import { _HTMLElement_ } from './dom.model';
 import { getDomFromReference } from './getters';
 
 /**
  *
  * @param {DOMElement | String} domRef - reference to the dom element
  * @param  {...DOMElements} list list of DOM elements to append to the parent
+ * @returns the html element that the given elements were appended
  */
-export const appendElementList = (domRef: Document | _HTMLElement_ | string, ...list: _HTMLElement_[]): boolean => {
+export const appendElementList = (domRef: Document | HTMLElement | string, ...list: HTMLElement[]): HTMLElement => {
   const parent = getDomFromReference(domRef);
 
-  if (parent === null || parent === undefined) {
-    errorLog('The dom is eather null or undefined');
-    return false;
-  }
-
-  list.forEach((child: _HTMLElement_) => {
+  list.forEach((child: HTMLElement) => {
     parent.appendChild(child);
   });
 
-  return true;
+  return parent;
 };
 
 /**
-   *
-   * @returns HTML div element
-   */
-export const createSubelementsHolder = (id: string): _HTMLElement_ => {
+ * DEPRICATED: remove because you can just use createElement(Div)
+ * @returns HTML div element
+ */
+export const createSubelementsHolder = (id: string): HTMLElement => {
   const buttonHolder = createElement('div', id);
-  buttonHolder.addClass(
-    'd-flex',
-    'flex-column',
-    'mx-2'
-  );
   return buttonHolder;
 };

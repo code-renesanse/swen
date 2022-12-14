@@ -15,11 +15,6 @@ export const createLanguageButton = (api: IApi, lang: string): void => {
 
   const parent = getDomFromReference('language-button-holder');
 
-  if (parent === null) {
-    errorLog('language-button-holder does not exist!');
-    return;
-  }
-
   // TODO: fix this so that it does not access alafstreet CDN
   const imagePrefix = 'https://alfastreet-marine.com/wp-content/plugins/sitepress-multilingual-cms/res/flags';
 
@@ -36,23 +31,18 @@ export const createLanguageButton = (api: IApi, lang: string): void => {
 
   const title = titleMap[lang];
 
-  const btn = createElement('button', id);
-  btn.addClass(
-    className,
-    'bg-transparent',
-    'border-none',
-    'button-hover'
-  );
+  const button = createElement('button', id);
+  button.classList.add(className);
 
-  btn.title = title;
+  button.title = title;
 
-  const bImg = createElement('img', `${id}-img`);
-  bImg.alt = title;
-  bImg.src = `${imagePrefix}/${lang}.png`;
-  bImg.addClass('wpml-ls-flag');
+  const buttonImage = createElement('img', `${id}-image`);
+  buttonImage.alt = title;
+  buttonImage.src = `${imagePrefix}/${lang}.png`;
+  buttonImage.classList.add('wpml-ls-flag');
 
   const elan = id.split('-')[1];
-  btn.addEventListener('click', () => {
+  button.addEventListener('click', () => {
     (async () => {
       await setLang(api, elan);
     })().catch(err => {
@@ -60,6 +50,6 @@ export const createLanguageButton = (api: IApi, lang: string): void => {
     });
   });
 
-  btn.appendChild(bImg);
-  parent.appendChild(btn);
+  button.appendChild(buttonImage);
+  parent.appendChild(button);
 };

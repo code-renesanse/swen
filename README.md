@@ -13,6 +13,7 @@
 
 # TODO
 
+* [ ] **createSubelementsHolder** - depricated
 * [ ] card li element have a button that contains the img
 * [ ] [ _Card_ ] change addConfigurationComponent to load the component class
   * instead fo just a function

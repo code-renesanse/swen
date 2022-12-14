@@ -1,4 +1,3 @@
-import { _HTMLElement_ } from './dom.model';
 import { getDomFromReference } from './getters';
 
 /**
@@ -6,18 +5,18 @@ import { getDomFromReference } from './getters';
  * @param {DomElement | String} domRef
  * @returns
  */
-export const showSelection = (_element: _HTMLElement_ | string, _type: string, _canBeUnselected: boolean): void => {
-  const _dom = getDomFromReference(_element);
+export const showSelection = (element: HTMLElement | string, type: string, _canBeUnselected: boolean = false): void => {
+  const _dom = getDomFromReference(element);
   if (_canBeUnselected) {
     if (_dom.classList.contains('selected-item')) {
       _dom.classList.remove('selected-item');
     } else {
-      clearSelection(_type);
-      _dom.addClass('selected-item');
+      clearSelection(type);
+      _dom.classList.add('selected-item');
     }
   } else {
-    clearSelection(_type);
-    _dom.addClass('selected-item');
+    clearSelection(type);
+    _dom.classList.add('selected-item');
   }
 };
 
@@ -26,8 +25,8 @@ export const showSelection = (_element: _HTMLElement_ | string, _type: string, _
  * @param {DOM Element | String | Array} domRef
  * @returns
  */
-export const clearSelection = (_type: string): void => {
-  const _testElms = document.querySelectorAll(`[${_type}].selected-item`);
+export const clearSelection = (type: string): void => {
+  const _testElms = document.querySelectorAll(`[${type}].selected-item`);
   if (_testElms !== undefined) {
     for (let i = 0; i < _testElms.length; i++) {
       _testElms[i].classList.remove('selected-item');

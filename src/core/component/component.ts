@@ -1,4 +1,4 @@
-import { createSubelementsHolder, getDomFromReference, _HTMLElement_ } from '../../dom';
+import { createSubelementsHolder, getDomFromReference } from '../../dom';
 import { getTranslation } from '../../languages';
 import { developmentLog, errorLog } from '../../logger';
 import { IApi } from '../../types';
@@ -6,7 +6,7 @@ import { createDockItem, createDockItemContent, createDockTitleButton } from '..
 import { IComponent } from './component.model';
 
 export class _Component_ implements IComponent {
-  subelements: _HTMLElement_;
+  subelements: HTMLElement;
   dockElement: HTMLElement;
   title: HTMLButtonElement;
   content: HTMLDivElement;
@@ -37,10 +37,6 @@ export class _Component_ implements IComponent {
     this.dockElement.appendChild(this.content);
 
     const dockWrapper = getDomFromReference('dock-wrapper');
-    if (dockWrapper === null) {
-      errorLog('dock-wrapper does not exist');
-      return;
-    }
 
     dockWrapper.appendChild(this.dockElement);
 

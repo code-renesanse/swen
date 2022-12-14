@@ -55,8 +55,7 @@ export class _Card_ {
 
       const apiFrameHolder = getDomFromReference('api-frame-holder');
       if (apiFrameHolder !== null) {
-        //   apiFrameHolder.classList.replace('d-none', 'd-flex');
-        apiFrameHolder.style.display = 'flex';
+        apiFrameHolder.classList.remove('visually-hidden');
       } else {
         errorLog('apiFrameHolder is null');
       }
