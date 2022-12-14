@@ -29,7 +29,7 @@ export const errorLog = (message: Message): void => {
     throw new Error('No valid APP_NAME enviromantal variable');
   }
 
-  throw new Error(`[ ${process.env.APP_NAME ?? 'error404'} ]: ${message}`);
+  console.error(`[ ${process.env.APP_NAME ?? 'error404'} ]: ${message}`);
 };
 
 export const mustImplementFunction = (functionName: Message): void => {
