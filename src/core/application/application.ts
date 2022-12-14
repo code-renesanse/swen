@@ -1,6 +1,8 @@
 import { createElement, hideLoadingBar } from '../../dom';
 import { buildComponentDictionary } from '../../dictionary';
-import { developmentLog, errorLog, log, mustImplementFunction } from '../../logger';
+import {
+  developmentLog, errorLog, log, mustImplementFunction
+} from '../../logger';
 import { IApi, Dictionary, ISketchfabModelElement } from '../../types';
 import { IModels } from '../card/card.model';
 import { getLangFromURL, loadNewTransllationFiles, Translator } from '../../languages';
@@ -11,14 +13,21 @@ import { createEmptyWrapper } from '../../dom/wrapper';
 
 declare const window: any;
 
-export class _Application_ {
+class _Application_ {
   appName: string = '';
+
   MAIN: HTMLDivElement = createElement('div', '');
+
   API_FRAME: HTMLIFrameElement = createElement('iframe', '');
+
   isMobile: boolean = false;
+
   GRAPH: object = {};
+
   translator: any = [];
+
   CARDS: IModels = {};
+
   API: IApi = {
     configuration: {},
     image_dictionary: {},
@@ -32,24 +41,25 @@ export class _Application_ {
     component_load_map: {},
     is_mobile: false,
     // getters: {},
-    show: function (_id: string): void {
+    show (_id: string): void {
       throw new Error('Function show is not implemented.');
     },
-    hide: function (_id: string): void {
+    hide (_id: string): void {
       throw new Error('Function is not implemented.');
     },
-    start: function (_fun: () => void): void {
+    start (_fun: () => void): void {
       throw new Error('Function not implemented.');
     },
-    getSceneGraph: function (_fun: (err: object, graph: object) => void): void {
+    getSceneGraph (_fun: (err: object, graph: object) => void): void {
       throw new Error('Function not implemented.');
     },
-    addEventListener: function (_type: string, _fun: () => void | Promise<void>): void {
+    addEventListener (_type: string, _fun: () => void | Promise<void>): void {
       throw new Error('Function not implemented.');
     }
   };
 
   DICTIONARY_BUILD_FUNCTION!: (graph: object) => Promise<Dictionary<ISketchfabModelElement>>;
+
   CLIENT: any;
 
   constructor (appName: string) {
@@ -285,10 +295,8 @@ export class _Application_ {
 
         if (this.isMobile) {
           log('Modile mode');
-        } else {
-          if (wrapper !== null) {
-            console.log('wrapper opaque call maybe remove');
-          }
+        } else if (wrapper !== null) {
+          console.log('wrapper opaque call maybe remove');
         }
 
         api.addEventListener('viewerstart', () => {
@@ -383,3 +391,5 @@ export class _Application_ {
     return cache;
   }
 }
+
+export default _Application_;

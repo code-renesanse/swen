@@ -1,3 +1,5 @@
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable max-len */
 import { getImage } from '../../dictionary';
 import { IApi } from '../../types';
 import { getDomFromReference } from '../getters';
