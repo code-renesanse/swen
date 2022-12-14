@@ -1,6 +1,6 @@
 import { createElement, getDomFromReference, hideLoadingSvg, showLoadingSvg } from '../dom';
 import { developmentLog } from '../logger';
-import _Application_ from './application/application';
+import { _Application_ } from './application/application';
 
 export class Launcher {
   async setupApplication (context: any, application: _Application_): Promise<void> {

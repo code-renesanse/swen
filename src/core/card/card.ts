@@ -1,4 +1,4 @@
-import _Application_ from '../application/application';
+import { _Application_ } from '../application/application';
 import { createCardLoadHolder, createHTMLButton, createLoadingbar, getDomFromReference } from '../../dom';
 import { errorLog, mustImplementFunction } from '../../logger';
 import { IApi } from '../../types';

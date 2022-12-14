@@ -13,7 +13,7 @@ import { createEmptyWrapper } from '../../dom/wrapper';
 
 declare const window: any;
 
-class _Application_ {
+export class _Application_ {
   appName: string = '';
 
   MAIN: HTMLDivElement = createElement('div', '');
@@ -391,5 +391,3 @@ class _Application_ {
     return cache;
   }
 }
-
-export default _Application_;
