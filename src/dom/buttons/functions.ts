@@ -1,12 +1,14 @@
 import { getDomFromReference } from '../getters';
 
+const DISABLED_ATTRIBUTE = 'disabled';
+
 /**
  * Enables the refered button dom
  * @param {String|DOM element} elementReference - reference to the button dom element to be enabled
  */
 export const enableHTMLElement = (elementReference: HTMLElement): HTMLElement => {
   const element = getDomFromReference(elementReference);
-  element.classList.remove('disabled');
+  element.removeAttribute(DISABLED_ATTRIBUTE);
   return element;
 };
 
@@ -16,6 +18,6 @@ export const enableHTMLElement = (elementReference: HTMLElement): HTMLElement =>
  */
 export const disableHTMLElement = (elementReference: string | HTMLElement): HTMLElement => {
   const element = getDomFromReference(elementReference);
-  element.classList.add('disabled');
+  element.setAttribute(DISABLED_ATTRIBUTE, '');
   return element;
 };
