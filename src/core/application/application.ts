@@ -1,11 +1,18 @@
 import { createElement, hideLoadingBar } from '../../dom';
 import { buildComponentDictionary } from '../../dictionary';
 import {
-  developmentLog, errorLog, log, mustImplementFunction
+  developmentLog,
+  errorLog,
+  log,
+  mustImplementFunction,
 } from '../../logger';
 import { IApi, Dictionary, ISketchfabModelElement } from '../../types';
 import { IModels } from '../card/card.model';
-import { getLangFromURL, loadNewTransllationFiles, Translator } from '../../languages';
+import {
+  getLangFromURL,
+  loadNewTransllationFiles,
+  Translator,
+} from '../../languages';
 import { clearDockWrapper } from '../../dock/functions';
 import { _Card_ } from '../card';
 import { IComponent } from '../component';
@@ -41,30 +48,36 @@ export class _Application_ {
     component_load_map: {},
     is_mobile: false,
     // getters: {},
-    show (_id: string): void {
+    show(_id: string): void {
       throw new Error('Function show is not implemented.');
     },
-    hide (_id: string): void {
+    hide(_id: string): void {
       throw new Error('Function is not implemented.');
     },
-    start (_fun: () => void): void {
+    start(_fun: () => void): void {
       throw new Error('Function not implemented.');
     },
-    getSceneGraph (_fun: (err: object, graph: object) => void): void {
+    getSceneGraph(_fun: (err: object, graph: object) => void): void {
       throw new Error('Function not implemented.');
     },
-    addEventListener (_type: string, _fun: () => void | Promise<void>): void {
+    addEventListener(_type: string, _fun: () => void | Promise<void>): void {
       throw new Error('Function not implemented.');
-    }
+    },
   };
 
-  DICTIONARY_BUILD_FUNCTION!: (graph: object) => Promise<Dictionary<ISketchfabModelElement>>;
+  DICTIONARY_BUILD_FUNCTION!: (
+    graph: object
+  ) => Promise<Dictionary<ISketchfabModelElement>>;
 
   CLIENT: any;
 
-  constructor (appName: string) {
+  constructor(appName: string) {
     // validateEnvironmentalVariables();
-    if (process.env.APP_NAME === null || process.env.APP_NAME === undefined || process.env.APP_NAME === '') {
+    if (
+      process.env.APP_NAME === null ||
+      process.env.APP_NAME === undefined ||
+      process.env.APP_NAME === ''
+    ) {
       errorLog('APP_NAME enviromet variable must be set');
       return;
     }
@@ -93,53 +106,54 @@ export class _Application_ {
       component_load_map: {},
       is_mobile: false,
       // getters: this.apiGetters(),
-      show () {},
-      hide () {},
-      start () {},
-      addEventListener () {},
-      getSceneGraph () {}
+      show() {},
+      hide() {},
+      start() {},
+      addEventListener() {},
+      getSceneGraph() {},
     };
 
     /**
-         * This setst the default build configuration function the the one that is implemented in the engine
-         * @param {Sketchfab GRAPH object} graph
-         */
-    this.DICTIONARY_BUILD_FUNCTION = async (graph) => await buildComponentDictionary(graph);
+     * This setst the default build configuration function the the one that is implemented in the engine
+     * @param {Sketchfab GRAPH object} graph
+     */
+    this.DICTIONARY_BUILD_FUNCTION = async graph =>
+      await buildComponentDictionary(graph);
   }
 
-  setCurrentModelId (modelId: string): void {
+  setCurrentModelId(modelId: string): void {
     // validateString(modelId);
     this.API.currentModelId = modelId;
   }
 
   // TODO: implement model CARDS
-  addCard (cardRef: _Card_): void {
+  addCard(cardRef: _Card_): void {
     // TODO: cardRef validation
     // validateString(cardRef.modelId);
     this.CARDS[cardRef.modelid] = cardRef;
   }
 
   /**
-     * This is called when the page loads
-     * @param {Sketchfab API object} api - JSON object holding all application data
-     */
-  async onPageLoad (_api: IApi): Promise<void> {
+   * This is called when the page loads
+   * @param {Sketchfab API object} api - JSON object holding all application data
+   */
+  async onPageLoad(_api: IApi): Promise<void> {
     mustImplementFunction('onPageLoad');
   }
 
   /**
-     * All the code that is executed before the scene graph is set
-     * @param {Sketchfab API object} api - JSON object holding all application data
-     */
-  async preload (_api: IApi): Promise<void> {
+   * All the code that is executed before the scene graph is set
+   * @param {Sketchfab API object} api - JSON object holding all application data
+   */
+  async preload(_api: IApi): Promise<void> {
     mustImplementFunction('preload');
   }
 
   /**
-     * All the code that is executed after the scene graph is set
-     * @param {Sketchfab API object} api - JSON object holding all application data
+   * All the code that is executed after the scene graph is set
+   * @param {Sketchfab API object} api - JSON object holding all application data
    */
-  async load (api: IApi): Promise<void> {
+  async load(api: IApi): Promise<void> {
     await hideLoadingBar();
 
     // Creates the wrapper
@@ -151,7 +165,7 @@ export class _Application_ {
     this.loadComponents(api);
 
     if (api.configuration_components.length > 0) {
-      api.configuration_components.forEach((cmp) => {
+      api.configuration_components.forEach(cmp => {
         cmp.enable();
         cmp.updateLang(api);
         developmentLog(`Component ${cmp.getComponentName()} loaded`);
@@ -160,36 +174,36 @@ export class _Application_ {
   }
 
   /**
-     * This method is celled when Sketchfab viewer is stopped
-     */
-  viewerStopFunction (): void {
+   * This method is celled when Sketchfab viewer is stopped
+   */
+  viewerStopFunction(): void {
     mustImplementFunction('viewerStopFunction');
   }
 
   /**
-     * This method is used used for defining configurator components
-     * Inside this function you append components to the COMPONENTS list
-     * @param {Sketchfab API object} api - JSON object holding all application data
-     */
-  loadComponents (_api: IApi): void {
+   * This method is used used for defining configurator components
+   * Inside this function you append components to the COMPONENTS list
+   * @param {Sketchfab API object} api - JSON object holding all application data
+   */
+  loadComponents(_api: IApi): void {
     mustImplementFunction('loadComponents function needs to be implemented');
   }
 
   /**
-     * This function pushes a new component class to the component array of the application class
-     * @param {Component} componentRef
-     */
-  addConfiguratorComponent (componentRef: IComponent): void {
+   * This function pushes a new component class to the component array of the application class
+   * @param {Component} componentRef
+   */
+  addConfiguratorComponent(componentRef: IComponent): void {
     // validateConfiguratorComponent(componentRef);
     this.API.configuration_components.push(componentRef);
   }
 
   /**
-     * This function is extecuted once on page load and it loads all assets and indexes them
-     * Pictures, gifs, etc.
-     */
+   * This function is extecuted once on page load and it loads all assets and indexes them
+   * Pictures, gifs, etc.
+   */
   // TODO: make asset loading based only on model type ex.: always load colors, tapestry, but extra elements are loaded only for the selected model
-  async loadAssets (context: any): Promise<void> {
+  async loadAssets(context: any): Promise<void> {
     const assets = this.importAssets(context);
     const lang = getLangFromURL();
 
@@ -209,11 +223,13 @@ export class _Application_ {
   // }
 
   /**
-     * This functions inserts the iframe element to the api-frane-holder div
-     * @returns HTML iframe element
-     */
-  createAPIFrame (): HTMLIFrameElement {
-    const PARENT: HTMLDivElement = document.querySelector('#api-frame-holder') as HTMLDivElement;
+   * This functions inserts the iframe element to the api-frane-holder div
+   * @returns HTML iframe element
+   */
+  createAPIFrame(): HTMLIFrameElement {
+    const PARENT: HTMLDivElement = document.querySelector(
+      '#api-frame-holder'
+    ) as HTMLDivElement;
     PARENT.innerHTML = `
         <iframe 
             id='api-frame'
@@ -235,11 +251,11 @@ export class _Application_ {
   }
 
   /**
-     * With this function we tell main application renderer what model to load off of sketchab
-     * It also preloads all necessary static data such as assets and getter functions
-     * @param {String} modelId - reference to the sketchafb model refrence inside api.modelMap
-     */
-  async loadModel (modelId: string, api: IApi): Promise<void> {
+   * With this function we tell main application renderer what model to load off of sketchab
+   * It also preloads all necessary static data such as assets and getter functions
+   * @param {String} modelId - reference to the sketchafb model refrence inside api.modelMap
+   */
+  async loadModel(modelId: string, api: IApi): Promise<void> {
     const loadingBar = document.getElementById('loading-bar');
 
     const modelReference = api.model_map[modelId];
@@ -287,7 +303,7 @@ export class _Application_ {
         developmentLog('Building api object');
         api = {
           ...this.API,
-          ...api
+          ...api,
         };
 
         developmentLog('Clearing dock wrapper');
@@ -310,7 +326,9 @@ export class _Application_ {
         api.start(() => {
           developmentLog('API started');
 
-          const _loadingprogress = loadingBar.querySelector('#loading-bar-progress');
+          const _loadingprogress = loadingBar.querySelector(
+            '#loading-bar-progress'
+          );
           _loadingprogress?.setAttribute('animation', 'start');
 
           api.addEventListener('viewerready', async () => {
@@ -337,7 +355,9 @@ export class _Application_ {
 
               // TODO: validation
               developmentLog('Building component dictionary');
-              api.model_dictionary = await this.DICTIONARY_BUILD_FUNCTION(graph);
+              api.model_dictionary = await this.DICTIONARY_BUILD_FUNCTION(
+                graph
+              );
 
               developmentLog('Starting component laoding');
               await this.load(api);
@@ -349,25 +369,27 @@ export class _Application_ {
       error: () => {
         alert('Error: Failed to load API. Try reloadig the page');
         errorLog('Error: Failed to load API');
-      }
+      },
     });
   }
 
   /**
-     * For initializing a new client
-     * @returns new sketchfab client instance
-     */
-  initClient (): any { return new window.Sketchfab(this.API_FRAME); }
+   * For initializing a new client
+   * @returns new sketchfab client instance
+   */
+  initClient(): any {
+    return new window.Sketchfab(this.API_FRAME);
+  }
 
   /**
-     * Application name getter
-     * @returns String - app name
-     */
-  getApplicationName (): string {
+   * Application name getter
+   * @returns String - app name
+   */
+  getApplicationName(): string {
     return this.appName;
   }
 
-  setModelReference (modelId: string, sketchfabId: string, api: IApi): void {
+  setModelReference(modelId: string, sketchfabId: string, api: IApi): void {
     api.model_map[modelId] = sketchfabId;
   }
 
@@ -375,7 +397,7 @@ export class _Application_ {
    * Stores assets in the application cache
    * @param context
    */
-  importAssets (context: any): any {
+  importAssets(context: any): any {
     const cache: any = {};
     context.keys().forEach((key: string) => {
       const split: string[] = key.split('/');
@@ -386,7 +408,7 @@ export class _Application_ {
         cache[group] = {};
       }
 
-      (cache[group][name] = context(key));
+      cache[group][name] = context(key);
     });
     return cache;
   }

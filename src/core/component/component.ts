@@ -2,7 +2,11 @@ import { createSubelementsHolder, getDomFromReference } from '../../dom';
 import { getTranslation } from '../../languages';
 import { developmentLog, errorLog } from '../../logger';
 import { IApi } from '../../types';
-import { createDockItem, createDockItemContent, createDockTitleButton } from '../../dock/functions';
+import {
+  createDockItem,
+  createDockItemContent,
+  createDockTitleButton,
+} from '../../dock/functions';
 import { IComponent } from './component.model';
 
 export class _Component_ implements IComponent {
@@ -15,12 +19,12 @@ export class _Component_ implements IComponent {
   api: IApi;
 
   /**
-     *
-     * @param {string} id - id of the component
-     * @param {Sketchfab API object} api - JSON object holding all application data
-     */
+   *
+   * @param {string} id - id of the component
+   * @param {Sketchfab API object} api - JSON object holding all application data
+   */
   // TODO: make the dock wrapper an argument or maybe append dock wrapper reference to the api object
-  constructor (id: string, api: IApi) {
+  constructor(id: string, api: IApi) {
     this.name = getTranslation(api, id);
     this.id = id;
 
@@ -41,30 +45,33 @@ export class _Component_ implements IComponent {
     dockWrapper.appendChild(this.dockElement);
 
     // This is the initailization of a component that is defined in each model (card)
-    api.component_load_map[id](this, api);
+    const componentLoad = api.component_load_map[id];
+    if (componentLoad instanceof Function) {
+      componentLoad(this, api);
+    }
   }
 
   /**
-     * This functions enables user interaction with the component DOM
-     */
-  enable (): void {
+   * This functions enables user interaction with the component DOM
+   */
+  enable(): void {
     this.title.disabled = false;
     this.title.classList.replace('disabled', 'button-hover');
   }
 
   /**
-     * This function disables user interaction with the component DOM
-     */
-  disable (): void {
+   * This function disables user interaction with the component DOM
+   */
+  disable(): void {
     this.title.disabled = true;
     this.title.classList.replace('button-hover', 'disabled');
   }
 
   /**
-     * Appends a child dom element to the main component DOM
-     * @param {dom element} btn - dom element that is added as a child of the main component element
-     */
-  addSubElement (element: HTMLElement | Element): void {
+   * Appends a child dom element to the main component DOM
+   * @param {dom element} btn - dom element that is added as a child of the main component element
+   */
+  addSubElement(element: HTMLElement | Element): void {
     if (element !== null && element !== undefined) {
       if (element instanceof Element) {
         this.subelements.appendChild(element);
@@ -74,32 +81,30 @@ export class _Component_ implements IComponent {
     }
   }
 
-  addSubElements (...elementList: HTMLElement[] | Element[]): void {
+  addSubElements(...elementList: HTMLElement[] | Element[]): void {
     elementList.forEach(e => this.addSubElement(e));
   }
 
   /**
-     * Returns the compnent name
-     * @returns string
-     */
-  getComponentName (): string {
+   * Returns the compnent name
+   * @returns string
+   */
+  getComponentName(): string {
     return this.name;
   }
 
   /**
-     * This function handles custom language updates
-     * @param {Sketchfab API object} api - JSON object holding all application data
-     */
-  customLangUpdate (_api: IApi): void {
-
-  }
+   * This function handles custom language updates
+   * @param {Sketchfab API object} api - JSON object holding all application data
+   */
+  customLangUpdate(_api: IApi): void {}
 
   /**
-     * Updates the language of the component and all of it's sub elements
-     * @param {Sketchfab API object} api - JSON object holding all application data
-     */
+   * Updates the language of the component and all of it's sub elements
+   * @param {Sketchfab API object} api - JSON object holding all application data
+   */
   // TODO: make it a promise or something similar
-  updateLang (): void {
+  updateLang(): void {
     setTimeout(() => {
       this.title.textContent = getTranslation(this.api, this.id);
       const subElements = Array.from(this.subelements.children);
@@ -117,19 +122,31 @@ export class _Component_ implements IComponent {
                 return;
               }
 
-              listNode.children[1].textContent = getTranslation(this.api, id) !== '' ? getTranslation(this.api, id) : '';
+              listNode.children[1].textContent =
+                getTranslation(this.api, id) !== ''
+                  ? getTranslation(this.api, id)
+                  : '';
 
               if (getTranslation(this.api, id) === '') {
                 listNode.remove();
-                errorLog(`EROOR: VLAUE NOT IN LANG FILE FOR LANG ${currentLanguage}`);
+                errorLog(
+                  `EROOR: VLAUE NOT IN LANG FILE FOR LANG ${currentLanguage}`
+                );
               }
             } else {
-              const id = listNode.id.split('-')[listNode.id.split('-').length - 1];
-              listNode.children[0].children[1].textContent = getTranslation(this.api, id) !== '' ? getTranslation(this.api, id) : '';
+              const id = listNode.id.split('-')[
+                listNode.id.split('-').length - 1
+              ];
+              listNode.children[0].children[1].textContent =
+                getTranslation(this.api, id) !== ''
+                  ? getTranslation(this.api, id)
+                  : '';
 
               if (getTranslation(this.api, id) === '') {
                 listNode.remove();
-                errorLog(`EROOR: VLAUE NOT IN LANG FILE FOR LANG ${currentLanguage}`);
+                errorLog(
+                  `EROOR: VLAUE NOT IN LANG FILE FOR LANG ${currentLanguage}`
+                );
               }
             }
           }
