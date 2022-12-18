@@ -25,6 +25,12 @@ export class _Component_ implements IComponent {
    */
   // TODO: make the dock wrapper an argument or maybe append dock wrapper reference to the api object
   constructor(id: string, api: IApi) {
+    const componentLoad = api.component_load_map[id];
+
+    if (!(componentLoad instanceof Function)) {
+      return;
+    }
+
     this.name = getTranslation(api, id);
     this.id = id;
 
@@ -42,13 +48,9 @@ export class _Component_ implements IComponent {
 
     const dockWrapper = getDomFromReference('dock-wrapper');
 
-    dockWrapper.appendChild(this.dockElement);
-
     // This is the initailization of a component that is defined in each model (card)
-    const componentLoad = api.component_load_map[id];
-    if (componentLoad instanceof Function) {
-      componentLoad(this, api);
-    }
+    dockWrapper.appendChild(this.dockElement);
+    componentLoad(this, api);
   }
 
   /**
