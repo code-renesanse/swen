@@ -1,9 +1,17 @@
-import { createElement, getDomFromReference, hideLoadingSvg, showLoadingSvg } from '../dom';
+import {
+  createElement,
+  getDomFromReference,
+  hideLoadingSvg,
+  showLoadingSvg,
+} from '../dom';
 import { developmentLog } from '../logger';
 import { _Application_ } from './application/application';
 
 export class Launcher {
-  async setupApplication (context: any, application: _Application_): Promise<void> {
+  async setupApplication(
+    context: any,
+    application: _Application_
+  ): Promise<void> {
     showLoadingSvg();
     developmentLog(`Running in ${this.getEnviromentLevel()} mode`);
     await application.loadAssets(context);
@@ -13,7 +21,7 @@ export class Launcher {
     developmentLog('Page has loaded');
   }
 
-  async setupLauncher (): Promise<void> {
+  async setupLauncher(): Promise<void> {
     const APP = getDomFromReference('app');
 
     const _modelSelectionHolder = createElement('ul', 'model-selection-holder');
@@ -23,7 +31,7 @@ export class Launcher {
     APP.appendChild(_apiFrameHolder);
   }
 
-  getEnviromentLevel (): string {
+  getEnviromentLevel(): string {
     return process.env.NODE_ENV?.toLocaleUpperCase() ?? 'error404';
   }
 }

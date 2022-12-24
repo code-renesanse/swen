@@ -1,4 +1,6 @@
-import { createElement, hideLoadingBar } from '../../dom';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/naming-convention */
+import { hideLoadingBar } from '../../dom';
 import { buildComponentDictionary } from '../../dictionary';
 import {
   developmentLog,
@@ -7,72 +9,39 @@ import {
   mustImplementFunction,
 } from '../../logger';
 import { IApi, Dictionary, ISketchfabModelElement } from '../../types';
-import { IModels } from '../card/card.model';
 import {
   getLangFromURL,
   loadNewTransllationFiles,
   Translator,
 } from '../../languages';
-import { clearDockWrapper } from '../../dock/functions';
 import { _Card_ } from '../card';
 import { IComponent } from '../component';
 import { createEmptyWrapper } from '../../dom/wrapper';
 
-declare const window: any;
-
 export class _Application_ {
-  appName: string = '';
+  appName!: string;
 
-  MAIN: HTMLDivElement = createElement('div', '');
+  MAIN!: HTMLDivElement;
 
-  API_FRAME: HTMLIFrameElement = createElement('iframe', '');
+  API_FRAME!: HTMLIFrameElement;
 
-  isMobile: boolean = false;
+  isMobile!: boolean;
 
-  GRAPH: object = {};
-
-  translator: any = [];
-
-  CARDS: IModels = {};
-
-  API: IApi = {
-    configuration: {},
-    image_dictionary: {},
-    model_dictionary: {},
-    model_map: {},
-    currentModelId: '',
-    animation_speed: 0,
-    languages: {},
-    translator: {},
-    configuration_components: [],
-    component_load_map: {},
-    is_mobile: false,
-    // getters: {},
-    show(_id: string): void {
-      throw new Error('Function show is not implemented.');
-    },
-    hide(_id: string): void {
-      throw new Error('Function is not implemented.');
-    },
-    start(_fun: () => void): void {
-      throw new Error('Function not implemented.');
-    },
-    getSceneGraph(_fun: (err: object, graph: object) => void): void {
-      throw new Error('Function not implemented.');
-    },
-    addEventListener(_type: string, _fun: () => void | Promise<void>): void {
-      throw new Error('Function not implemented.');
-    },
+  CARDS!: {
+    [key: string]: _Card_;
   };
 
-  DICTIONARY_BUILD_FUNCTION!: (
+  API!: IApi;
+
+  DICTIONARY_BUILDFUNCTION!: (
     graph: object
   ) => Promise<Dictionary<ISketchfabModelElement>>;
 
-  CLIENT: any;
+  CLIENT!: any;
+
+  GRAPH!: object;
 
   constructor(appName: string) {
-    // validateEnvironmentalVariables();
     if (
       process.env.APP_NAME === null ||
       process.env.APP_NAME === undefined ||
@@ -93,32 +62,13 @@ export class _Application_ {
     // this.translator;
 
     this.CARDS = {};
-    this.API = {
-      configuration: {},
-      currentModelId: '',
-      image_dictionary: {},
-      model_dictionary: {},
-      animation_speed: 0,
-      languages: {},
-      translator: {},
-      configuration_components: [],
-      model_map: {},
-      component_load_map: {},
-      is_mobile: false,
-      // getters: this.apiGetters(),
-      show() {},
-      hide() {},
-      start() {},
-      addEventListener() {},
-      getSceneGraph() {},
-    };
 
     /**
      * This setst the default build configuration function the the one that is implemented in the engine
      * @param {Sketchfab GRAPH object} graph
      */
-    this.DICTIONARY_BUILD_FUNCTION = async graph =>
-      await buildComponentDictionary(graph);
+    this.DICTIONARY_BUILDFUNCTION = async (graph) =>
+      buildComponentDictionary(graph);
   }
 
   setCurrentModelId(modelId: string): void {
@@ -128,8 +78,6 @@ export class _Application_ {
 
   // TODO: implement model CARDS
   addCard(cardRef: _Card_): void {
-    // TODO: cardRef validation
-    // validateString(cardRef.modelId);
     this.CARDS[cardRef.modelid] = cardRef;
   }
 
@@ -137,6 +85,7 @@ export class _Application_ {
    * This is called when the page loads
    * @param {Sketchfab API object} api - JSON object holding all application data
    */
+
   async onPageLoad(_api: IApi): Promise<void> {
     mustImplementFunction('onPageLoad');
   }
@@ -158,14 +107,14 @@ export class _Application_ {
 
     // Creates the wrapper
     const APP = document.querySelector('#app');
-    const _wrapper = createEmptyWrapper();
-    APP?.appendChild(_wrapper);
+    const wrapper = createEmptyWrapper();
+    APP?.appendChild(wrapper);
 
     this.CARDS[api.currentModelId].loadDefaultConfiguration(api);
     this.loadComponents(api);
 
     if (api.configuration_components.length > 0) {
-      api.configuration_components.forEach(cmp => {
+      api.configuration_components.forEach((cmp) => {
         cmp.enable();
         cmp.updateLang(api);
         developmentLog(`Component ${cmp.getComponentName()} loaded`);
@@ -203,7 +152,7 @@ export class _Application_ {
    * Pictures, gifs, etc.
    */
   // TODO: make asset loading based only on model type ex.: always load colors, tapestry, but extra elements are loaded only for the selected model
-  async loadAssets(context: any): Promise<void> {
+  async loadAssets(context: unknown): Promise<void> {
     const assets = this.importAssets(context);
     const lang = getLangFromURL();
 
@@ -212,15 +161,6 @@ export class _Application_ {
     this.API.translator = Translator(this.API, lang);
     this.API.image_dictionary = assets.images;
   }
-
-  // DEPRICATED
-  // /**
-  //    * For appending specific functions, usually getter functions, to the API object
-  //    * @returns JSON object this getter functions
-  //    */
-  // apiGetters () {
-  //   return {};
-  // }
 
   /**
    * This functions inserts the iframe element to the api-frane-holder div
@@ -306,8 +246,7 @@ export class _Application_ {
           ...api,
         };
 
-        developmentLog('Clearing dock wrapper');
-        const wrapper = clearDockWrapper();
+        const wrapper = createEmptyWrapper();
 
         if (this.isMobile) {
           log('Modile mode');
@@ -355,9 +294,7 @@ export class _Application_ {
 
               // TODO: validation
               developmentLog('Building component dictionary');
-              api.model_dictionary = await this.DICTIONARY_BUILD_FUNCTION(
-                graph
-              );
+              api.model_dictionary = await this.DICTIONARY_BUILDFUNCTION(graph);
 
               developmentLog('Starting component laoding');
               await this.load(api);

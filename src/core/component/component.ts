@@ -10,13 +10,19 @@ import {
 import { IComponent } from './component.model';
 
 export class _Component_ implements IComponent {
-  subelements: HTMLElement;
-  dockElement: HTMLElement;
-  title: HTMLButtonElement;
-  content: HTMLDivElement;
-  name: string;
-  id: string;
-  api: IApi;
+  subelements!: HTMLElement;
+
+  dockElement!: HTMLElement;
+
+  title!: HTMLButtonElement;
+
+  content!: HTMLDivElement;
+
+  name!: string;
+
+  id!: string;
+
+  api!: IApi;
 
   /**
    *
@@ -25,12 +31,6 @@ export class _Component_ implements IComponent {
    */
   // TODO: make the dock wrapper an argument or maybe append dock wrapper reference to the api object
   constructor(id: string, api: IApi) {
-    const componentLoad = api.component_load_map[id];
-
-    if (!(componentLoad instanceof Function)) {
-      return;
-    }
-
     this.name = getTranslation(api, id);
     this.id = id;
 
@@ -49,8 +49,10 @@ export class _Component_ implements IComponent {
     const dockWrapper = getDomFromReference('dock-wrapper');
 
     // This is the initailization of a component that is defined in each model (card)
-    dockWrapper.appendChild(this.dockElement);
-    componentLoad(this, api);
+    if (api.component_load_map[id] instanceof Function) {
+      dockWrapper.appendChild(this.dockElement);
+      api.component_load_map[id](this, api);
+    }
   }
 
   /**
@@ -84,7 +86,7 @@ export class _Component_ implements IComponent {
   }
 
   addSubElements(...elementList: HTMLElement[] | Element[]): void {
-    elementList.forEach(e => this.addSubElement(e));
+    elementList.forEach((e) => this.addSubElement(e));
   }
 
   /**
@@ -99,14 +101,16 @@ export class _Component_ implements IComponent {
    * This function handles custom language updates
    * @param {Sketchfab API object} api - JSON object holding all application data
    */
-  customLangUpdate(_api: IApi): void {}
+  customLangUpdate(): string {
+    return '';
+  }
 
   /**
    * Updates the language of the component and all of it's sub elements
    * @param {Sketchfab API object} api - JSON object holding all application data
    */
   // TODO: make it a promise or something similar
-  updateLang(): void {
+  updateLanguage(): void {
     setTimeout(() => {
       this.title.textContent = getTranslation(this.api, this.id);
       const subElements = Array.from(this.subelements.children);
@@ -136,9 +140,7 @@ export class _Component_ implements IComponent {
                 );
               }
             } else {
-              const id = listNode.id.split('-')[
-                listNode.id.split('-').length - 1
-              ];
+              const id = listNode.id.split('list-item-').at(-1) ?? '';
               listNode.children[0].children[1].textContent =
                 getTranslation(this.api, id) !== ''
                   ? getTranslation(this.api, id)
@@ -164,7 +166,7 @@ export class _Component_ implements IComponent {
         }
       }
 
-      this.customLangUpdate(this.api);
+      this.customLangUpdate();
     });
   }
 }

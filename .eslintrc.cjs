@@ -10,5 +10,7 @@ module.exports = {
     project: './tsconfig.json',
   },
   plugins: ['import', '@typescript-eslint'],
-  rules: {},
+  rules: {
+    '@typescript-eslint/no-unused-vars': 0,
+  },
 };
