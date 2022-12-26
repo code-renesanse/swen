@@ -5,12 +5,12 @@ import {
   showLoadingSvg,
 } from '../dom';
 import { developmentLog } from '../logger';
-import { _Application_ } from './application/application';
+import { Application } from './application/application';
 
 export class Launcher {
   async setupApplication(
     context: unknown,
-    application: _Application_
+    application: Application
   ): Promise<void> {
     showLoadingSvg();
     developmentLog(`Running in ${this.getEnviromentLevel()} mode`);
