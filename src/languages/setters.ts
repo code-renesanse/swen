@@ -11,7 +11,7 @@ import { Translator } from './translator';
  * @param {String} lang - the lang that the app will switch to
  */
 export const setLang = async (api: IApi, lang: string): Promise<string> => {
-  api.translator = await Translator(api, lang);
+  api.translator = Translator(api, lang);
 
   if (api.translator === null || api.translator === undefined) {
     errorLog(`${lang} is not a valid language`);
@@ -29,8 +29,8 @@ export const setLang = async (api: IApi, lang: string): Promise<string> => {
   const rtsBtn = getDomFromReference('return-to-selection-button');
   rtsBtn.textContent = getTranslation(api, 'return-to-selection-button');
 
-  api.configuration_components.forEach(cmp => {
-    cmp.updateLang(api);
+  api.configuration_components.forEach((cmp) => {
+    cmp.updateLanguage();
   });
 
   return lang;

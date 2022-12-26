@@ -18,6 +18,8 @@ import { _Card_ } from '../card';
 import { IComponent } from '../component';
 import { createEmptyWrapper } from '../../dom/wrapper';
 
+declare const window: any;
+
 export class _Application_ {
   appName!: string;
 
@@ -116,7 +118,7 @@ export class _Application_ {
     if (api.configuration_components.length > 0) {
       api.configuration_components.forEach((cmp) => {
         cmp.enable();
-        cmp.updateLang(api);
+        cmp.updateLanguage();
         developmentLog(`Component ${cmp.getComponentName()} loaded`);
       });
     }
@@ -143,7 +145,9 @@ export class _Application_ {
    * @param {Component} componentRef
    */
   addConfiguratorComponent(componentRef: IComponent): void {
-    // validateConfiguratorComponent(componentRef);
+    if (this.API.configuration_components === undefined) {
+      this.API.configuration_components = [];
+    }
     this.API.configuration_components.push(componentRef);
   }
 
@@ -327,6 +331,9 @@ export class _Application_ {
   }
 
   setModelReference(modelId: string, sketchfabId: string, api: IApi): void {
+    if (api.model_map === undefined) {
+      api.model_map = {};
+    }
     api.model_map[modelId] = sketchfabId;
   }
 

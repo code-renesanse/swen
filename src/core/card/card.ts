@@ -1,20 +1,30 @@
 import { _Application_ } from '../application/application';
-import { createCardLoadHolder, createHTMLButton, createLoadingbar, getDomFromReference } from '../../dom';
+import {
+  createCardLoadHolder,
+  createHTMLButton,
+  createLoadingbar,
+  getDomFromReference,
+} from '../../dom';
 import { errorLog, mustImplementFunction } from '../../logger';
 import { IApi } from '../../types';
 import { IComponent } from '../component';
 
 export class _Card_ {
   modelid: string;
+
   CARD_HOLDER: HTMLLIElement | null = null;
+
   BUTTON: HTMLButtonElement | null = null;
+
   configurator: _Application_;
 
-  constructor (cardTitle: string, modelid: string, configurator: _Application_) {
+  constructor(cardTitle: string, modelid: string, configurator: _Application_) {
     this.modelid = modelid;
     this.configurator = configurator;
 
-    const HOLDER = document.querySelector<HTMLLIElement>('#model-selection-holder');
+    const HOLDER = document.querySelector<HTMLLIElement>(
+      '#model-selection-holder'
+    );
 
     if (HOLDER === null) {
       errorLog('model-selection-holder');
@@ -23,7 +33,11 @@ export class _Card_ {
 
     this.CARD_HOLDER = createCardLoadHolder(`card-load-${modelid}`, cardTitle);
 
-    this.BUTTON = createHTMLButton(`card-button-${modelid}`, `model-${modelid}`, configurator.API);
+    this.BUTTON = createHTMLButton(
+      `card-button-${modelid}`,
+      `model-${modelid}`,
+      configurator.API
+    );
 
     this.CARD_HOLDER.appendChild(this.BUTTON);
 
@@ -43,7 +57,7 @@ export class _Card_ {
   /**
    * This is the load function of the card
    */
-  async load (modelid: string, HOLDER: HTMLLIElement, api: IApi): Promise<void> {
+  async load(modelid: string, HOLDER: HTMLLIElement, api: IApi): Promise<void> {
     await (async () => {
       await createLoadingbar(api);
 
@@ -65,16 +79,23 @@ export class _Card_ {
     })();
   }
 
-  addConfigurationComponent (id: string, component: (parent: IComponent, api: IApi) => void, api: IApi): void {
+  addConfigurationComponent(
+    id: string,
+    component: (parent: IComponent, api: IApi) => void,
+    api: IApi
+  ): void {
+    if (api.component_load_map == undefined) {
+      api.component_load_map = {};
+    }
     api.component_load_map[id] = (parent, api) => component(parent, api);
   }
 
-  setModelConfiguration (_api: IApi): void {
+  setModelConfiguration(_api: IApi): void {
     mustImplementFunction('setModelConfiguration');
   }
 
   // TODO: rename to SETUP
-  loadDefaultConfiguration (_api: IApi): void {
+  loadDefaultConfiguration(_api: IApi): void {
     mustImplementFunction('loadDefaultConfiguration');
   }
 }

@@ -1,7 +1,6 @@
 import { IApi } from '../../types/api.model';
 
 export interface IComponent {
-  updateLang(api: IApi): unknown;
   api: IApi;
   id: string;
   name: string;
