@@ -1,4 +1,4 @@
-import { _Application_ } from '../application';
+import { Application } from '../application';
 import { Card } from './card';
 
 let instance: Card;
@@ -11,7 +11,7 @@ beforeAll(() => {
   apiFrame.id = 'api-frame-holder';
   document.body.appendChild(apiFrame);
 
-  const app: _Application_ = new _Application_('test');
+  const app: Application = new Application('test');
   app.API = {
     currentModelId: '',
     image_dictionary: {},

@@ -1,4 +1,4 @@
-import { _Application_ } from '../application/application';
+import { Application } from '../application/application';
 import {
   createCardLoadHolder,
   createHTMLButton,
@@ -16,9 +16,9 @@ export class Card {
 
   BUTTON: HTMLButtonElement | null = null;
 
-  configurator: _Application_;
+  configurator: Application;
 
-  constructor(cardTitle: string, modelid: string, configurator: _Application_) {
+  constructor(cardTitle: string, modelid: string, configurator: Application) {
     this.modelid = modelid;
     this.configurator = configurator;
 
@@ -75,7 +75,7 @@ export class Card {
       }
 
       this.configurator.setCurrentModelId(modelid);
-      await this.configurator.loadModel(modelid, api);
+      await this.configurator.loadModel(modelid);
     })();
   }
 

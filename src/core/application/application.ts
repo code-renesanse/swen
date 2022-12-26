@@ -20,7 +20,7 @@ import { createEmptyWrapper } from '../../dom/wrapper';
 
 declare const window: any;
 
-export class _Application_ {
+export class Application {
   appName!: string;
 
   MAIN!: HTMLDivElement;
@@ -199,10 +199,10 @@ export class _Application_ {
    * It also preloads all necessary static data such as assets and getter functions
    * @param {String} modelId - reference to the sketchafb model refrence inside api.modelMap
    */
-  async loadModel(modelId: string, api: IApi): Promise<void> {
+  async loadModel(modelId: string): Promise<void> {
     const loadingBar = document.getElementById('loading-bar');
 
-    const modelReference = api.model_map[modelId];
+    const modelReference = this.API.model_map[modelId];
 
     if (loadingBar === null) {
       errorLog('No valid loading bar element');
