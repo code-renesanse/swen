@@ -14,7 +14,7 @@ import {
   loadNewTransllationFiles,
   Translator,
 } from '../../languages';
-import { _Card_ } from '../card';
+import { Card } from '../card';
 import { IComponent } from '../component';
 import { createEmptyWrapper } from '../../dom/wrapper';
 
@@ -30,7 +30,7 @@ export class _Application_ {
   isMobile!: boolean;
 
   CARDS!: {
-    [key: string]: _Card_;
+    [key: string]: Card;
   };
 
   API!: IApi;
@@ -79,7 +79,7 @@ export class _Application_ {
   }
 
   // TODO: implement model CARDS
-  addCard(cardRef: _Card_): void {
+  addCard(cardRef: Card): void {
     this.CARDS[cardRef.modelid] = cardRef;
   }
 

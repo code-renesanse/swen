@@ -7,7 +7,10 @@ import { createElement } from './create';
  * @param {String} title
  * @returns LI HTML element
  */
-export const createCardLoadHolder = (id: string, title: string): HTMLLIElement => {
+export const createCardLoadHolder = (
+  id: string,
+  title: string
+): HTMLLIElement => {
   const cardHolder = createElement('li', id);
   cardHolder.classList.add('card-holder');
   cardHolder.title = title;

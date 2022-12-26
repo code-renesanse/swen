@@ -1,5 +1,6 @@
 import { getImage } from '../../../dictionary';
 import { IApi } from '../../../types';
+import { createHTMLButton } from '../../buttons';
 import { createElement } from '../../create';
 import { appendElementList } from '../../subelements';
 
@@ -9,7 +10,10 @@ import { appendElementList } from '../../subelements';
  * @param {Image} colorImg
  * @returns HTML div
  */
-export const createListItemColorImage = (id: string, colorImg: string): HTMLImageElement => {
+export const createListItemColorImage = (
+  id: string,
+  colorImg: string
+): HTMLImageElement => {
   const cd = createElement('img', `${id}-color-image`);
   cd.src = colorImg;
 
@@ -43,8 +47,8 @@ export const createListItemHead = (id: string): HTMLLIElement => {
  * @param {String} id
  * @returns HTML button
  */
-export const createListButton = (id: string): HTMLButtonElement => {
-  const listButton = createElement('button', `list-button-${id}`);
+export const createListButton = (id: string, api: IApi): HTMLButtonElement => {
+  const listButton = createHTMLButton(`list-button-${id}`, '', api);
   listButton.classList.add('list-button');
   return listButton;
 };
@@ -58,12 +62,17 @@ export const createListButton = (id: string): HTMLButtonElement => {
  * @param {Function} itemFunction
  * @returns fully composed list item
  */
-export const createListItem = (id: string, img: string = '', itemFunction: () => void, api: IApi): HTMLLIElement => {
+export const createListItem = (
+  id: string,
+  img: string,
+  itemFunction: () => void,
+  api: IApi
+): HTMLLIElement => {
   const listHead = createListItemHead(id);
 
   listHead.onmousedown = (event) => event.preventDefault();
 
-  const listElement = createListButton(id);
+  const listElement = createListButton(id, api);
 
   const colorImageLink = getImage(img, api);
 

@@ -9,10 +9,10 @@ import {
 } from '../../dock/functions';
 import { IComponent } from './component.model';
 
-export class _Component_ implements IComponent {
+export class Component implements IComponent {
   subelements!: HTMLElement;
 
-  dockElement!: HTMLElement;
+  dockItem!: HTMLElement;
 
   title!: HTMLButtonElement;
 
@@ -31,26 +31,26 @@ export class _Component_ implements IComponent {
    */
   // TODO: make the dock wrapper an argument or maybe append dock wrapper reference to the api object
   constructor(id: string, api: IApi) {
-    this.name = getTranslation(api, id);
+    this.name = getTranslation(api, id) ?? 'error404';
     this.id = id;
 
     this.api = api;
     this.subelements = createSubelementsHolder(id);
 
-    this.dockElement = createDockItem();
+    this.dockItem = createDockItem();
 
     this.title = createDockTitleButton(api, id);
 
     this.content = createDockItemContent(this.subelements);
 
-    this.dockElement.appendChild(this.title);
-    this.dockElement.appendChild(this.content);
+    this.dockItem.appendChild(this.title);
+    this.dockItem.appendChild(this.content);
 
     const dockWrapper = getDomFromReference('dock-wrapper');
 
     // This is the initailization of a component that is defined in each model (card)
     if (api.component_load_map[id] instanceof Function) {
-      dockWrapper.appendChild(this.dockElement);
+      dockWrapper.appendChild(this.dockItem);
       api.component_load_map[id](this, api);
     }
   }
@@ -111,62 +111,19 @@ export class _Component_ implements IComponent {
    */
   // TODO: make it a promise or something similar
   updateLanguage(): void {
-    setTimeout(() => {
-      this.title.textContent = getTranslation(this.api, this.id);
-      const subElements = Array.from(this.subelements.children);
-      const currentLanguage: string = this.api.translator.lang;
+    const elements = this.dockItem.querySelectorAll('[translation-key]');
+    elements.forEach((element) => {
+      const translationKey = element.getAttribute('translation-key');
 
-      for (const node of subElements) {
-        if (node.nodeName === 'UL') {
-          const listNodes = Array.from(node.children);
-          for (const listNode of listNodes) {
-            if (listNode.tagName.toLocaleLowerCase() === 'button') {
-              const id: string = listNode.id;
-
-              if (id === '' || id === null) {
-                errorLog('The id of the node is null or not defined');
-                return;
-              }
-
-              listNode.children[1].textContent =
-                getTranslation(this.api, id) !== ''
-                  ? getTranslation(this.api, id)
-                  : '';
-
-              if (getTranslation(this.api, id) === '') {
-                listNode.remove();
-                errorLog(
-                  `EROOR: VLAUE NOT IN LANG FILE FOR LANG ${currentLanguage}`
-                );
-              }
-            } else {
-              const id = listNode.id.split('list-item-').at(-1) ?? '';
-              listNode.children[0].children[1].textContent =
-                getTranslation(this.api, id) !== ''
-                  ? getTranslation(this.api, id)
-                  : '';
-
-              if (getTranslation(this.api, id) === '') {
-                listNode.remove();
-                errorLog(
-                  `EROOR: VLAUE NOT IN LANG FILE FOR LANG ${currentLanguage}`
-                );
-              }
-            }
-          }
-        } else {
-          if (node.children.length > 0) {
-            const translation = getTranslation(this.api, node.id);
-            if (node.children[1] !== null && node.children[1] !== undefined) {
-              node.children[1].textContent = translation;
-            } else {
-              node.children[0].textContent = translation;
-            }
-          }
-        }
+      if (translationKey === undefined || translationKey === '') {
+        errorLog(
+          `${this.id}: Element with id ${element.id} does not have a valid translation-key attribute`
+        );
+        return;
       }
 
-      this.customLangUpdate();
+      const translationString = getTranslation(this.api, translationKey);
+      element.textContent = translationString ?? 'error404';
     });
   }
 }

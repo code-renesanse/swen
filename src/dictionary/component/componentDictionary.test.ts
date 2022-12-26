@@ -3,12 +3,12 @@ import { buildComponentDictionary } from './build';
 import { elementExists, find, findAll, getElementID } from './getters';
 
 describe('Component dictionary', () => {
-  let _api: IApi;
-  let _graph: object;
+  let api: IApi;
+  let graph: object;
 
   beforeAll(() => {
     // TODO: example API
-    _api = {
+    api = {
       currentModelId: '',
       image_dictionary: {},
       model_dictionary: {},
@@ -17,14 +17,14 @@ describe('Component dictionary', () => {
       animation_speed: 0,
       languages: {},
       translator: {
-        test: 'test'
+        test: 'test',
       },
       configuration_components: [],
       is_mobile: false,
       component_load_map: {
         test: () => {
           console.log('Test component initialization works');
-        }
+        },
       },
       show: function (_id: string): void {
         throw new Error('Function not implemented.');
@@ -35,77 +35,86 @@ describe('Component dictionary', () => {
       start: function (_fun: () => void): void {
         throw new Error('Function not implemented.');
       },
-      getSceneGraph: function (_fun: (err: object, graph: object) => void | Promise<void>): void | Promise<void> {
+      getSceneGraph: function (
+        _fun: (err: object, graph: object) => void | Promise<void>
+      ): void | Promise<void> {
         throw new Error('Function not implemented.');
       },
-      addEventListener: function (_type: string, _fun: () => void | Promise<void>): void {
+      addEventListener: function (
+        _type: string,
+        _fun: () => void | Promise<void>
+      ): void {
         throw new Error('Function not implemented.');
-      }
+      },
     };
 
     // TODO: example graph
-    _graph = {
-      children: [ {
-        children: [
-          {
-            name: 'CMP001_part001',
-            instanceID: 'test-id'
-          },
-          {
-            name: 'CMP002_part002'
-          }
-        ]
-      } ]
+    graph = {
+      children: [
+        {
+          children: [
+            {
+              name: 'CMP001_part001',
+              instanceID: 'test-id',
+            },
+            {
+              name: 'CMP002_part002',
+            },
+          ],
+        },
+      ],
     };
   });
 
   it('Build dictionary', async () => {
-    const _result = await buildComponentDictionary(_graph);
+    const result = await buildComponentDictionary(graph);
 
-    expect(_result).toBeDefined();
+    expect(result).toBeDefined();
 
-    _api.model_dictionary = _result;
+    api.model_dictionary = result;
 
-    expect(_api.model_dictionary).toMatchObject(_result);
+    expect(api.model_dictionary).toMatchObject(result);
   });
 
   it('Check if element CMP001 exists', () => {
-    const _result = elementExists('CMP001', _api);
-    expect(_result).toBe(true);
+    const result = elementExists('CMP001', api);
+    expect(result).toBe(true);
   });
 
   it('Check if element CMP003 exists (should throw and error)', () => {
     // This is done like so that the function returns void
-    const _result = (): void => {
-      elementExists('CMP003', _api);
+    const result = (): void => {
+      elementExists('CMP003', api);
     };
-    // expect(_result).toThrow(`[ ${process.env.APP_NAME ?? 'swen'} ]: Element with index 'CMP003' does not exist`);
-    expect(_result).toThrowError();
+    // expect(result).toThrow(`[ ${process.env.APP_NAME ?? 'swen'} ]: Element with index 'CMP003' does not exist`);
+    expect(result).toThrowError();
   });
 
   it('Find one', () => {
-    const _result = find('CMP001', _api);
-    expect(_result).toBeDefined();
+    const result = find('CMP001', api);
+    expect(result).toBeDefined();
 
-    const _result2 = (): void => {
-      find('CMP003', _api);
+    const result2 = (): void => {
+      find('CMP003', api);
     };
-    expect(_result2).toThrowError();
+    expect(result2).toThrowError();
   });
 
   it('Find all', () => {
-    const _result = findAll('CMP', _api);
-    expect(_result.length).toEqual(2);
+    const result = findAll('CMP', api);
+    expect(result.length).toEqual(2);
 
-    const _result2 = findAll('KMP', _api);
-    expect(_result2).toHaveLength(0);
+    const result2 = findAll('KMP', api);
+    expect(result2).toHaveLength(0);
   });
 
   it('Get element id', () => {
-    const _result = getElementID('CMP001', _api);
-    expect(_result).toMatch('test-id');
+    const result = getElementID('CMP001', api);
+    expect(result).toMatch('test-id');
 
-    const _result2 = (): void => { getElementID('CMP003', _api); };
-    expect(_result2).toThrowError();
+    const result2 = (): void => {
+      getElementID('CMP003', api);
+    };
+    expect(result2).toThrowError();
   });
 });

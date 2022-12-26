@@ -4,9 +4,8 @@ export interface IComponent {
   api: IApi;
   id: string;
   name: string;
-  // this.translation;
   subelements: HTMLElement;
-  dockElement: HTMLElement;
+  dockItem: HTMLElement;
   title: HTMLElement;
   content: HTMLElement;
   enable: () => void;

@@ -1,5 +1,5 @@
-import { _Card_ } from './card';
+import { Card } from './card';
 
 export interface IModels {
-  [key: string]: _Card_
+  [key: string]: Card;
 }

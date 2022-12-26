@@ -7,8 +7,16 @@ import { IApi, ISketchfabModelElement } from '../../types';
  * @param {Sketchfab API object} api - JSON object holding all application data
  * @returns boolean
  */
-export function elementExists (elementReference: ISketchfabModelElement | string, api: IApi): boolean {
-  const key: string = typeof elementReference === 'object' ? elementReference.name : typeof elementReference === 'string' ? elementReference : '';
+export function elementExists(
+  elementReference: ISketchfabModelElement | string,
+  api: IApi
+): boolean {
+  const key: string =
+    typeof elementReference === 'object'
+      ? elementReference.name
+      : typeof elementReference === 'string'
+      ? elementReference
+      : '';
 
   const component: ISketchfabModelElement = api.model_dictionary[key];
 
@@ -17,7 +25,7 @@ export function elementExists (elementReference: ISketchfabModelElement | string
   }
 
   return component !== null;
-};
+}
 
 /**
  * Finds the first element that satisfies the key given
@@ -25,7 +33,7 @@ export function elementExists (elementReference: ISketchfabModelElement | string
  * @param {Sketchfab API object} api - JSON object holding all application data
  * @returns ISketchfabModelElement
  */
-export function find (key: string, api: IApi): ISketchfabModelElement {
+export function find(key: string, api: IApi): ISketchfabModelElement {
   for (const elementId in api.model_dictionary) {
     if (elementId.includes(key)) return api.model_dictionary[elementId];
   }
@@ -33,9 +41,9 @@ export function find (key: string, api: IApi): ISketchfabModelElement {
   errorLog(`Element with key: '${key}' does not exsist`);
   return {
     instanceID: 'error 404',
-    name: 'error 404'
+    name: 'error 404',
   };
-};
+}
 
 /**
  * Finds all elements that satisfy the key given
@@ -43,7 +51,7 @@ export function find (key: string, api: IApi): ISketchfabModelElement {
  * @param {Sketchfab API object} api - JSON object holding all application data
  * @returns ISketchfabModelElement[]
  */
-export function findAll (key: string, api: IApi): ISketchfabModelElement[] {
+export function findAll(key: string, api: IApi): ISketchfabModelElement[] {
   const out: ISketchfabModelElement[] = [];
 
   for (const elementId in api.model_dictionary) {
@@ -57,7 +65,7 @@ export function findAll (key: string, api: IApi): ISketchfabModelElement[] {
   }
 
   return out;
-};
+}
 
 /**
  * For getting the ID of the ISketchfabModelElement
@@ -65,8 +73,12 @@ export function findAll (key: string, api: IApi): ISketchfabModelElement[] {
  * @param {Sketchfab API object} api - JSON object holding all application data
  * @returns string
  */
-export function getElementID (elementRef: ISketchfabModelElement | string, api: IApi): string {
-  const key: string = typeof elementRef === 'object' ? elementRef.name : elementRef;
+export function getElementID(
+  elementRef: ISketchfabModelElement | string,
+  api: IApi
+): string {
+  const key: string =
+    typeof elementRef === 'object' ? elementRef.name : elementRef;
 
   if (key === '') {
     errorLog(`Element with key ${key} does not exist!`);
@@ -81,4 +93,4 @@ export function getElementID (elementRef: ISketchfabModelElement | string, api: 
   }
 
   return ref.instanceID;
-};
+}

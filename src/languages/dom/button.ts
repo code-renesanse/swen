@@ -1,4 +1,8 @@
-import { createElement, getDomFromReference } from '../../dom';
+import {
+  createElement,
+  createHTMLButton,
+  getDomFromReference,
+} from '../../dom';
 import { errorLog } from '../../logger';
 import { IApi } from '../../types';
 import { setLang } from '../setters';
@@ -16,14 +20,15 @@ export const createLanguageButton = (api: IApi, lang: string): void => {
   const parent = getDomFromReference('language-button-holder');
 
   // TODO: fix this so that it does not access alafstreet CDN
-  const imagePrefix = 'https://alfastreet-marine.com/wp-content/plugins/sitepress-multilingual-cms/res/flags';
+  const imagePrefix =
+    'https://alfastreet-marine.com/wp-content/plugins/sitepress-multilingual-cms/res/flags';
 
   const titleMap: { [key: string]: string } = {
     en: 'English',
     de: 'German',
     fr: 'French',
     nl: 'Dutch',
-    es: 'Spanish'
+    es: 'Spanish',
   };
 
   const className = 'language-button';
@@ -31,7 +36,7 @@ export const createLanguageButton = (api: IApi, lang: string): void => {
 
   const title = titleMap[lang];
 
-  const button = createElement('button', id);
+  const button = createHTMLButton(id, '', api);
   button.classList.add(className);
 
   button.title = title;
@@ -45,7 +50,7 @@ export const createLanguageButton = (api: IApi, lang: string): void => {
   button.addEventListener('click', () => {
     (async () => {
       await setLang(api, elan);
-    })().catch(err => {
+    })().catch((err) => {
       errorLog(err);
     });
   });

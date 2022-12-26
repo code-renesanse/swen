@@ -9,7 +9,7 @@ import { _Application_ } from './application/application';
 
 export class Launcher {
   async setupApplication(
-    context: any,
+    context: unknown,
     application: _Application_
   ): Promise<void> {
     showLoadingSvg();
@@ -24,11 +24,11 @@ export class Launcher {
   async setupLauncher(): Promise<void> {
     const APP = getDomFromReference('app');
 
-    const _modelSelectionHolder = createElement('ul', 'model-selection-holder');
-    const _apiFrameHolder = createElement('div', 'api-frame-holder');
+    const modelSelectionHolder = createElement('ul', 'model-selection-holder');
+    const apiFrameHolder = createElement('div', 'api-frame-holder');
 
-    APP.appendChild(_modelSelectionHolder);
-    APP.appendChild(_apiFrameHolder);
+    APP.appendChild(modelSelectionHolder);
+    APP.appendChild(apiFrameHolder);
   }
 
   getEnviromentLevel(): string {

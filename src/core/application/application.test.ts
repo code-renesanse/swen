@@ -16,7 +16,7 @@ describe('Application', () => {
 
   it('Validates the example _application_', () => {
     expect(instance).toBeInstanceOf(_Application_);
-    expect(instance.API).toBeDefined();
+    expect(instance.API).toBeUndefined();
     expect(instance.API_FRAME).toBeDefined();
     expect(instance.appName).toBeDefined();
   });

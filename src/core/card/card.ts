@@ -9,7 +9,7 @@ import { errorLog, mustImplementFunction } from '../../logger';
 import { IApi } from '../../types';
 import { IComponent } from '../component';
 
-export class _Card_ {
+export class Card {
   modelid: string;
 
   CARD_HOLDER: HTMLLIElement | null = null;
