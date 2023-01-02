@@ -1,6 +1,6 @@
 import { IApi } from '../../types/api.model';
 
-export type setupMap = {
+export type SetupMap = {
   [key: string]: HTMLElement;
 };
 

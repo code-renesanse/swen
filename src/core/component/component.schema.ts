@@ -1,5 +1,5 @@
 import { errorLog } from '../../logger';
-import { setupMap } from './component.model';
+import { SetupMap } from './component.model';
 
 class ComponentSchema {
   id: string;
@@ -31,7 +31,7 @@ class ComponentSchema {
     this.store = {};
   }
 
-  setup(): setupMap {
+  setup(): SetupMap {
     return {};
   }
 
