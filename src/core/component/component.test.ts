@@ -45,7 +45,7 @@ describe('Components', () => {
         throw new Error('Function not implemented.');
       },
     };
-    const dock = document.createElement('div');
+    const dock = document.createElement('ul');
     dock.id = 'dock-wrapper';
     document.body.appendChild(dock);
     instance = new Component('test', api);

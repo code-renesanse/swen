@@ -1,5 +1,9 @@
 import { IApi } from '../../types/api.model';
 
+export type setupMap = {
+  [key: string]: HTMLElement;
+};
+
 export interface IComponent {
   api: IApi;
   id: string;
