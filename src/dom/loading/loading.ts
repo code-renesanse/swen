@@ -7,6 +7,21 @@ import {
 } from '../animations/setters';
 import { createElement } from '../create';
 
+export const showLoading = (loadingPath?: string) => {
+  const holder = createElement('div', 'loading-bar-holder');
+
+  const loadingbar = createElement('img', 'loading-bar-image');
+  loadingbar.src = loadingPath ?? './loading.svg';
+
+  holder.appendChild(loadingbar);
+  return holder;
+};
+
+export const hideLoading = () => {
+  const holder = document.querySelector('#loading-bar-holder');
+  holder?.remove();
+};
+
 /**
  * Creates the loading bar holder and progress bar
  * @returns DIV Element - loading-bar-holder
