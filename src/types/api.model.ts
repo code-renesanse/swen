@@ -1,11 +1,10 @@
-import { IComponent } from '../core/component/component.model';
-import ComponentSchema from '../core/component/component.schema';
+import { Component } from '../core';
 import { Dictionary } from './dictionary.model';
 import { ISketchfabModelElement } from './element.model';
 import { ILanguage, ITranslation } from './language.model';
 
 export type IComponentLoadMap = {
-  [key: string]: ComponentSchema;
+  [key: string]: Component;
 };
 
 // TODO: remove configuration_components array <=> no uses for configuration_components array
@@ -18,7 +17,6 @@ export interface IApi {
   animation_speed: number;
   languages: ILanguage;
   translator: ITranslation;
-  configuration_components: IComponent[];
   is_mobile: boolean;
   component_load_map: IComponentLoadMap;
   // getters: object

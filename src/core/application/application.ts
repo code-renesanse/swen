@@ -111,14 +111,20 @@ export class Application {
     APP?.appendChild(wrapper);
 
     this.CARDS[api.currentModelId].setup(api);
+    Object.keys(api.component_load_map).forEach((key) => {
+      const component = api.component_load_map[key];
+      component.load(api);
+      component.render(api);
+      component.languageUpdate(api);
+    });
 
-    if (api.configuration_components.length > 0) {
-      api.configuration_components.forEach((cmp) => {
-        cmp.enable();
-        cmp.updateLanguage();
-        developmentLog(`Component ${cmp.getComponentName()} loaded`);
-      });
-    }
+    // if (api.configuration_components.length > 0) {
+    //   api.configuration_components.forEach((cmp) => {
+    //     cmp.enable();
+    //     cmp.updateLanguage();
+    //     developmentLog(`Component ${cmp.getComponentName()} loaded`);
+    //   });
+    // }
   }
 
   /**
@@ -141,11 +147,12 @@ export class Application {
    * This function pushes a new component class to the component array of the application class
    * @param {Component} componentRef
    */
-  addConfiguratorComponent(componentRef: IComponent): void {
-    if (this.API.configuration_components === undefined) {
-      this.API.configuration_components = [];
-    }
-    this.API.configuration_components.push(componentRef);
+  addConfiguratorComponent(_componentRef: IComponent): void {
+    // if (this.API.configuration_components === undefined) {
+    //   this.API.configuration_components = [];
+    // }
+    // this.API.configuration_components.push(componentRef);
+    errorLog('This function is depricated');
   }
 
   /**

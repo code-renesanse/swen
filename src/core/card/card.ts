@@ -7,7 +7,7 @@ import {
 } from '../../dom';
 import { errorLog, mustImplementFunction } from '../../logger';
 import { IApi } from '../../types';
-import ComponentSchema from '../component/component.schema';
+import { Component } from '../component';
 
 export class Card {
   modelid: string;
@@ -79,7 +79,7 @@ export class Card {
     })();
   }
 
-  addConfigurationComponent(component: ComponentSchema, api: IApi): void {
+  addConfigurationComponent(component: Component, api: IApi): void {
     if (api.component_load_map == undefined) {
       api.component_load_map = {};
     }

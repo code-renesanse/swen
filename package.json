@@ -20,6 +20,7 @@
         "start": "tsdx watch",
         "build": "tsdx build",
         "test": "tsdx test",
+	"devtest": "NODE_ENV='development' APP_NAME='swen-testing' npm run test",
         "lint": "tsdx lint",
         "prepare": "tsdx build",
         "size": "size-limit",

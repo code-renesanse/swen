@@ -8,6 +8,8 @@
 
 # Working on
 
+- [ ] Do tests for component schema
+
 ---
 
 # TODO
