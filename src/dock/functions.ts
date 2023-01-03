@@ -50,17 +50,3 @@ export const createDockTitleButton = (
   dockTitleButton.disabled = true;
   return dockTitleButton;
 };
-
-/**
- *
- * @returns dock-wripper with no elements inside
- */
-export const clearDockWrapper = (): HTMLElement => {
-  const wrapper = getDomFromReference('dock-wrapper');
-
-  for (let i = wrapper.childElementCount - 1; i >= 0; i--) {
-    wrapper.children[i].remove();
-  }
-
-  return wrapper;
-};
