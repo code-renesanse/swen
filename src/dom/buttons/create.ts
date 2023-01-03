@@ -1,5 +1,4 @@
 import { getImage } from '../../dictionary';
-import { getTranslation } from '../../languages';
 import { IApi } from '../../types';
 import { openConfiguratorMenu } from '../configurationMenu';
 import { createElement } from '../create';
@@ -21,7 +20,7 @@ export const createHTMLButton = (
   const out = createElement('button', id);
 
   const text = createElement('p', `${id}-paragraph`);
-  text.textContent = getTranslation(api, id) ?? 'error404';
+  text.setAttribute('trasnlation-key', id);
 
   if (img !== null && img !== undefined && img !== '') {
     const ico = createElement('img', `${id}-image`);
