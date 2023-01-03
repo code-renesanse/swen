@@ -91,6 +91,6 @@ export class Card {
   }
 
   setup(_api: IApi): void {
-    mustImplementFunction('loadDefaultConfiguration');
+    mustImplementFunction('setup');
   }
 }
