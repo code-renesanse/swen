@@ -8,9 +8,9 @@ import { getDomFromReference } from './getters';
 export const clearSelection = (type: string): void => {
   const testElms = document.querySelectorAll(`[${type}].selected-item`);
   if (testElms !== undefined) {
-    for (let i = 0; i < testElms.length; i++) {
-      testElms[i].classList.remove('selected-item');
-    }
+    testElms.forEach((element) => {
+      element.classList.remove('selected-item');
+    });
   }
 };
 

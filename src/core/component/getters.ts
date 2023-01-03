@@ -8,11 +8,11 @@ import { IComponent } from './component.model';
  * @param {Sketchfab API object} api - JSON object holding all application data
  * @returns API Component || -1 if component with id does not exist
  */
-export const getComponentFromId = (id: string, api: IApi): IComponent | null => {
-  for (let i = 0; i < api.configuration_components.length; i++) {
-    if (api.configuration_components[i].id === id) {
-      return api.configuration_components[i];
-    }
-  }
-  return null;
+export const getComponentFromId = (
+  id: string,
+  api: IApi
+): IComponent | undefined => {
+  return api.configuration_components
+    .filter((component) => component.id === id)
+    .at(0);
 };
