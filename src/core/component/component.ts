@@ -100,7 +100,7 @@ export class Component {
     }
 
     const listItemButton = createHTMLButton(
-      `${this.name}-list-item-button`,
+      `list-item-button-${this.name}`,
       '',
       api
     );
