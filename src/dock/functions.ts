@@ -1,6 +1,6 @@
 // TODO: remove replace calls
 
-import { createElement, createHTMLButton, getDomFromReference } from '../dom';
+import { createElement, createHTMLButton } from '../dom';
 import { IApi } from '../types';
 /**
  * Creates an dock item div element
