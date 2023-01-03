@@ -4,6 +4,9 @@ export type SetupMap = {
   [key: string]: HTMLElement;
 };
 
+/**
+ * @deprecated
+ */
 export interface IComponent {
   api: IApi;
   id: string;

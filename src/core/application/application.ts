@@ -74,7 +74,6 @@ export class Application {
   }
 
   setCurrentModelId(modelId: string): void {
-    // validateString(modelId);
     this.API.currentModelId = modelId;
   }
 
@@ -107,13 +106,11 @@ export class Application {
   async load(api: IApi): Promise<void> {
     await hideLoadingBar();
 
-    // Creates the wrapper
     const APP = document.querySelector('#app');
     const wrapper = createEmptyWrapper();
     APP?.appendChild(wrapper);
 
-    this.CARDS[api.currentModelId].loadDefaultConfiguration(api);
-    this.loadComponents(api);
+    this.CARDS[api.currentModelId].setup(api);
 
     if (api.configuration_components.length > 0) {
       api.configuration_components.forEach((cmp) => {
@@ -132,15 +129,15 @@ export class Application {
   }
 
   /**
+   * @deprecated
    * This method is used used for defining configurator components
    * Inside this function you append components to the COMPONENTS list
    * @param {Sketchfab API object} api - JSON object holding all application data
    */
-  loadComponents(_api: IApi): void {
-    mustImplementFunction('loadComponents function needs to be implemented');
-  }
+  loadComponents(_api: IApi): void {}
 
   /**
+   * @deprecated
    * This function pushes a new component class to the component array of the application class
    * @param {Component} componentRef
    */

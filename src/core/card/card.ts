@@ -7,7 +7,7 @@ import {
 } from '../../dom';
 import { errorLog, mustImplementFunction } from '../../logger';
 import { IApi } from '../../types';
-import { IComponent } from '../component';
+import ComponentSchema from '../component/component.schema';
 
 export class Card {
   modelid: string;
@@ -79,23 +79,18 @@ export class Card {
     })();
   }
 
-  addConfigurationComponent(
-    id: string,
-    component: (parent: IComponent, api: IApi) => void,
-    api: IApi
-  ): void {
+  addConfigurationComponent(component: ComponentSchema, api: IApi): void {
     if (api.component_load_map == undefined) {
       api.component_load_map = {};
     }
-    api.component_load_map[id] = (parent, api) => component(parent, api);
+    api.component_load_map[component.getComponentName()] = component;
   }
 
   setModelConfiguration(_api: IApi): void {
     mustImplementFunction('setModelConfiguration');
   }
 
-  // TODO: rename to SETUP
-  loadDefaultConfiguration(_api: IApi): void {
+  setup(_api: IApi): void {
     mustImplementFunction('loadDefaultConfiguration');
   }
 }

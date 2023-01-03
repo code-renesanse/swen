@@ -1,9 +1,9 @@
+import { getTranslation } from '../../languages';
 import { errorLog } from '../../logger';
+import { IApi } from '../../types';
 import { SetupMap } from './component.model';
 
 class ComponentSchema {
-  id: string;
-
   name: string;
 
   SELECTION_KEY_PARENT: string;
@@ -15,17 +15,16 @@ class ComponentSchema {
   store: object;
 
   constructor(name: string) {
-    this.id = `component-${name}`;
     this.name = name;
 
     this.SELECTION_KEY_PARENT = `${name}-parent`;
 
     this.component = document.createElement('li');
-    this.component.id = `${this.id}-list-item`;
+    this.component.id = `${this.name}-list-item`;
 
     this.content = document.createElement('ul');
     this.content.className = 'component-content';
-    this.content.id = `${this.id}-content`;
+    this.content.id = `${this.name}-content`;
     this.content.classList.add('visually-hidden');
 
     this.store = {};
@@ -51,6 +50,10 @@ class ComponentSchema {
     return this.content;
   }
 
+  getComponentName() {
+    return this.name;
+  }
+
   disable() {
     const buttons =
       this.component.querySelectorAll<HTMLButtonElement>('button');
@@ -66,6 +69,23 @@ class ComponentSchema {
     return this.component;
   }
 
+  languageUpdate(api: IApi) {
+    const elements = this.component.querySelectorAll('[translation-key]');
+    elements.forEach((element) => {
+      const translationKey = element.getAttribute('translation-key');
+
+      if (translationKey === undefined || translationKey === '') {
+        errorLog(
+          `${this.name}: Element with id ${element.id} does not have a valid translation-key attribute`
+        );
+        return;
+      }
+
+      const translationString = getTranslation(api, translationKey);
+      element.textContent = translationString ?? 'error404';
+    });
+  }
+
   render() {
     const WRAPPER = document.querySelector<HTMLUListElement>('#dock-wrapper');
 
@@ -74,7 +94,7 @@ class ComponentSchema {
     }
 
     const listItemButton = document.createElement('button');
-    listItemButton.id = `${this.id}-list-item-button`;
+    listItemButton.id = `${this.name}-list-item-button`;
     listItemButton.textContent = this.name;
     listItemButton.addEventListener('click', () => {
       if (listItemButton.disabled) return;

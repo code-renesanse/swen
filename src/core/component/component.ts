@@ -1,4 +1,4 @@
-import { createSubelementsHolder, getDomFromReference } from '../../dom';
+import { createSubelementsHolder } from '../../dom';
 import { getTranslation } from '../../languages';
 import { developmentLog, errorLog } from '../../logger';
 import { IApi } from '../../types';
@@ -9,6 +9,9 @@ import {
 } from '../../dock/functions';
 import { IComponent } from './component.model';
 
+/**
+ * @deprecated
+ */
 export class Component implements IComponent {
   subelements!: HTMLElement;
 
@@ -46,13 +49,14 @@ export class Component implements IComponent {
     this.dockItem.appendChild(this.title);
     this.dockItem.appendChild(this.content);
 
-    const dockWrapper = getDomFromReference('dock-wrapper');
+    throw new Error('This way of generating components is depricated!');
 
     // This is the initailization of a component that is defined in each model (card)
-    if (api.component_load_map[id] instanceof Function) {
-      dockWrapper.appendChild(this.dockItem);
-      api.component_load_map[id](this, api);
-    }
+    // const dockWrapper = getDomFromReference('dock-wrapper');
+    // if (api.component_load_map[id] instanceof Function) {
+    //   dockWrapper.appendChild(this.dockItem);
+    //   api.component_load_map[id](this, api);
+    // }
   }
 
   /**

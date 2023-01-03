@@ -1,64 +1,72 @@
-import { IApi } from '../../types';
-import { Component } from './component';
-import { IComponent } from './component.model';
+import { createEmptyWrapper } from '../../dom/wrapper';
+// import { IApi } from '../../types';
+import ComponentSchema from './component.schema';
 
 describe('Components', () => {
-  let instance: IComponent;
+  let instance: ComponentSchema;
 
-  beforeEach(() => {
-    const api: IApi = {
-      currentModelId: '',
-      image_dictionary: {},
-      model_dictionary: {},
-      model_map: {},
-      configuration: {},
-      animation_speed: 0,
-      languages: {},
-      translator: {
-        test: 'test',
-      },
-      configuration_components: [],
-      is_mobile: false,
-      component_load_map: {
-        test: () => {
-          console.log('Test component initialization works');
-        },
-      },
-      show: function (_id: string): void {
-        throw new Error('Function not implemented.');
-      },
-      hide: function (_id: string): void {
-        throw new Error('Function not implemented.');
-      },
-      start: function (_fun: () => void): void {
-        throw new Error('Function not implemented.');
-      },
-      getSceneGraph: function (
-        _fun: (err: object, graph: object) => void | Promise<void>
-      ): void | Promise<void> {
-        throw new Error('Function not implemented.');
-      },
-      addEventListener: function (
-        _type: string,
-        _fun: () => void | Promise<void>
-      ): void {
-        throw new Error('Function not implemented.');
-      },
-    };
-    const dock = document.createElement('ul');
-    dock.id = 'dock-wrapper';
+  beforeAll(() => {
+    // const api: IApi = {
+    //   currentModelId: '',
+    //   image_dictionary: {},
+    //   model_dictionary: {},
+    //   model_map: {},
+    //   configuration: {},
+    //   animation_speed: 0,
+    //   languages: {},
+    //   translator: {
+    //     test: 'test',
+    //   },
+    //   configuration_components: [],
+    //   is_mobile: false,
+    //   component_load_map: {
+    //     test: () => {
+    //       console.log('Test component initialization works');
+    //     },
+    //   },
+    //   show: function (_id: string): void {
+    //     throw new Error('Function not implemented.');
+    //   },
+    //   hide: function (_id: string): void {
+    //     throw new Error('Function not implemented.');
+    //   },
+    //   start: function (_fun: () => void): void {
+    //     throw new Error('Function not implemented.');
+    //   },
+    //   getSceneGraph: function (
+    //     _fun: (err: object, graph: object) => void | Promise<void>
+    //   ): void | Promise<void> {
+    //     throw new Error('Function not implemented.');
+    //   },
+    //   addEventListener: function (
+    //     _type: string,
+    //     _fun: () => void | Promise<void>
+    //   ): void {
+    //     throw new Error('Function not implemented.');
+    //   },
+    // };
+    const dock = createEmptyWrapper();
     document.body.appendChild(dock);
-    instance = new Component('test', api);
+
+    instance = new ComponentSchema('test');
+
+    instance.setup = () => {
+      const exampleButton = document.createElement('button');
+      exampleButton.textContent = 'example';
+
+      return {
+        exampleButton,
+      };
+    };
   });
 
   it('works', () => {
-    expect(instance).toBeInstanceOf(Component);
+    expect(instance).toBeInstanceOf(ComponentSchema);
     expect(instance.getComponentName()).toEqual('test');
-    expect(instance.id).toBeDefined();
-    expect(instance.title).toBeDefined();
-    expect(instance.name).toBeDefined();
-    expect(instance.dockItem).toBeDefined();
-    expect(instance.content).toBeDefined();
-    expect(instance.subelements).toBeDefined();
+  });
+
+  it('renderes', () => {
+    expect(instance.render()).toHaveProperty('id');
+    expect(instance.render().id).toEqual('test-list-item');
   });
 });

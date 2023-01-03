@@ -1,12 +1,12 @@
 import { IComponent } from '../core/component/component.model';
+import ComponentSchema from '../core/component/component.schema';
 import { Dictionary } from './dictionary.model';
 import { ISketchfabModelElement } from './element.model';
 import { ILanguage, ITranslation } from './language.model';
 
-export type IComponentLoadMap = Record<
-  string,
-  (parent: IComponent, api: IApi) => void
->;
+export type IComponentLoadMap = {
+  [key: string]: ComponentSchema;
+};
 
 // TODO: remove configuration_components array <=> no uses for configuration_components array
 export interface IApi {
