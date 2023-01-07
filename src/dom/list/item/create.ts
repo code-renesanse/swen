@@ -1,8 +1,6 @@
-import { getImage } from '../../../dictionary';
 import { IApi } from '../../../types';
 import { createHTMLButton } from '../../buttons';
 import { createElement } from '../../create';
-import { appendElementList } from '../../subelements';
 
 /**
  *
@@ -46,6 +44,7 @@ export const createListItemHead = (id: string): HTMLLIElement => {
  *
  * @param {String} id
  * @returns HTML button
+ * @deprecated
  */
 export const createListButton = (id: string, api: IApi): HTMLButtonElement => {
   const listButton = createHTMLButton(`list-button-${id}`, '', api);
@@ -64,7 +63,7 @@ export const createListButton = (id: string, api: IApi): HTMLButtonElement => {
  */
 export const createListItem = (
   id: string,
-  img: string,
+  imageReference: string,
   itemFunction: () => void,
   api: IApi
 ): HTMLLIElement => {
@@ -72,16 +71,10 @@ export const createListItem = (
 
   listHead.onmousedown = (event) => event.preventDefault();
 
-  const listElement = createListButton(id, api);
+  const listButton = createHTMLButton(`list-button-${id}`, imageReference, api);
+  listButton.classList.add('list-button');
 
-  const colorImageLink = getImage(img, api);
-
-  const colorImg = createListItemColorImage(id, colorImageLink);
-
-  const colorTxt = createListItemColorText(id);
-
-  appendElementList(listElement, colorImg, colorTxt);
-  appendElementList(listHead, listElement);
+  listHead.appendChild(listButton);
 
   listHead.addEventListener('click', itemFunction);
 

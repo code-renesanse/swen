@@ -20,7 +20,7 @@ export const createHTMLButton = (
   const out = createElement('button', id);
 
   const text = createElement('p', `${id}-paragraph`);
-  text.setAttribute('trasnlation-key', id);
+  text.setAttribute('translation-key', id);
 
   if (img !== null && img !== undefined && img !== '') {
     const ico = createElement('img', `${id}-image`);

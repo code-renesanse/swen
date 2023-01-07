@@ -1,8 +1,4 @@
-import {
-  createElement,
-  createHTMLButton,
-  getDomFromReference,
-} from '../../dom';
+import { createElement, createHTMLButton } from '../../dom';
 import { errorLog } from '../../logger';
 import { IApi } from '../../types';
 import { setLang } from '../setters';
@@ -15,9 +11,12 @@ import { setLang } from '../setters';
  */
 // TODO: change the image picture loading so that it is not pulled from alfastreet !!
 export const createLanguageButton = (api: IApi, lang: string): void => {
-  // if(!validateAPI(api)) return;
+  const parent = document.querySelector('#language-button-holder');
 
-  const parent = getDomFromReference('language-button-holder');
+  if (parent === null) {
+    errorLog('language-button-holder is null');
+    return;
+  }
 
   // TODO: fix this so that it does not access alafstreet CDN
   const imagePrefix =

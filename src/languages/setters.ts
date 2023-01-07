@@ -1,4 +1,3 @@
-import { getDomFromReference } from '../dom';
 import { errorLog } from '../logger';
 import { IApi } from '../types';
 import { getTranslation } from './getters';
@@ -18,19 +17,20 @@ export const setLang = async (api: IApi, lang: string): Promise<string> => {
     return '';
   }
 
-  const apiUpdate = api.configuration_components[0].api;
-  if (apiUpdate === null) {
-    console.error('API not loaded');
-    return '';
-  }
-
   document.title = getTranslation(api, 'title');
 
-  const rtsBtn = getDomFromReference('return-to-selection-button');
-  rtsBtn.textContent = getTranslation(api, 'return-to-selection-button');
+  const returnToSelectionButton = document.querySelector(
+    '#return-to-selection-button'
+  );
 
-  api.configuration_components.forEach((cmp) => {
-    cmp.updateLanguage();
+  if (returnToSelectionButton !== null) {
+    const translationString = getTranslation(api, 'return-to-selection-button');
+    returnToSelectionButton.textContent = translationString;
+  }
+
+  Object.keys(api.component_load_map).forEach((key) => {
+    const component = api.component_load_map[key];
+    component.languageUpdate(api);
   });
 
   return lang;

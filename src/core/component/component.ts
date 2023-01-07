@@ -37,11 +37,15 @@ export class Component {
 
   load(api: IApi) {
     const elements = this.setup(api);
-    for (const key in elements) {
+    Object.keys(elements).forEach((key) => {
       const element = elements[key];
       this.content.appendChild(element);
-    }
+    });
     return this.content;
+  }
+
+  addElement(element: HTMLElement): HTMLElement {
+    return this.content.appendChild(element);
   }
 
   getStore() {
@@ -78,7 +82,9 @@ export class Component {
   languageUpdate(api: IApi) {
     const elements = this.component.querySelectorAll('[translation-key]');
     elements.forEach((element) => {
-      const translationKey = element.getAttribute('translation-key');
+      const translationKey = element
+        .getAttribute('translation-key')
+        ?.replace('list-item-button-', '');
 
       if (translationKey === undefined || translationKey === '') {
         errorLog(

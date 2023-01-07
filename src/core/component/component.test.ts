@@ -84,11 +84,11 @@ describe('Components', () => {
     });
   });
 
-  it('loads', () => {
+  it('sets up', () => {
     Object.keys(api.component_load_map).forEach((key) => {
       const component = api.component_load_map[key];
 
-      component.load(api);
+      component.setup(api);
     });
   });
 

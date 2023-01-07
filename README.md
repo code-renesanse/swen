@@ -9,6 +9,7 @@
 # Working on
 
 - [ ] Do tests for component schema
+- [ ] Refactor list item creation
 
 ---
 
